@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { heritageService } from '../services/heritageService';
-import { Language } from '../types';
+import { Language, Monument } from '../types';
 import { 
   MapPin, 
   ArrowLeft, 
-  ArrowRight, 
   Compass, 
   Landmark, 
   Calendar, 
   History, 
   ChevronRight,
-  Sparkles
+  Sparkles,
+  Box,
+  Layers,
+  Eye,
+  Grid,
+  Map
 } from 'lucide-react';
 import { HeritageImage } from '../components/HeritageImage';
 
@@ -21,7 +25,9 @@ interface StatePageProps {
 }
 
 export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => {
+  const [activeTab, setActiveTab] = useState<'monuments' | 'destinations'>('monuments');
   const state = heritageService.getStateById(stateId) || heritageService.getStates()[0];
+  const monuments = heritageService.getMonumentsByState(state.id);
 
   return (
     <div className="min-h-screen bg-[#f5f0e6] text-[#4b2f23] pt-24 pb-20 px-4 sm:px-6 lg:px-8">
@@ -30,7 +36,7 @@ export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => 
         <div className="flex items-center gap-2 text-xs text-[#b65a3a]">
           <button
             onClick={() => onNavigate('explore')}
-            className="hover:underline flex items-center gap-1 font-medium"
+            className="hover:underline flex items-center gap-1 font-medium cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Explore India
@@ -120,6 +126,32 @@ export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => 
                 Destinations in {state.name}
               </h2>
             </div>
+
+            {/* View Mode Toggle Buttons */}
+            <div className="inline-flex p-1 bg-[#2B2118] border border-[#D4A85A]/30 rounded-xl">
+              <button
+                onClick={() => setActiveTab('monuments')}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                  activeTab === 'monuments'
+                    ? 'bg-[#D4A85A] text-[#17130F] shadow-lg'
+                    : 'text-[#F3EBDD]/70 hover:text-[#D4A85A]'
+                }`}
+              >
+                <Grid className="w-4 h-4" />
+                <span>Monuments List ({monuments.length})</span>
+              </button>
+              <button
+                onClick={() => setActiveTab('destinations')}
+                className={`px-4 py-2 rounded-lg text-xs font-bold transition-all flex items-center gap-2 cursor-pointer ${
+                  activeTab === 'destinations'
+                    ? 'bg-[#D4A85A] text-[#17130F] shadow-lg'
+                    : 'text-[#F3EBDD]/70 hover:text-[#D4A85A]'
+                }`}
+              >
+                <Map className="w-4 h-4" />
+                <span>Destinations ({state.destinations.length})</span>
+              </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -172,3 +204,4 @@ export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => 
     </div>
   );
 };
+

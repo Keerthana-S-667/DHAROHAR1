@@ -63,6 +63,26 @@ export const heritageService = {
   },
 
   /**
+   * Retrieves all monuments located in a specific state by stateId.
+   */
+  getMonumentsByState(stateId: string): Monument[] {
+    const all = Object.values(MONUMENTS);
+    const state = STATES_DATA.find((s) => s.id === stateId);
+    const destinationMonIds = state
+      ? state.destinations.flatMap((d) => d.monumentIds || [])
+      : [];
+
+    return all.filter(
+      (m) =>
+        m.stateId === stateId ||
+        destinationMonIds.includes(m.id) ||
+        (m.location &&
+          m.location.state &&
+          m.location.state.toLowerCase().replace(/\s+/g, '-') === stateId)
+    );
+  },
+
+  /**
    * Retrieves all monuments map.
    */
   getMonuments(): Record<string, Monument> {

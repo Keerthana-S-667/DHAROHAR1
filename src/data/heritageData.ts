@@ -791,6 +791,7 @@ export const MONUMENTS: Record<string, Monument> = {
     },
     heroImage: '/images/bara-imambara-hero.jpg',
     galleryImages: [
+      '/images/bara-imambara-hero.jpg',
       '/images/gallery/bara-imambara-1.png',
       '/images/gallery/bara-imambara-2.png',
       '/images/gallery/bara-imambara-3.png',
@@ -798,6 +799,7 @@ export const MONUMENTS: Record<string, Monument> = {
       '/images/gallery/bara-imambara-5.png'
     ],
     imageGallery: [
+      { url: '/images/bara-imambara-hero.jpg', source: 'DHAROHAR Cultural Archive', photographer: 'User Collection', license: 'Heritage Archive' },
       { url: '/images/gallery/bara-imambara-1.png', source: 'DHAROHAR Cultural Archive' },
       { url: '/images/gallery/bara-imambara-2.png', source: 'DHAROHAR Cultural Archive' },
       { url: '/images/gallery/bara-imambara-3.png', source: 'DHAROHAR Cultural Archive' },
@@ -1137,8 +1139,53 @@ export const MONUMENTS: Record<string, Monument> = {
     material: 'Red Sandstone',
     unescoYear: 1986,
     location: { city: 'Fatehpur Sikri', state: 'Uttar Pradesh', coordinates: '27.0945° N, 77.6679° E', lat: 27.0945, lng: 77.6679 },
-    heroImage: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1600&q=85',
-    galleryImages: [],
+    heroImage: '/images/fatehpur-sikri-hero.jpg',
+    galleryImages: [
+      '/images/fatehpur-sikri-hero.jpg',
+      '/images/gallery/fatehpur-sikri-1.jpg',
+      '/images/gallery/fatehpur-sikri-2.jpg',
+      '/images/gallery/fatehpur-sikri-3.jpg',
+      '/images/gallery/fatehpur-sikri-4.png',
+      '/images/gallery/fatehpur-sikri-5.jpg'
+    ],
+    imageGallery: [
+      {
+        url: '/images/fatehpur-sikri-hero.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-1.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-2.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-3.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-4.png',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-5.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      }
+    ],
     culturalSignificance: 'Home to Buland Darwaza (54m high gateway of victory), Panch Mahal, and Salim Chishti Dargah.',
     history: 'Built by Akbar as his short-lived royal capital to honor Sufi saint Salim Chishti.',
     stories: [],
@@ -1223,7 +1270,7 @@ export const STATES_DATA: StateData[] = [
         nativeName: 'लखनऊ',
         stateId: 'uttar-pradesh',
         tagline: 'The City of Nawabs & Vaulted Labyrinths',
-        heroImage: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80',
+        heroImage: '/images/bara-imambara-hero.jpg',
         description: 'Famous for Awadhi culture, refined poetry, and the gravity-defying vaulted arches of Bara Imambara.',
         historicalContext: 'Capital of the Nawabs of Awadh during the 18th and 19th centuries.',
         bestTimeToVisit: 'October to March',
