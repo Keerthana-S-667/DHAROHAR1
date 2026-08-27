@@ -318,14 +318,14 @@ export const HeritageMap: React.FC<HeritageMapProps> = ({
   if (hasError) {
     const activeInfo = activeMonument || allMonuments[0];
     return (
-      <div className="relative rounded-3xl bg-[#2B2118] border border-[#D4A85A]/40 overflow-hidden min-h-[450px] flex flex-col justify-between p-6">
-        <div className="flex items-center gap-2 p-3 bg-amber-900/20 border border-amber-500/30 rounded-xl text-xs text-[#D4A85A]">
+      <div className="relative rounded-3xl bg-[#ede3d1] border border-[#aa7b3f]/40 overflow-hidden min-h-[450px] flex flex-col justify-between p-6">
+        <div className="flex items-center gap-2 p-3 bg-amber-900/20 border border-amber-500/30 rounded-xl text-xs text-[#b65a3a]">
           <AlertTriangle className="w-4 h-4 shrink-0" />
           <span>Interactive Map Engine Offline. Using spatial landmark listing.</span>
         </div>
 
-        <div className="relative my-6 w-full h-[320px] bg-[#17130F] rounded-2xl border border-[#D4A85A]/20 overflow-hidden flex flex-col sm:flex-row">
-          <div className="w-full sm:w-1/3 border-r border-[#D4A85A]/20 overflow-y-auto p-3 space-y-1.5 max-h-[320px] bg-[#2B2118]/40">
+        <div className="relative my-6 w-full h-[320px] bg-[#f5f0e6] rounded-2xl border border-[#aa7b3f]/20 overflow-hidden flex flex-col sm:flex-row">
+          <div className="w-full sm:w-1/3 border-r border-[#aa7b3f]/20 overflow-y-auto p-3 space-y-1.5 max-h-[320px] bg-[#ede3d1]/40">
             {allMonuments.map((mon) => (
               <button
                 key={mon.id}
@@ -335,8 +335,8 @@ export const HeritageMap: React.FC<HeritageMapProps> = ({
                 }}
                 className={`w-full text-left p-2.5 rounded-lg text-xs font-medium border transition-colors flex items-center gap-2 ${
                   selectedMonumentId === mon.id
-                    ? 'bg-[#D4A85A] text-[#17130F] border-[#D4A85A]'
-                    : 'bg-[#17130F] text-[#F3EBDD]/80 border-[#D4A85A]/10 hover:border-[#D4A85A]/40'
+                    ? 'bg-[#b65a3a] text-white border-[#aa7b3f]'
+                    : 'bg-[#f5f0e6] text-[#4b2f23]/80 border-[#aa7b3f]/10 hover:border-[#aa7b3f]/40'
                 }`}
               >
                 <span className="truncate">{mon.name}</span>
@@ -345,10 +345,10 @@ export const HeritageMap: React.FC<HeritageMapProps> = ({
           </div>
 
           <div className="flex-1 p-6 flex flex-col justify-center items-center text-center relative select-none">
-            <Compass className="w-12 h-12 text-[#D4A85A]/45 mb-3" />
-            <h4 className="font-display text-sm font-bold text-[#F3EBDD]">{activeInfo.name}</h4>
-            <p className="text-[10px] text-[#D4A85A] mt-0.5">{activeInfo.location.city}, {activeInfo.location.state}</p>
-            <p className="text-xs text-[#F3EBDD]/60 mt-4">
+            <Compass className="w-12 h-12 text-[#b65a3a]/45 mb-3" />
+            <h4 className="font-display text-sm font-bold text-[#4b2f23]">{activeInfo.name}</h4>
+            <p className="text-[10px] text-[#b65a3a] mt-0.5">{activeInfo.location.city}, {activeInfo.location.state}</p>
+            <p className="text-xs text-[#4b2f23]/60 mt-4">
               Coordinates: {activeInfo.location.lat.toFixed(4)}° N, {activeInfo.location.lng.toFixed(4)}° E
             </p>
           </div>
@@ -358,18 +358,18 @@ export const HeritageMap: React.FC<HeritageMapProps> = ({
   }
 
   return (
-    <div className="relative w-full h-[540px] rounded-3xl overflow-hidden border border-[#D4A85A]/40 shadow-2xl">
+    <div className="relative w-full h-[540px] rounded-3xl overflow-hidden border border-[#aa7b3f]/40 shadow-2xl">
       {/* Map Element */}
-      <div ref={mapContainerRef} className="w-full h-full bg-[#17130F] z-0" />
+      <div ref={mapContainerRef} className="w-full h-full bg-[#f5f0e6] z-0" />
 
       {/* Top Right Map Layer Controls */}
-      <div className="absolute top-3 right-3 bg-[#2B2118]/90 border border-[#D4A85A]/40 rounded-xl p-1 shadow-xl backdrop-blur-md flex items-center gap-1 z-10">
+      <div className="absolute top-3 right-3 bg-[#ede3d1]/90 border border-[#aa7b3f]/40 rounded-xl p-1 shadow-xl backdrop-blur-md flex items-center gap-1 z-10">
         <button
           onClick={() => setMapType('roadmap')}
           className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
             mapType === 'roadmap'
-              ? 'bg-[#D4A85A] text-[#17130F] shadow-md'
-              : 'text-[#F3EBDD]/80 hover:bg-[#17130F] hover:text-[#D4A85A]'
+              ? 'bg-[#b65a3a] text-white shadow-md'
+              : 'text-[#4b2f23]/80 hover:bg-[#f5f0e6] hover:text-[#b65a3a]'
           }`}
         >
           <MapIcon className="w-3.5 h-3.5" />
@@ -380,8 +380,8 @@ export const HeritageMap: React.FC<HeritageMapProps> = ({
           onClick={() => setMapType('satellite')}
           className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
             mapType === 'satellite'
-              ? 'bg-[#D4A85A] text-[#17130F] shadow-md'
-              : 'text-[#F3EBDD]/80 hover:bg-[#17130F] hover:text-[#D4A85A]'
+              ? 'bg-[#b65a3a] text-white shadow-md'
+              : 'text-[#4b2f23]/80 hover:bg-[#f5f0e6] hover:text-[#b65a3a]'
           }`}
         >
           <Globe className="w-3.5 h-3.5" />
@@ -392,8 +392,8 @@ export const HeritageMap: React.FC<HeritageMapProps> = ({
           onClick={() => setMapType('terrain')}
           className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${
             mapType === 'terrain'
-              ? 'bg-[#D4A85A] text-[#17130F] shadow-md'
-              : 'text-[#F3EBDD]/80 hover:bg-[#17130F] hover:text-[#D4A85A]'
+              ? 'bg-[#b65a3a] text-white shadow-md'
+              : 'text-[#4b2f23]/80 hover:bg-[#f5f0e6] hover:text-[#b65a3a]'
           }`}
         >
           <Layers className="w-3.5 h-3.5" />
@@ -403,16 +403,16 @@ export const HeritageMap: React.FC<HeritageMapProps> = ({
 
       {/* Floating Monument Context Card */}
       {activeMonument && !routeGeometry && (
-        <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6 bg-[#2B2118]/95 border border-[#D4A85A]/50 rounded-2xl p-4 shadow-2xl backdrop-blur-md flex flex-col sm:flex-row justify-between items-center gap-4 z-10">
+        <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6 bg-[#ede3d1]/95 border border-[#aa7b3f]/50 rounded-2xl p-4 shadow-2xl backdrop-blur-md flex flex-col sm:flex-row justify-between items-center gap-4 z-10">
           <div className="space-y-1 text-center sm:text-left">
-            <div className="flex items-center gap-1.5 justify-center sm:justify-start text-[10px] text-[#D4A85A] uppercase tracking-wider font-bold">
+            <div className="flex items-center gap-1.5 justify-center sm:justify-start text-[10px] text-[#b65a3a] uppercase tracking-wider font-bold">
               <MapPin className="w-3.5 h-3.5" />
               <span>{activeMonument.location.city}, {activeMonument.location.state}</span>
             </div>
-            <h3 className="font-display text-base sm:text-lg font-bold text-[#F3EBDD]">
+            <h3 className="font-display text-base sm:text-lg font-bold text-[#4b2f23]">
               {activeMonument.name}
             </h3>
-            <div className="flex flex-wrap justify-center sm:justify-start gap-3 text-xs text-[#F3EBDD]/80">
+            <div className="flex flex-wrap justify-center sm:justify-start gap-3 text-xs text-[#4b2f23]/80">
               <span>Distance: ~{dist.toFixed(1)} km</span>
               <span>Est. Walk: ~{time} mins</span>
             </div>
@@ -421,7 +421,7 @@ export const HeritageMap: React.FC<HeritageMapProps> = ({
           {onNavigateHere && (
             <button
               onClick={() => onNavigateHere(activeMonument.id)}
-              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#D4A85A] text-[#17130F] text-xs font-bold uppercase tracking-wider hover:bg-[#F3EBDD] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shrink-0"
+              className="w-full sm:w-auto px-5 py-2.5 rounded-xl bg-[#b65a3a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors flex items-center justify-center gap-1.5 cursor-pointer shadow-lg shrink-0"
             >
               <Navigation className="w-3.5 h-3.5" />
               <span>Navigate Here</span>

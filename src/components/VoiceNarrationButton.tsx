@@ -79,7 +79,7 @@ export const VoiceNarrationButton: React.FC<VoiceNarrationButtonProps> = ({
   // Not available at all
   if (!isAvailable) {
     return (
-      <span className={`text-[10px] text-[#F3EBDD]/40 italic ${className}`}>
+      <span className={`text-[10px] text-[#4b2f23]/40 italic ${className}`}>
         {t.notAvailable}
       </span>
     );
@@ -100,7 +100,7 @@ export const VoiceNarrationButton: React.FC<VoiceNarrationButtonProps> = ({
               onClick={handlePause}
               aria-label={t.pause}
               title={t.pause}
-              className="p-1.5 rounded-lg bg-[#D4A85A]/20 hover:bg-[#D4A85A]/30 text-[#D4A85A] transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg bg-[#b65a3a]/20 hover:bg-[#b65a3a]/30 text-[#b65a3a] transition-colors cursor-pointer"
             >
               <Pause className="w-3.5 h-3.5" />
             </button>
@@ -122,7 +122,7 @@ export const VoiceNarrationButton: React.FC<VoiceNarrationButtonProps> = ({
             className={`p-1.5 rounded-lg transition-colors cursor-pointer ${
               state === 'paused'
                 ? 'bg-amber-700/30 hover:bg-amber-700/40 text-amber-400'
-                : 'bg-[#D4A85A]/15 hover:bg-[#D4A85A]/25 text-[#D4A85A]'
+                : 'bg-[#b65a3a]/15 hover:bg-[#b65a3a]/25 text-[#b65a3a]'
             } disabled:opacity-30 disabled:cursor-not-allowed`}
           >
             {state === 'paused' ? <Play className="w-3.5 h-3.5" /> : <Volume2 className="w-3.5 h-3.5" />}
@@ -144,7 +144,7 @@ export const VoiceNarrationButton: React.FC<VoiceNarrationButtonProps> = ({
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold transition-all cursor-pointer border ${
             state === 'paused'
               ? 'bg-amber-800/30 border-amber-600/40 text-amber-400 hover:bg-amber-800/50'
-              : 'bg-[#2B2118] border-[#D4A85A]/40 text-[#D4A85A] hover:bg-[#D4A85A]/10'
+              : 'bg-[#ede3d1] border-[#aa7b3f]/40 text-[#b65a3a] hover:bg-[#b65a3a]/10'
           } disabled:opacity-30 disabled:cursor-not-allowed`}
         >
           {state === 'paused'
@@ -157,7 +157,7 @@ export const VoiceNarrationButton: React.FC<VoiceNarrationButtonProps> = ({
           <button
             onClick={handlePause}
             aria-label={t.pause}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#D4A85A] text-[#17130F] cursor-pointer hover:bg-amber-400 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-[#b65a3a] text-white cursor-pointer hover:bg-amber-400 transition-colors"
           >
             <Pause className="w-3.5 h-3.5 animate-pulse" style={{ animationDuration: '1.5s' }} />
             <span>{t.pause}</span>
@@ -165,7 +165,7 @@ export const VoiceNarrationButton: React.FC<VoiceNarrationButtonProps> = ({
           <button
             onClick={handleStop}
             aria-label={t.stop}
-            className="p-1.5 rounded-full bg-[#2B2118] border border-red-900/40 text-red-400 hover:bg-red-950/20 transition-colors cursor-pointer"
+            className="p-1.5 rounded-full bg-[#ede3d1] border border-red-900/40 text-red-400 hover:bg-red-950/20 transition-colors cursor-pointer"
           >
             <Square className="w-3 h-3" />
           </button>

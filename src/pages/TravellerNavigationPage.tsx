@@ -167,11 +167,11 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
 
   if (!monument) {
     return (
-      <div className="min-h-screen bg-[#17130F] text-[#F3EBDD] pt-24 pb-20 flex items-center justify-center">
+      <div className="min-h-screen bg-[#f5f0e6] text-[#4b2f23] pt-24 pb-20 flex items-center justify-center">
         <div className="text-center space-y-4">
-          <AlertTriangle className="w-12 h-12 text-[#D4A85A] mx-auto" />
+          <AlertTriangle className="w-12 h-12 text-[#b65a3a] mx-auto" />
           <h2 className="text-xl font-bold">Monument not found</h2>
-          <button onClick={() => onNavigate('traveller/nearby')} className="px-4 py-2 bg-[#D4A85A] text-[#17130F] font-bold rounded-xl text-xs">
+          <button onClick={() => onNavigate('traveller/nearby')} className="px-4 py-2 bg-[#b65a3a] text-white font-bold rounded-xl text-xs">
             Back to Nearby
           </button>
         </div>
@@ -180,11 +180,11 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
   }
 
   return (
-    <div className="min-h-screen bg-[#17130F] text-[#F3EBDD] pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#f5f0e6] text-[#4b2f23] pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto space-y-8 animate-in fade-in duration-500">
         
         {/* Navigation Breadcrumbs */}
-        <div className="flex items-center gap-2 text-xs text-[#D4A85A]">
+        <div className="flex items-center gap-2 text-xs text-[#b65a3a]">
           <button
             onClick={() => onNavigate('traveller/nearby')}
             className="hover:underline flex items-center gap-1 font-medium cursor-pointer"
@@ -192,18 +192,18 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Nearby
           </button>
-          <span className="text-[#F3EBDD]/40">/</span>
-          <span className="text-[#F3EBDD] font-bold">Active Navigation Portal</span>
+          <span className="text-[#4b2f23]/40">/</span>
+          <span className="text-[#4b2f23] font-bold">Active Navigation Portal</span>
         </div>
 
         {/* Header Block */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[#D4A85A]/20">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[#aa7b3f]/20">
           <div className="space-y-1">
-            <span className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-[#D4A85A] tracking-wider">
+            <span className="inline-flex items-center gap-1 text-[10px] uppercase font-bold text-[#b65a3a] tracking-wider">
               <Navigation className="w-3.5 h-3.5" />
               Active Route Tracking
             </span>
-            <h1 className="font-display text-2xl sm:text-4xl font-bold text-[#F3EBDD]">
+            <h1 className="font-display text-2xl sm:text-4xl font-bold text-[#4b2f23]">
               Navigation to {monument.name}
             </h1>
           </div>
@@ -212,7 +212,7 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
             <button
               onClick={calculateRoute}
               disabled={isLoading}
-              className="px-4 py-2 rounded-xl bg-[#2B2118] border border-[#D4A85A]/40 text-xs font-bold text-[#D4A85A] hover:bg-[#D4A85A] hover:text-[#17130F] transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
+              className="px-4 py-2 rounded-xl bg-[#ede3d1] border border-[#aa7b3f]/40 text-xs font-bold text-[#b65a3a] hover:bg-[#b65a3a] hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer disabled:opacity-50"
             >
               <RotateCcw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
               Recenter Route
@@ -222,11 +222,11 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
 
         {/* Confirm starting location state if not confirmed yet */}
         {!isOriginConfirmed && (
-          <div className="p-8 rounded-3xl bg-[#2B2118] border border-[#D4A85A]/40 text-center max-w-xl mx-auto space-y-6">
-            <Navigation className="w-12 h-12 text-[#D4A85A] mx-auto animate-pulse" />
+          <div className="p-8 rounded-3xl bg-[#ede3d1] border border-[#aa7b3f]/40 text-center max-w-xl mx-auto space-y-6">
+            <Navigation className="w-12 h-12 text-[#b65a3a] mx-auto animate-pulse" />
             <div className="space-y-2">
               <h3 className="font-display text-xl font-bold">Confirm Starting Location</h3>
-              <p className="text-xs text-[#F3EBDD]/70 leading-relaxed">
+              <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
                 Choose how to set your starting origin coordinates to plan a route directly to <strong>{monument.name}</strong>.
               </p>
             </div>
@@ -235,15 +235,15 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
               <button
                 onClick={handleConfirmCurrentLocation}
                 disabled={isLoading}
-                className="w-full px-6 py-3 rounded-xl bg-[#D4A85A] text-[#17130F] font-bold text-xs uppercase tracking-wider hover:bg-[#F3EBDD] transition-colors cursor-pointer disabled:opacity-50"
+                className="w-full px-6 py-3 rounded-xl bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors cursor-pointer disabled:opacity-50"
               >
                 📍 Use Current GPS Location
               </button>
               
               <div className="relative flex py-2 items-center">
-                <div className="flex-grow border-t border-[#D4A85A]/20"></div>
-                <span className="flex-shrink mx-4 text-[10px] text-[#D4A85A] uppercase font-bold">Or Search Starting Point</span>
-                <div className="flex-grow border-t border-[#D4A85A]/20"></div>
+                <div className="flex-grow border-t border-[#aa7b3f]/20"></div>
+                <span className="flex-shrink mx-4 text-[10px] text-[#b65a3a] uppercase font-bold">Or Search Starting Point</span>
+                <div className="flex-grow border-t border-[#aa7b3f]/20"></div>
               </div>
 
               {/* Autocomplete / Geocoder Search */}
@@ -254,24 +254,24 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
                   value={searchLocationQuery}
                   onChange={(e) => setSearchLocationQuery(e.target.value)}
                   onKeyDown={(e) => e.key === 'Enter' && handleSearchStartingLocation()}
-                  className="flex-1 bg-[#17130F] border border-[#D4A85A]/30 rounded-xl px-3 py-2.5 text-xs text-[#F3EBDD] placeholder-[#F3EBDD]/35 focus:outline-none focus:border-[#D4A85A]"
+                  className="flex-1 bg-[#f5f0e6] border border-[#aa7b3f]/30 rounded-xl px-3 py-2.5 text-xs text-[#4b2f23] placeholder-[#F3EBDD]/35 focus:outline-none focus:border-[#aa7b3f]"
                 />
                 <button
                   onClick={handleSearchStartingLocation}
                   disabled={isLoading}
-                  className="px-4 py-2.5 rounded-xl bg-[#2B2118] border border-[#D4A85A]/40 text-xs font-bold text-[#D4A85A] hover:bg-[#D4A85A] hover:text-[#17130F] transition-colors cursor-pointer"
+                  className="px-4 py-2.5 rounded-xl bg-[#ede3d1] border border-[#aa7b3f]/40 text-xs font-bold text-[#b65a3a] hover:bg-[#b65a3a] hover:text-white transition-colors cursor-pointer"
                 >
                   Search
                 </button>
               </div>
 
               {searchResults.length > 0 && (
-                <div className="bg-[#17130F] border border-[#D4A85A]/30 rounded-xl max-h-40 overflow-y-auto text-left text-xs divide-y divide-[#D4A85A]/10">
+                <div className="bg-[#f5f0e6] border border-[#aa7b3f]/30 rounded-xl max-h-40 overflow-y-auto text-left text-xs divide-y divide-[#d5b990]/60">
                   {searchResults.map((res, i) => (
                     <button
                       key={i}
                       onClick={() => handleSelectSearchResult(res)}
-                      className="w-full px-3 py-2.5 text-left text-[#F3EBDD]/90 hover:bg-[#2B2118] transition-colors"
+                      className="w-full px-3 py-2.5 text-left text-[#4b2f23]/90 hover:bg-[#ede3d1] transition-colors"
                     >
                       {res.formatted_address}
                     </button>
@@ -313,23 +313,23 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
             <div className="lg:col-span-4 space-y-6">
               
               {/* Navigation Metrics Panel */}
-              <div className="p-6 rounded-3xl bg-[#2B2118] border border-[#D4A85A]/40 shadow-2xl space-y-5">
-                <h3 className="font-display text-lg font-bold text-[#F3EBDD] pb-3 border-b border-[#D4A85A]/20">
+              <div className="p-6 rounded-3xl bg-[#ede3d1] border border-[#aa7b3f]/40 shadow-2xl space-y-5">
+                <h3 className="font-display text-lg font-bold text-[#4b2f23] pb-3 border-b border-[#aa7b3f]/20">
                   Navigation Metrics
                 </h3>
 
                 {/* Travel Mode Selector Selector */}
                 <div className="space-y-1.5">
-                  <span className="text-[10px] text-[#D4A85A] uppercase tracking-wider block font-bold">Select Travel Mode</span>
-                  <div className="grid grid-cols-4 gap-1.5 bg-[#17130F] p-1 rounded-xl border border-[#D4A85A]/20">
+                  <span className="text-[10px] text-[#b65a3a] uppercase tracking-wider block font-bold">Select Travel Mode</span>
+                  <div className="grid grid-cols-4 gap-1.5 bg-[#f5f0e6] p-1 rounded-xl border border-[#aa7b3f]/20">
                     {(['foot-walking', 'two-wheeler', 'driving-car', 'cycling-regular'] as const).map((mode) => (
                       <button
                         key={mode}
                         onClick={() => setTravelMode(mode)}
                         className={`py-2 rounded-lg text-center text-xs transition-all flex flex-col items-center justify-center ${
                           travelMode === mode
-                            ? 'bg-[#D4A85A] text-[#17130F] font-bold'
-                            : 'text-[#F3EBDD]/60 hover:text-[#F3EBDD] hover:bg-[#2B2118]'
+                            ? 'bg-[#b65a3a] text-white font-bold'
+                            : 'text-[#4b2f23]/60 hover:text-[#4b2f23] hover:bg-[#ede3d1]'
                         }`}
                         title={mode.replace('-', ' ')}
                       >
@@ -344,53 +344,53 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
                   </div>
                 </div>
 
-                <div className="space-y-4 text-xs pt-3 border-t border-[#D4A85A]/15">
+                <div className="space-y-4 text-xs pt-3 border-t border-[#aa7b3f]/15">
                   <div>
-                    <span className="text-[10px] text-[#D4A85A] uppercase tracking-wider block font-bold">Starting Point</span>
-                    <span className="font-medium text-[#F3EBDD] mt-0.5 block truncate" title={confirmedOrigin.name}>
+                    <span className="text-[10px] text-[#b65a3a] uppercase tracking-wider block font-bold">Starting Point</span>
+                    <span className="font-medium text-[#4b2f23] mt-0.5 block truncate" title={confirmedOrigin.name}>
                       {confirmedOrigin.name}
                     </span>
                     <button
                       onClick={() => setIsOriginConfirmed(false)}
-                      className="text-[10px] text-[#D4A85A] hover:underline mt-1 block"
+                      className="text-[10px] text-[#b65a3a] hover:underline mt-1 block"
                     >
                       Change starting point
                     </button>
                   </div>
 
                   <div>
-                    <span className="text-[10px] text-[#D4A85A] uppercase tracking-wider block font-bold">Destination</span>
-                    <span className="font-medium text-[#F3EBDD] mt-0.5 block">{monument.name}</span>
-                    <span className="text-[10px] text-[#F3EBDD]/60 mt-0.5 block">
+                    <span className="text-[10px] text-[#b65a3a] uppercase tracking-wider block font-bold">Destination</span>
+                    <span className="font-medium text-[#4b2f23] mt-0.5 block">{monument.name}</span>
+                    <span className="text-[10px] text-[#4b2f23]/60 mt-0.5 block">
                       {monument.location.city}, {monument.location.state}
                     </span>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-4 pt-3 border-t border-[#D4A85A]/10">
+                  <div className="grid grid-cols-2 gap-4 pt-3 border-t border-[#aa7b3f]/10">
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#D4A85A] uppercase tracking-wider block font-bold">Distance</span>
+                      <span className="text-[10px] text-[#b65a3a] uppercase tracking-wider block font-bold">Distance</span>
                       <div className="flex items-baseline gap-1">
                         <span className="text-xl font-bold font-mono">
                           {isLoading ? '...' : route ? (route.distanceMeters / 1000).toFixed(2) : '0.00'}
                         </span>
-                        <span className="text-[10px] text-[#F3EBDD]/60 font-semibold uppercase">km</span>
+                        <span className="text-[10px] text-[#4b2f23]/60 font-semibold uppercase">km</span>
                       </div>
                     </div>
 
                     <div className="space-y-1">
-                      <span className="text-[10px] text-[#D4A85A] uppercase tracking-wider block font-bold">Est. Time</span>
+                      <span className="text-[10px] text-[#b65a3a] uppercase tracking-wider block font-bold">Est. Time</span>
                       <div className="flex items-baseline gap-1">
                         <span className="text-xl font-bold font-mono">
                           {isLoading ? '...' : route ? Math.ceil(route.durationSeconds / 60) : '0'}
                         </span>
-                        <span className="text-[10px] text-[#F3EBDD]/60 font-semibold uppercase">min</span>
+                        <span className="text-[10px] text-[#4b2f23]/60 font-semibold uppercase">min</span>
                       </div>
                     </div>
                   </div>
 
-                  <div className="pt-3 border-t border-[#D4A85A]/10">
-                    <span className="text-[10px] text-[#D4A85A] uppercase tracking-wider block font-bold">Travel Mode</span>
-                    <span className="font-medium text-[#F3EBDD] mt-0.5 block capitalize">
+                  <div className="pt-3 border-t border-[#aa7b3f]/10">
+                    <span className="text-[10px] text-[#b65a3a] uppercase tracking-wider block font-bold">Travel Mode</span>
+                    <span className="font-medium text-[#4b2f23] mt-0.5 block capitalize">
                       {travelMode.replace('-', ' ')}
                     </span>
                   </div>
@@ -419,7 +419,7 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
                     <p className="text-xs text-emerald-400/90 font-semibold italic">
                       Welcome to {monument.name}
                     </p>
-                    <p className="text-[10px] text-[#F3EBDD]/70 leading-relaxed pt-1.5">
+                    <p className="text-[10px] text-[#4b2f23]/70 leading-relaxed pt-1.5">
                       You are within the landmark threshold. Take out your device, explore hotspots, or tap the button below to launch the high-fidelity 3D spatial model.
                     </p>
                   </div>
@@ -427,7 +427,7 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
                   {monument.has3DModel && (
                     <button
                       onClick={() => onNavigate(`monument/${monument.id}/3d`)}
-                      className="w-full py-3 rounded-xl bg-emerald-500 text-[#17130F] font-bold text-xs uppercase tracking-wider hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/20"
+                      className="w-full py-3 rounded-xl bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider hover:bg-emerald-400 transition-colors shadow-lg shadow-emerald-500/20"
                     >
                       Launch 3D Model
                     </button>

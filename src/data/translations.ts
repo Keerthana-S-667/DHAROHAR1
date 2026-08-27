@@ -115,10 +115,10 @@ export const TRANSLATIONS = {
       resetView: 'Reset Camera View'
     },
     guide: {
-      title: 'Sutradhar: AI Cultural Heritage Guide',
+      title: 'Dharohar AI: AI Cultural Heritage Guide',
       subtitle: 'An erudite cultural guide conversing on Indian architecture, epigraphy, cosmic geometries, and preservation.',
       inputPlaceholder: 'Ask anything about Dravidian vimanas, musical pillars, salt weathering, or legends...',
-      send: 'Ask Sutradhar',
+      send: 'Ask Dharohar AI',
       suggestedQuestions: 'Curated Inquiries'
     },
     trails: {
@@ -156,7 +156,7 @@ export const TRANSLATIONS = {
       listenSection: 'Listen to this section',
       listenResponse: 'Listen to response'
     },
-    sutradharQuestions: [
+    dharoharAIQuestions: [
       'Tell me the story of this monument.',
       'What should I see first?',
       'Why is this architecturally important?',
@@ -321,7 +321,7 @@ export const TRANSLATIONS = {
       listenSection: 'இந்தப் பகுதியைக் கேட்கவும்',
       listenResponse: 'பதிலைக் கேட்கவும்'
     },
-    sutradharQuestions: [
+    dharoharAIQuestions: [
       'இந்த நினைவுச்சின்னத்தின் வரலாற்றை சொல்லுங்கள்.',
       'முதலில் என்ன பார்க்க வேண்டும்?',
       'இந்தக் கட்டிடக்கலை ஏன் முக்கியமானது?',
@@ -486,7 +486,7 @@ export const TRANSLATIONS = {
       listenSection: 'इस अनुभाग को सुनें',
       listenResponse: 'उत्तर सुनें'
     },
-    sutradharQuestions: [
+    dharoharAIQuestions: [
       'इस स्मारक का इतिहास बताइए।',
       'यहाँ पहले क्या देखें?',
       'यह स्थापत्य शैली क्यों महत्वपूर्ण है?',
