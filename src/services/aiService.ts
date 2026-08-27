@@ -1,5 +1,5 @@
 /**
- * DHAROHAR AI Service — Sutradhar Heritage Guide
+ * DHAROHAR AI Service — Dharohar AI Heritage Guide
  * Connects to Google Gemini via VITE_GEMINI_API_KEY env variable.
  * All AI communication is isolated inside this service.
  */
@@ -34,7 +34,7 @@ const FALLBACK_RESPONSES: Record<string, string> = {
   story: `This monument stands as a testament to the artistic and spiritual vision of its patrons. Built during the height of a great dynasty, it served as both a place of worship and a symbol of royal power. Legends speak of divine inspiration guiding the craftsmen who shaped every stone. Walking through its corridors, you are experiencing centuries of devotion preserved in granite.`,
   architecture: `This monument exemplifies the architectural mastery of its era. The skilled craftsmen employed sophisticated techniques — precisely fitted stone joints, carefully calibrated proportions, and ornamental programs that merged aesthetic beauty with structural integrity. Each architectural element carries symbolic meaning rooted in ancient cosmological frameworks.`,
   history: `The monument's history spans multiple centuries, witnessing the rise and fall of dynasties, the devotion of pilgrims, and the attention of modern conservation efforts. Archaeological evidence and epigraphical records provide insights into its patronage, construction timeline, and cultural importance across different historical periods.`,
-  default: `Sutradhar AI is currently operating in offline mode. This monument contains a rich wealth of historical, architectural, and cultural significance. Please explore the detailed sections on this page for comprehensive information about its dynasty, construction techniques, and preservation status. You can ask me about specific architectural features, historical context, or cultural significance when the AI connection is restored.`
+  default: `Dharohar AI is currently operating in offline mode. This monument contains a rich wealth of historical, architectural, and cultural significance. Please explore the detailed sections on this page for comprehensive information about its dynasty, construction techniques, and preservation status. You can ask me about specific architectural features, historical context, or cultural significance when the AI connection is restored.`
 };
 
 function buildSystemPrompt(mode: 'traveller' | 'researcher'): string {
@@ -42,7 +42,7 @@ function buildSystemPrompt(mode: 'traveller' | 'researcher'): string {
     ? 'Prefer simple, engaging, story-driven explanations suitable for a visitor experiencing the monument in person. Keep answers to 2-4 paragraphs. Use vivid language and avoid academic jargon.'
     : 'Prefer structured, detailed scholarly explanations. Include architectural terminology, historical context, dynastic significance, and construction techniques. Organize information clearly.';
 
-  return `You are Sutradhar (सूत्रधार), DHAROHAR's AI heritage cultural guide for Indian monuments and architecture.
+  return `You are Dharohar AI (सूत्रधार), DHAROHAR's AI heritage cultural guide for Indian monuments and architecture.
 
 Your purpose is to explain Indian heritage accurately, clearly, and respectfully. You are a knowledgeable, warm, and culturally sensitive guide.
 
@@ -100,14 +100,14 @@ function getFallbackResponse(question: string): string {
 
 export const aiService = {
   /**
-   * Primary method: Ask Sutradhar a question with full monument context.
+   * Primary method: Ask Dharohar AI a question with full monument context.
    * Uses Gemini Flash if VITE_GEMINI_API_KEY is configured, falls back gracefully.
    */
-  async askSutradhar(question: string, context: HeritageAIContext = {}): Promise<string> {
+  async askDharoharAI(question: string, context: HeritageAIContext = {}): Promise<string> {
     const apiKey = (import.meta.env.VITE_GEMINI_API_KEY as string | undefined)?.trim();
 
     if (!apiKey) {
-      console.warn('[Sutradhar] No VITE_GEMINI_API_KEY found — using fallback responses.');
+      console.warn('[Dharohar AI] No VITE_GEMINI_API_KEY found — using fallback responses.');
       await new Promise((r) => setTimeout(r, 600));
       return getFallbackResponse(question);
     }
@@ -137,7 +137,7 @@ export const aiService = {
 
       if (!response.ok) {
         const errBody = await response.text();
-        console.error(`[Sutradhar] Gemini API ${response.status}:`, errBody);
+        console.error(`[Dharohar AI] Gemini API ${response.status}:`, errBody);
         throw new Error(`Gemini API error: ${response.status}`);
       }
 
@@ -159,7 +159,7 @@ export const aiService = {
    * Legacy method kept for backward compatibility with existing AIGuidePage keyword system.
    */
   async getHeritageResponse(query: string, context?: string): Promise<string> {
-    return this.askSutradhar(query, {
+    return this.askDharoharAI(query, {
       historicalChronicle: context,
       researchMode: 'traveller'
     });

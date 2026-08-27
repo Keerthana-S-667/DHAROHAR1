@@ -768,22 +768,22 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
   };
 
   return (
-    <div id="shore-temple-3d-container" className="relative w-full h-[640px] lg:h-[720px] rounded-2xl overflow-hidden border border-[#D4A85A]/30 bg-[#17130F] shadow-2xl group">
+    <div id="shore-temple-3d-container" className="relative w-full h-[640px] lg:h-[720px] rounded-2xl overflow-hidden border border-[#aa7b3f]/30 bg-[#f5f0e6] shadow-2xl group">
       {/* 3D WebGL Canvas Mount */}
       <div ref={mountRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
       {/* Top Left Title & Status Header */}
       <div className="absolute top-4 left-4 z-10 flex flex-col gap-1.5 pointer-events-none">
-        <div className="flex items-center gap-2 bg-[#17130F]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#D4A85A]/40 shadow-lg pointer-events-auto">
+        <div className="flex items-center gap-2 bg-[#f5f0e6]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-[#aa7b3f]/40 shadow-lg pointer-events-auto">
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
-          <span className="text-xs font-semibold uppercase tracking-widest text-[#D4A85A]">
+          <span className="text-xs font-semibold uppercase tracking-widest text-[#b65a3a]">
             Spatial 3D Model • 700 CE
           </span>
-          <span className="text-[11px] text-[#F3EBDD]/60 border-l border-[#D4A85A]/30 pl-2">
+          <span className="text-[11px] text-[#4b2f23]/60 border-l border-[#aa7b3f]/30 pl-2">
             Zoom {cameraZoomLevel}x
           </span>
         </div>
-        <div className="text-xs text-[#F3EBDD]/70 bg-[#17130F]/70 px-3 py-1 rounded-md backdrop-blur-sm hidden sm:inline-block max-w-xs">
+        <div className="text-xs text-[#4b2f23]/70 bg-[#f5f0e6]/70 px-3 py-1 rounded-md backdrop-blur-sm hidden sm:inline-block max-w-xs">
           Drag to orbit • Scroll to zoom • Click gold markers for deep archaeological context
         </div>
       </div>
@@ -797,8 +797,8 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
           title={ambientSound ? "Mute Ocean & Temple Chime" : "Play Ambient Ocean Waves & Sacred Chime"}
           className={`p-2.5 rounded-xl border backdrop-blur-md transition-all flex items-center gap-1.5 text-xs ${
             ambientSound 
-              ? 'bg-[#D4A85A] text-[#17130F] border-[#D4A85A] font-bold shadow-lg shadow-[#D4A85A]/20' 
-              : 'bg-[#2B2118]/80 text-[#F3EBDD] border-[#D4A85A]/30 hover:border-[#D4A85A] hover:bg-[#2B2118]'
+              ? 'bg-[#b65a3a] text-white border-[#aa7b3f] font-bold shadow-lg shadow-[#D4A85A]/20' 
+              : 'bg-[#ede3d1]/80 text-[#4b2f23] border-[#aa7b3f]/30 hover:border-[#aa7b3f] hover:bg-[#ede3d1]'
           }`}
         >
           {ambientSound ? <Volume2 className="w-4 h-4 animate-bounce" /> : <VolumeX className="w-4 h-4" />}
@@ -812,8 +812,8 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
           title={autoRotate ? "Pause Auto-Rotation" : "Enable 360° Auto-Rotation"}
           className={`p-2.5 rounded-xl border backdrop-blur-md transition-all ${
             autoRotate 
-              ? 'bg-[#D4A85A]/20 text-[#D4A85A] border-[#D4A85A]' 
-              : 'bg-[#2B2118]/80 text-[#F3EBDD]/70 border-[#D4A85A]/30 hover:text-[#F3EBDD]'
+              ? 'bg-[#b65a3a]/20 text-[#b65a3a] border-[#aa7b3f]' 
+              : 'bg-[#ede3d1]/80 text-[#4b2f23]/70 border-[#aa7b3f]/30 hover:text-[#4b2f23]'
           }`}
         >
           <RotateCw className={`w-4 h-4 ${autoRotate ? 'animate-spin' : ''}`} />
@@ -825,7 +825,7 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
           onClick={handleCaptureSnapshot}
           disabled={isCapturing}
           title="Save High-Res 3D Architectural Screenshot"
-          className="p-2.5 rounded-xl border border-[#D4A85A]/30 bg-[#2B2118]/80 text-[#F3EBDD] hover:border-[#D4A85A] hover:text-[#D4A85A] backdrop-blur-md transition-all"
+          className="p-2.5 rounded-xl border border-[#aa7b3f]/30 bg-[#ede3d1]/80 text-[#4b2f23] hover:border-[#aa7b3f] hover:text-[#b65a3a] backdrop-blur-md transition-all"
         >
           <Camera className="w-4 h-4" />
         </button>
@@ -835,7 +835,7 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
           id="btn-3d-fullscreen"
           onClick={toggleFullscreen}
           title="Toggle Fullscreen"
-          className="p-2.5 rounded-xl border border-[#D4A85A]/30 bg-[#2B2118]/80 text-[#F3EBDD] hover:border-[#D4A85A] hover:text-[#D4A85A] backdrop-blur-md transition-all"
+          className="p-2.5 rounded-xl border border-[#aa7b3f]/30 bg-[#ede3d1]/80 text-[#4b2f23] hover:border-[#aa7b3f] hover:text-[#b65a3a] backdrop-blur-md transition-all"
         >
           {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
         </button>
@@ -843,16 +843,16 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
 
       {/* Floating Hotspots Overlay Bar (Bottom Left) */}
       <div className="absolute bottom-4 left-4 z-10 max-w-[calc(100%-2rem)] md:max-w-xl">
-        <div className="bg-[#17130F]/90 backdrop-blur-md p-3 rounded-2xl border border-[#D4A85A]/40 shadow-2xl">
-          <div className="flex items-center justify-between gap-2 mb-2 pb-1.5 border-b border-[#D4A85A]/20">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#D4A85A] flex items-center gap-1.5">
+        <div className="bg-[#f5f0e6]/90 backdrop-blur-md p-3 rounded-2xl border border-[#aa7b3f]/40 shadow-2xl">
+          <div className="flex items-center justify-between gap-2 mb-2 pb-1.5 border-b border-[#aa7b3f]/20">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#b65a3a] flex items-center gap-1.5">
               <Sparkles className="w-3.5 h-3.5" />
               Archaeological Hotspots ({hotspots.length})
             </span>
             <button 
               id="btn-reset-3d-camera"
               onClick={handleResetCamera}
-              className="text-[11px] text-[#F3EBDD]/70 hover:text-[#D4A85A] flex items-center gap-1 transition-colors"
+              className="text-[11px] text-[#4b2f23]/70 hover:text-[#b65a3a] flex items-center gap-1 transition-colors"
             >
               <Compass className="w-3 h-3" />
               Reset View
@@ -869,12 +869,12 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
                   onClick={() => handleSelectHotspot(hotspot)}
                   className={`px-2.5 py-2 rounded-xl text-left transition-all border text-xs flex flex-col ${
                     isSelected
-                      ? 'bg-[#D4A85A] text-[#17130F] border-[#D4A85A] font-bold shadow-md shadow-[#D4A85A]/30 scale-[1.02]'
-                      : 'bg-[#2B2118]/80 text-[#F3EBDD] border-[#D4A85A]/20 hover:border-[#D4A85A]/60 hover:bg-[#2B2118]'
+                      ? 'bg-[#b65a3a] text-white border-[#aa7b3f] font-bold shadow-md shadow-[#D4A85A]/30 scale-[1.02]'
+                      : 'bg-[#ede3d1]/80 text-[#4b2f23] border-[#aa7b3f]/20 hover:border-[#aa7b3f]/60 hover:bg-[#ede3d1]'
                   }`}
                 >
                   <span className="font-semibold truncate">{hotspot.title.split('(')[0]}</span>
-                  <span className={`text-[10px] truncate ${isSelected ? 'text-[#17130F]/80' : 'text-[#D4A85A]'}`}>
+                  <span className={`text-[10px] truncate ${isSelected ? 'text-white/80' : 'text-[#b65a3a]'}`}>
                     {hotspot.subtitle.split(' ')[0]}
                   </span>
                 </button>
@@ -887,36 +887,36 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
       {/* Floating Lighting & Camera Controls (Bottom Right) */}
       <div className="absolute bottom-4 right-4 z-10 flex flex-col items-end gap-2">
         {/* Zoom In/Out Buttons */}
-        <div className="flex flex-col gap-1 bg-[#17130F]/90 backdrop-blur-md p-1 rounded-xl border border-[#D4A85A]/30 shadow-lg">
+        <div className="flex flex-col gap-1 bg-[#f5f0e6]/90 backdrop-blur-md p-1 rounded-xl border border-[#aa7b3f]/30 shadow-lg">
           <button
             id="btn-3d-zoom-in"
             onClick={() => handleZoom('in')}
             title="Zoom In"
-            className="p-2 text-[#F3EBDD] hover:text-[#D4A85A] hover:bg-[#2B2118] rounded-lg transition-colors"
+            className="p-2 text-[#4b2f23] hover:text-[#b65a3a] hover:bg-[#ede3d1] rounded-lg transition-colors"
           >
             <ZoomIn className="w-4 h-4" />
           </button>
-          <div className="h-px bg-[#D4A85A]/20 mx-1" />
+          <div className="h-px bg-[#b65a3a]/20 mx-1" />
           <button
             id="btn-3d-zoom-out"
             onClick={() => handleZoom('out')}
             title="Zoom Out"
-            className="p-2 text-[#F3EBDD] hover:text-[#D4A85A] hover:bg-[#2B2118] rounded-lg transition-colors"
+            className="p-2 text-[#4b2f23] hover:text-[#b65a3a] hover:bg-[#ede3d1] rounded-lg transition-colors"
           >
             <ZoomOut className="w-4 h-4" />
           </button>
         </div>
 
         {/* Lighting Selector Pill */}
-        <div className="flex items-center gap-1 bg-[#17130F]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#D4A85A]/40 shadow-xl">
+        <div className="flex items-center gap-1 bg-[#f5f0e6]/90 backdrop-blur-md p-1.5 rounded-2xl border border-[#aa7b3f]/40 shadow-xl">
           <button
             id="btn-light-dawn"
             onClick={() => setLightingMode('dawn')}
             title="Dawn Sunrise (6:00 AM)"
             className={`p-2 rounded-xl text-xs flex items-center gap-1 transition-all ${
               lightingMode === 'dawn'
-                ? 'bg-[#B58A52] text-[#17130F] font-bold shadow-md'
-                : 'text-[#F3EBDD]/70 hover:text-[#F3EBDD] hover:bg-[#2B2118]'
+                ? 'bg-[#B58A52] text-white font-bold shadow-md'
+                : 'text-[#4b2f23]/70 hover:text-[#4b2f23] hover:bg-[#ede3d1]'
             }`}
           >
             <Sun className="w-3.5 h-3.5 text-amber-300" />
@@ -929,8 +929,8 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
             title="Golden Hour (4:30 PM)"
             className={`p-2 rounded-xl text-xs flex items-center gap-1 transition-all ${
               lightingMode === 'golden'
-                ? 'bg-[#D4A85A] text-[#17130F] font-bold shadow-md'
-                : 'text-[#F3EBDD]/70 hover:text-[#F3EBDD] hover:bg-[#2B2118]'
+                ? 'bg-[#b65a3a] text-white font-bold shadow-md'
+                : 'text-[#4b2f23]/70 hover:text-[#4b2f23] hover:bg-[#ede3d1]'
             }`}
           >
             <Sunset className="w-3.5 h-3.5 text-amber-500" />
@@ -943,8 +943,8 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
             title="Midnight Deepam (10:00 PM)"
             className={`p-2 rounded-xl text-xs flex items-center gap-1 transition-all ${
               lightingMode === 'night'
-                ? 'bg-[#2B2118] text-[#D4A85A] border border-[#D4A85A] font-bold shadow-md'
-                : 'text-[#F3EBDD]/70 hover:text-[#F3EBDD] hover:bg-[#2B2118]'
+                ? 'bg-[#ede3d1] text-[#b65a3a] border border-[#aa7b3f] font-bold shadow-md'
+                : 'text-[#4b2f23]/70 hover:text-[#4b2f23] hover:bg-[#ede3d1]'
             }`}
           >
             <Moon className="w-3.5 h-3.5 text-indigo-300" />
@@ -958,7 +958,7 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
             className={`p-2 rounded-xl text-xs flex items-center gap-1 transition-all ${
               lightingMode === 'wireframe'
                 ? 'bg-cyan-900 text-cyan-200 border border-cyan-400 font-bold shadow-md'
-                : 'text-[#F3EBDD]/70 hover:text-[#F3EBDD] hover:bg-[#2B2118]'
+                : 'text-[#4b2f23]/70 hover:text-[#4b2f23] hover:bg-[#ede3d1]'
             }`}
           >
             <Layers className="w-3.5 h-3.5" />
@@ -969,32 +969,32 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
 
       {/* Contextual Hotspot Detail Modal / Drawer */}
       {selectedHotspot && (
-        <div className="absolute top-16 right-4 z-20 w-80 md:w-96 bg-[#17130F]/95 backdrop-blur-xl border border-[#D4A85A] rounded-2xl shadow-2xl p-5 animate-in fade-in slide-in-from-right-4 duration-300">
-          <div className="flex items-start justify-between gap-3 mb-3 pb-2 border-b border-[#D4A85A]/30">
+        <div className="absolute top-16 right-4 z-20 w-80 md:w-96 bg-[#f5f0e6]/95 backdrop-blur-xl border border-[#aa7b3f] rounded-2xl shadow-2xl p-5 animate-in fade-in slide-in-from-right-4 duration-300">
+          <div className="flex items-start justify-between gap-3 mb-3 pb-2 border-b border-[#aa7b3f]/30">
             <div>
               <div className="flex items-center gap-2">
-                <span className="px-2 py-0.5 rounded-full bg-[#D4A85A]/20 text-[#D4A85A] text-[10px] uppercase font-bold tracking-wider">
+                <span className="px-2 py-0.5 rounded-full bg-[#b65a3a]/20 text-[#b65a3a] text-[10px] uppercase font-bold tracking-wider">
                   Hotspot In Focus
                 </span>
               </div>
-              <h4 className="font-display text-lg font-bold text-[#F3EBDD] mt-1">
+              <h4 className="font-display text-lg font-bold text-[#4b2f23] mt-1">
                 {selectedHotspot.title}
               </h4>
-              <p className="text-xs text-[#D4A85A] font-subheading italic">
+              <p className="text-xs text-[#b65a3a] font-subheading italic">
                 {selectedHotspot.subtitle}
               </p>
             </div>
             <button
               id="btn-close-hotspot-detail"
               onClick={() => setSelectedHotspot(null)}
-              className="p-1.5 rounded-full bg-[#2B2118] text-[#F3EBDD]/70 hover:text-[#F3EBDD] hover:bg-[#B58A52]/40 transition-colors"
+              className="p-1.5 rounded-full bg-[#ede3d1] text-[#4b2f23]/70 hover:text-[#4b2f23] hover:bg-[#B58A52]/40 transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
           {selectedHotspot.detailImage && (
-            <div className="relative h-32 w-full rounded-xl overflow-hidden mb-3 border border-[#D4A85A]/30 shadow-inner">
+            <div className="relative h-32 w-full rounded-xl overflow-hidden mb-3 border border-[#aa7b3f]/30 shadow-inner">
               <img 
                 src={selectedHotspot.detailImage} 
                 alt={selectedHotspot.title} 
@@ -1005,41 +1005,41 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
             </div>
           )}
 
-          <div className="space-y-3 text-xs text-[#F3EBDD]/90 leading-relaxed">
-            <p className="border-l-2 border-[#D4A85A] pl-2.5 text-[#F3EBDD]/80">
+          <div className="space-y-3 text-xs text-[#4b2f23]/90 leading-relaxed">
+            <p className="border-l-2 border-[#aa7b3f] pl-2.5 text-[#4b2f23]/80">
               {selectedHotspot.architecturalSignificance}
             </p>
 
-            <div className="bg-[#2B2118]/70 p-3 rounded-xl border border-[#D4A85A]/20">
-              <div className="text-[11px] font-bold text-[#D4A85A] mb-1 flex items-center gap-1.5">
+            <div className="bg-[#ede3d1]/70 p-3 rounded-xl border border-[#aa7b3f]/20">
+              <div className="text-[11px] font-bold text-[#b65a3a] mb-1 flex items-center gap-1.5">
                 <Info className="w-3 h-3" />
                 Epigraphical & Historical Chronicle
               </div>
-              <p className="text-[11px] text-[#F3EBDD]/80">
+              <p className="text-[11px] text-[#4b2f23]/80">
                 {selectedHotspot.eraFact}
               </p>
             </div>
 
             {selectedHotspot.audioGuideSnippet && (
-              <div className="p-2.5 rounded-xl bg-[#D4A85A]/10 border border-[#D4A85A]/30 flex items-start gap-2">
-                <Volume2 className="w-4 h-4 text-[#D4A85A] shrink-0 mt-0.5" />
-                <p className="text-[11px] italic text-[#F3EBDD]/90">
+              <div className="p-2.5 rounded-xl bg-[#b65a3a]/10 border border-[#aa7b3f]/30 flex items-start gap-2">
+                <Volume2 className="w-4 h-4 text-[#b65a3a] shrink-0 mt-0.5" />
+                <p className="text-[11px] italic text-[#4b2f23]/90">
                   "{selectedHotspot.audioGuideSnippet}"
                 </p>
               </div>
             )}
           </div>
 
-          <div className="mt-4 pt-3 border-t border-[#D4A85A]/20 flex items-center justify-between">
+          <div className="mt-4 pt-3 border-t border-[#aa7b3f]/20 flex items-center justify-between">
             <button
               id="btn-3d-inspect-close"
               onClick={handleResetCamera}
-              className="text-xs text-[#D4A85A] hover:underline flex items-center gap-1"
+              className="text-xs text-[#b65a3a] hover:underline flex items-center gap-1"
             >
               <Eye className="w-3.5 h-3.5" />
               Return to Full Temple
             </button>
-            <span className="text-[10px] text-[#F3EBDD]/50">DHAROHAR Spatial Twin</span>
+            <span className="text-[10px] text-[#4b2f23]/50">DHAROHAR Spatial Twin</span>
           </div>
         </div>
       )}
