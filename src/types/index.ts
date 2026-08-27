@@ -62,7 +62,16 @@ export interface Monument {
   hotspots?: (Hotspot | MonumentHotspot)[];
   constructionMaterial?: string;
   constructionTechnique?: string;
+  historicalOverview?: string;
   historicalTimeline?: HistoricalTimelineEvent[];
+  architecturalDetails?: {
+    overview: string;
+    style: string;
+    materials: string;
+    techniques: string;
+    highlights: string[];
+    geometryPlan?: string;
+  };
   unescoDetails?: string;
   researchReferences?: string[];
 }
@@ -83,6 +92,8 @@ export interface GalleryImage {
   sourcePage?: string;
   photographer?: string;
   license?: string;
+  title?: string;
+  caption?: string;
 }
 
 export interface Destination {

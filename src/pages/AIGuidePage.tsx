@@ -96,7 +96,7 @@ export const AIGuidePage: React.FC<AIGuidePageProps> = ({ onNavigate, language }
               Ready to explore step-by-step thematic itineraries?
             </h4>
             <p className="text-xs text-[#4b2f23]/70">
-              Experience the Pallava Architecture Trail linking Shore Temple to Arjuna's Penance & Pancha Rathas.
+              Experience the Pallava Architecture Trail linking Shore Temple to Arjuna's Penance & Brihadeeswarar Temple.
             </p>
           </div>
           <button

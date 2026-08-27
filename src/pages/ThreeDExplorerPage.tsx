@@ -83,7 +83,7 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
             </button>
             <button
               onClick={() => onNavigate('ai-guide')}
-              className="px-4 py-2 rounded-full bg-[#b65a3a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors flex items-center gap-1.5 shadow-md shadow-[#D4A85A]/20"
+              className="px-4 py-2 rounded-full bg-[#b65a3a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#9a472a] transition-colors flex items-center gap-1.5 shadow-md shadow-[#D4A85A]/20 cursor-pointer"
             >
               <Bot className="w-3.5 h-3.5" />
               Ask AI Guide
@@ -109,7 +109,7 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
                     : 'text-[#4b2f23]/70 hover:text-[#4b2f23]'
                 }`}
               >
-                Live 3D Model (Sketchfab)
+                Live 3D Model
               </button>
               {selectedMonument.id === 'shore-temple' && (
                 <button
@@ -161,17 +161,6 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
                 <h2 className="font-display text-2xl font-bold text-[#4b2f23]">
                   {selectedMonument.name} <span className="text-xs text-[#b65a3a] font-subheading">({selectedMonument.nativeName})</span>
                 </h2>
-                {selectedMonument.sketchfabUrl && (
-                  <a
-                    href={selectedMonument.sketchfabUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-xs font-semibold text-[#b65a3a] hover:underline flex items-center gap-1"
-                  >
-                    <span>Sketchfab Link</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                )}
               </div>
               <p className="text-xs text-[#b65a3a] font-subheading italic">
                 {selectedMonument.location.city}, {selectedMonument.location.state} • {selectedMonument.period} ({selectedMonument.dynasty})
@@ -261,7 +250,7 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
               <div className="pt-2">
                 <button
                   onClick={() => onNavigate(`monument/${selectedMonument.id}`)}
-                  className="w-full py-3 rounded-xl bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[#D4A85A]/20 cursor-pointer"
+                  className="w-full py-3 rounded-xl bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#9a472a] transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#D4A85A]/20 cursor-pointer"
                 >
                   <span>Explore Full History & Audio Guide</span>
                   <ArrowRight className="w-4 h-4" />
@@ -288,7 +277,7 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
               <button
                 id="btn-next-to-ai-guide"
                 onClick={() => onNavigate('ai-guide')}
-                className="px-5 py-2.5 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors flex items-center gap-1.5 shadow-md"
+                className="px-5 py-2.5 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#9a472a] transition-colors flex items-center gap-1.5 shadow-md cursor-pointer"
               >
                 <Bot className="w-4 h-4" />
                 <span>Ask AI Guide</span>

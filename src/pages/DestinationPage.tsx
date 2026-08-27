@@ -73,21 +73,21 @@ export const DestinationPage: React.FC<DestinationPageProps> = ({
               src={currentDest.heroImage}
               alt={currentDest.name}
               fallbackName={currentDest.name}
-              className="w-full h-full object-cover filter brightness-70"
+              className="w-full h-full object-cover filter brightness-105 contrast-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#17130F] via-[#17130F]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#17130F]/90 via-[#17130F]/45 to-transparent" />
             
             <div className="absolute bottom-8 left-6 sm:left-10 right-6 space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f5f0e6]/90 border border-[#aa7b3f]/40 text-xs text-[#b65a3a] font-semibold">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f5f0e6]/95 border border-[#aa7b3f]/40 text-xs text-[#b65a3a] font-bold shadow-md">
                 <MapPin className="w-3.5 h-3.5" />
                 {currentState.name} • UNESCO Cultural Heritage
               </div>
 
-              <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#4b2f23]">
+              <h1 className="font-display text-4xl sm:text-6xl font-extrabold text-white drop-shadow-lg">
                 {currentDest.name}
               </h1>
 
-              <p className="font-subheading text-2xl sm:text-3xl text-[#b65a3a] italic font-semibold">
+              <p className="font-subheading text-2xl sm:text-3xl text-[#F3EBDD] italic font-semibold drop-shadow-md">
                 “{currentDest.tagline}”
               </p>
             </div>
@@ -233,7 +233,7 @@ export const DestinationPage: React.FC<DestinationPageProps> = ({
                     <button
                       id={`explore-3d-btn-${monument.id}`}
                       onClick={() => onNavigate(`3d-explorer/${monument.id}`)}
-                      className="px-5 py-3 rounded-xl bg-[#b65a3a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#f5f0e6] transition-all flex items-center gap-1.5 shadow-lg shadow-[#D4A85A]/20"
+                      className="px-5 py-3 rounded-xl bg-[#b65a3a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#9a472a] transition-all flex items-center gap-1.5 shadow-lg shadow-[#D4A85A]/20 cursor-pointer"
                     >
                       <Eye className="w-4 h-4" />
                       <span>3D</span>

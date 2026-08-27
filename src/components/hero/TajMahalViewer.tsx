@@ -21,7 +21,7 @@ export const TajMahalViewer: React.FC = () => {
       {/* Sketchfab 3D Embed — transparent background so beige shows through, with autospin=0.05 */}
       <iframe
         title="Taj Mahal 3D Model"
-        src="https://sketchfab.com/models/7b43e635cbfb47719d5a124302b78579/embed?autostart=1&preload=1&ui_infos=0&ui_watermark=0&ui_help=0&ui_settings=0&ui_share=0&transparent=1&autospin=0.05"
+        src="https://sketchfab.com/models/7b43e635cbfb47719d5a124302b78579/embed?autostart=1&preload=1&ui_infos=0&ui_controls=0&ui_watermark=0&ui_help=0&ui_settings=0&ui_share=0&ui_annotations=0&ui_ar=0&ui_vr=0&transparent=1&autospin=0.05"
         allow="autoplay; fullscreen; xr-spatial-tracking"
         allowFullScreen
         onLoad={() => setIsLoaded(true)}

@@ -71,7 +71,7 @@ export const TRANSLATIONS = {
 
       trailsBadge: 'Thematic Journeys',
       trailsTitle: 'The Pallava Architecture Trail',
-      trailsSubtitle: 'Shore Temple → Arjuna\'s Penance → Pancha Rathas',
+      trailsSubtitle: 'Shore Temple → Arjuna\'s Penance → Brihadeeswarar Temple',
       trailsDesc: 'Trace 150 years of rapid architectural evolution in Mahabalipuram as Pallava stonemasons transformed monolithic boulders into structural oceanfront pyramids.',
       btnWalkTrail: 'Walk the Trail Route',
       btnCustomItinerary: 'Build Custom 15m / 1hr Itinerary',

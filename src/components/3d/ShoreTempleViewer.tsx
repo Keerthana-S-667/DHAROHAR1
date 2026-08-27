@@ -1001,7 +1001,7 @@ export const ShoreTempleViewer: React.FC<ShoreTempleViewerProps> = ({
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#17130F] via-transparent to-transparent opacity-60" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#5c3c28] via-transparent to-transparent opacity-60" />
             </div>
           )}
 
