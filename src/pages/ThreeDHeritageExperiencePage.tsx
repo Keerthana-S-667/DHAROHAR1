@@ -173,11 +173,83 @@ export const ThreeDHeritageExperiencePage: React.FC<ThreeDHeritageExperiencePage
             {/* Hotspots Info Showcase Panel */}
             <div className="p-6 rounded-3xl bg-[#ede3d1] border border-[#aa7b3f]/40 shadow-2xl space-y-6">
               {!selectedHotspot ? (
-                <div className="text-center py-12 space-y-3">
-                  <Box className="w-10 h-10 text-[#b65a3a]/30 mx-auto animate-pulse" />
-                  <p className="text-xs text-[#4b2f23]/60 max-w-xs mx-auto">
-                    Select a highlighted architectural feature on the 3D model to explore its design history and legends.
-                  </p>
+                <div className="space-y-5 animate-in fade-in duration-300">
+                  <div className="pb-3 border-b border-[#aa7b3f]/20 space-y-1">
+                    <span className="text-[10px] uppercase font-bold text-[#b65a3a] tracking-wider block">
+                      Architectural Overview
+                    </span>
+                    <h3 className="font-display text-xl font-bold text-[#4b2f23]">
+                      {monument.name}
+                    </h3>
+                    <p className="text-xs text-[#b65a3a] font-subheading italic">
+                      “{monument.tagline}”
+                    </p>
+                  </div>
+
+                  {/* Key Quick Facts Grid */}
+                  <div className="grid grid-cols-2 gap-2 text-[11px]">
+                    <div className="p-2.5 rounded-xl bg-[#f5f0e6]/80 border border-[#aa7b3f]/20 space-y-0.5">
+                      <span className="text-[9px] uppercase font-bold text-[#b65a3a] block">Period</span>
+                      <span className="font-semibold text-[#4b2f23]">{monument.period}</span>
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-[#f5f0e6]/80 border border-[#aa7b3f]/20 space-y-0.5">
+                      <span className="text-[9px] uppercase font-bold text-[#b65a3a] block">Dynasty</span>
+                      <span className="font-semibold text-[#4b2f23]">{monument.dynasty}</span>
+                    </div>
+                    <div className="p-2.5 rounded-xl bg-[#f5f0e6]/80 border border-[#aa7b3f]/20 space-y-0.5 col-span-2">
+                      <span className="text-[9px] uppercase font-bold text-[#b65a3a] block">Architectural Style</span>
+                      <span className="font-semibold text-[#4b2f23]">{monument.architectureStyle}</span>
+                    </div>
+                  </div>
+
+                  {/* Cultural Significance */}
+                  <div className="space-y-1.5 pt-1">
+                    <span className="text-[10px] uppercase font-bold text-[#b65a3a] tracking-wider block">
+                      Cultural Significance
+                    </span>
+                    <p className="text-xs text-[#4b2f23]/90 leading-relaxed bg-[#f5f0e6] p-3 rounded-xl border border-[#aa7b3f]/20">
+                      {monument.culturalSignificance}
+                    </p>
+                  </div>
+
+                  {/* Interactive Hotspots List */}
+                  {hotspots.length > 0 && (
+                    <div className="space-y-2 pt-1">
+                      <div className="flex items-center justify-between">
+                        <span className="text-[10px] uppercase font-bold text-[#b65a3a] tracking-wider block">
+                          3D Architectural Hotspots ({hotspots.length})
+                        </span>
+                        <span className="text-[10px] text-[#4b2f23]/50">Click feature to inspect</span>
+                      </div>
+                      <div className="space-y-1.5 max-h-48 overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-[#D4A85A]/40">
+                        {hotspots.map((hs) => (
+                          <button
+                            key={hs.id}
+                            onClick={() => setSelectedHotspot(hs)}
+                            className="w-full text-left p-2.5 rounded-xl bg-[#f5f0e6]/90 border border-[#aa7b3f]/25 hover:border-[#b65a3a] hover:bg-[#f5f0e6] transition-all flex items-center justify-between group cursor-pointer"
+                          >
+                            <span className="text-xs font-semibold text-[#4b2f23] group-hover:text-[#b65a3a]">
+                              {hs.name}
+                            </span>
+                            <span className="text-[10px] text-[#b65a3a] font-bold opacity-0 group-hover:opacity-100 transition-opacity">
+                              View →
+                            </span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Action Link */}
+                  <div className="pt-2">
+                    <button
+                      onClick={() => onNavigate(`monument/${monument.id}`)}
+                      className="w-full py-3 rounded-xl bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#9a472a] transition-all flex items-center justify-center gap-2 shadow-md cursor-pointer"
+                    >
+                      <span>View Full Monument Dossier</span>
+                      <ArrowLeft className="w-3.5 h-3.5 rotate-180" />
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <div className="space-y-6 animate-in slide-in-from-bottom duration-300">

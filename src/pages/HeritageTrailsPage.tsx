@@ -104,19 +104,19 @@ export const HeritageTrailsPage: React.FC<HeritageTrailsPageProps> = ({
             <img
               src={selectedTrail.heroImage}
               alt={selectedTrail.title}
-              className="w-full h-full object-cover filter brightness-75"
+              className="w-full h-full object-cover filter brightness-105 contrast-105"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#17130F] via-[#17130F]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#17130F]/90 via-[#17130F]/45 to-transparent" />
             
             <div className="absolute bottom-6 left-6 right-6 space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f5f0e6]/90 border border-[#aa7b3f]/40 text-xs text-[#b65a3a] font-semibold">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-[#f5f0e6]/95 border border-[#aa7b3f]/40 text-xs text-[#b65a3a] font-bold shadow-md">
                 <Compass className="w-3.5 h-3.5" />
                 {selectedTrail.region} • {selectedTrail.distance}
               </div>
-              <h2 className="font-display text-2xl sm:text-4xl font-bold text-[#4b2f23]">
+              <h2 className="font-display text-3xl sm:text-5xl font-extrabold text-white drop-shadow-lg tracking-tight">
                 {selectedTrail.title}
               </h2>
-              <p className="font-subheading text-lg sm:text-xl text-[#b65a3a] italic">
+              <p className="font-subheading text-xl sm:text-2xl text-[#F3EBDD] italic font-semibold drop-shadow-md">
                 “{selectedTrail.subtitle}”
               </p>
             </div>
@@ -159,7 +159,10 @@ export const HeritageTrailsPage: React.FC<HeritageTrailsPageProps> = ({
 
                   <div className="space-y-1.5">
                     <div className="flex flex-wrap items-center gap-2">
-                      <h4 className="font-display text-lg font-bold text-[#4b2f23]">
+                      <h4 
+                        onClick={() => stop.monumentId && onNavigate(`monument/${stop.monumentId}`)}
+                        className="font-display text-lg font-bold text-[#4b2f23] hover:text-[#b65a3a] transition-colors cursor-pointer"
+                      >
                         {stop.name}
                       </h4>
                       <span className="px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider bg-[#b65a3a]/20 text-[#b65a3a]">
@@ -192,21 +195,13 @@ export const HeritageTrailsPage: React.FC<HeritageTrailsPageProps> = ({
                   </div>
                 </div>
 
-                <div className="shrink-0 flex items-center gap-2">
+                <div className="shrink-0 flex items-center">
                   <button
                     onClick={() => onNavigate(`monument/${stop.monumentId}`)}
-                    className="px-4 py-2 rounded-xl bg-[#f5f0e6] border border-[#aa7b3f]/40 text-[#b65a3a] text-xs font-semibold hover:bg-[#b65a3a] hover:text-white transition-all"
+                    className="px-5 py-2.5 rounded-xl bg-[#f5f0e6] border border-[#aa7b3f]/40 text-[#b65a3a] text-xs font-bold hover:bg-[#b65a3a] hover:text-white transition-all cursor-pointer shadow-sm"
                   >
                     View Monument
                   </button>
-                  {stop.monumentId === 'shore-temple' && (
-                    <button
-                      onClick={() => onNavigate('3d-explorer/' + stop.monumentId)}
-                      className="px-4 py-2 rounded-xl bg-[#b65a3a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors"
-                    >
-                      3D Model
-                    </button>
-                  )}
                 </div>
               </div>
             ))}

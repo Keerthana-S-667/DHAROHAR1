@@ -99,9 +99,9 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
       {sketchfabId ? (
         <div className="absolute inset-0 z-0">
           <iframe
-            title="Sketchfab 3D Model"
+            title="3D Heritage Model"
             className="w-full h-full border-0"
-            src={`https://sketchfab.com/models/${sketchfabId}/embed?autostart=1&internal=1&tracking=0&ui_infos=0&ui_snapshots=1&ui_stop=0&ui_watermark=0`}
+            src={`https://sketchfab.com/models/${sketchfabId}/embed?autostart=1&internal=1&tracking=0&ui_infos=0&ui_controls=0&ui_watermark=0&ui_help=0&ui_settings=0&ui_share=0&ui_annotations=0&ui_ar=0&ui_vr=0&transparent=1`}
             allow="autoplay; fullscreen; xr-spatial-tracking"
             execution-while-out-of-viewport
             execution-while-not-rendered
@@ -182,33 +182,22 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
       )}
 
       {/* Model Overlay Header */}
-      <div className="relative z-10 p-5 flex items-center justify-between w-full bg-gradient-to-b from-[#17130F] to-transparent pointer-events-none">
+      <div className="relative z-10 p-5 flex items-center justify-between w-full bg-gradient-to-b from-[#5c3c28]/85 via-[#5c3c28]/35 to-transparent pointer-events-none">
         <div className="space-y-1">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-[10px] uppercase font-bold text-[#b65a3a]">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#f5f0e6]/90 border border-[#aa7b3f]/40 text-[10px] uppercase font-bold text-[#b65a3a] shadow-sm">
             <Box className="w-3 h-3" />
             3D Heritage Model
           </span>
-          <p className="text-xs text-[#4b2f23]/60 pt-1">
-            {sketchfabId ? 'Live Sketchfab 3D Embed Active' : (modelUrl ? 'GLB Asset Registered' : 'Interactive Architectural Mesh')}
+          <p className="text-xs text-[#f5f0e6]/90 font-medium pt-1 drop-shadow-sm">
+            {sketchfabId ? '3D Spatial Digital Twin Active' : (modelUrl ? 'GLB Asset Registered' : 'Interactive Architectural Mesh')}
           </p>
         </div>
-        
-        {sketchfabUrl && (
-          <a
-            href={sketchfabUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pointer-events-auto px-3.5 py-1.5 rounded-xl bg-[#ede3d1]/90 border border-[#aa7b3f]/40 hover:border-[#aa7b3f] text-xs font-semibold text-[#b65a3a] transition-colors"
-          >
-            View on Sketchfab ↗
-          </a>
-        )}
       </div>
 
       {/* 3D Control Panel Overlay Footer */}
-      <div className="relative z-10 p-4 bg-gradient-to-t from-[#17130F] to-transparent w-full flex flex-wrap justify-between items-center gap-3">
-        <div className="text-[10px] text-[#4b2f23]/60 flex items-center gap-4">
-          <span>{sketchfabId ? '🖱 Orbit & Zoom directly in Sketchfab 3D window' : '🖱 Drag to rotate • 🌀 Scroll to zoom'}</span>
+      <div className="relative z-10 p-4 bg-gradient-to-t from-[#5c3c28]/85 via-[#5c3c28]/35 to-transparent w-full flex flex-wrap justify-between items-center gap-3">
+        <div className="text-[10px] text-[#f5f0e6]/95 font-semibold tracking-wide flex items-center gap-4 drop-shadow-sm">
+          <span>🖱 Click & Drag to Orbit 360° • 🌀 Scroll to Zoom</span>
         </div>
 
         <div className="flex items-center gap-1.5 bg-[#ede3d1]/80 border border-[#aa7b3f]/30 p-1.5 rounded-2xl">

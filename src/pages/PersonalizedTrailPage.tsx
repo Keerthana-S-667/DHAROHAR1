@@ -246,46 +246,79 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
               </h4>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 space-y-2">
-                  <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
-                    <span>Stop 1 • 00:00</span>
-                    <span>12 Mins</span>
+                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 flex flex-col justify-between space-y-3">
+                  <div className="space-y-2">
+                    <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
+                      <span>Stop 1 • 00:00</span>
+                      <span>12 Mins</span>
+                    </div>
+                    <h5 className="font-display text-base font-bold text-[#4b2f23]">
+                      Shore Temple: Eastern Vimana
+                    </h5>
+                    <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
+                      Capture the early morning sun striking the basalt Shiva Lingam through the ocean breakwater portal.
+                    </p>
+                    <div className="text-[10px] text-amber-700 font-semibold">📸 Photo Spot: Groyne rock vantage</div>
                   </div>
-                  <h5 className="font-display text-base font-bold text-[#4b2f23]">
-                    Shore Temple: Eastern Vimana
-                  </h5>
-                  <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
-                    Capture the early morning sun striking the basalt Shiva Lingam through the ocean breakwater portal.
-                  </p>
-                  <div className="text-[10px] text-amber-300 font-medium">📸 Photo Spot: Groyne rock vantage</div>
+
+                  <div className="pt-2 border-t border-[#aa7b3f]/20">
+                    <button
+                      onClick={() => onNavigate('monument/shore-temple')}
+                      className="w-full py-2.5 rounded-xl bg-[#f5f0e6] border border-[#aa7b3f]/40 text-[#b65a3a] text-xs font-bold hover:bg-[#b65a3a] hover:text-white transition-all cursor-pointer shadow-sm text-center"
+                    >
+                      View Monument
+                    </button>
+                  </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 space-y-2">
-                  <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
-                    <span>Stop 2 • +15:00</span>
-                    <span>10 Mins</span>
+                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 flex flex-col justify-between space-y-3">
+                  <div className="space-y-2">
+                    <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
+                      <span>Stop 2 • +15:00</span>
+                      <span>10 Mins</span>
+                    </div>
+                    <h5 className="font-display text-base font-bold text-[#4b2f23]">
+                      Arjuna's Penance Bas-Relief
+                    </h5>
+                    <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
+                      Examine the central natural rainwater fissure depicting the descent of the sacred Ganga river from the heavens.
+                    </p>
+                    <div className="text-[10px] text-amber-700 font-semibold">📜 Inscription Fact: Over 100 celestial figures</div>
                   </div>
-                  <h5 className="font-display text-base font-bold text-[#4b2f23]">
-                    Arjuna's Penance Bas-Relief
-                  </h5>
-                  <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
-                    Examine the central natural rainwater fissure depicting the descent of the sacred Ganga river from the heavens.
-                  </p>
-                  <div className="text-[10px] text-amber-300 font-medium">📜 Inscription Fact: Over 100 celestial figures</div>
+
+                  <div className="pt-2 border-t border-[#aa7b3f]/20">
+                    <button
+                      onClick={() => onNavigate('monument/arjunas-penance')}
+                      className="w-full py-2.5 rounded-xl bg-[#f5f0e6] border border-[#aa7b3f]/40 text-[#b65a3a] text-xs font-bold hover:bg-[#b65a3a] hover:text-white transition-all cursor-pointer shadow-sm text-center"
+                    >
+                      View Monument
+                    </button>
+                  </div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 space-y-2">
-                  <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
-                    <span>Stop 3 • +25:00</span>
-                    <span>15 Mins</span>
+                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 flex flex-col justify-between space-y-3">
+                  <div className="space-y-2">
+                    <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
+                      <span>Stop 3 • +25:00</span>
+                      <span>15 Mins</span>
+                    </div>
+                    <h5 className="font-display text-base font-bold text-[#4b2f23]">
+                      Brihadeeswarar Temple (Thanjavur)
+                    </h5>
+                    <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
+                      Observe the 81-ton monolithic granite apex capstone (Kumbam) crowning the 216-foot Vimana tower.
+                    </p>
+                    <div className="text-[10px] text-amber-700 font-semibold">🏛️ Architecture: Imperial Chola Granite Masterpiece</div>
                   </div>
-                  <h5 className="font-display text-base font-bold text-[#4b2f23]">
-                    Pancha Rathas (Five Chariots)
-                  </h5>
-                  <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
-                    Walk clockwise around the monolithic Dharmaraja and Bhima Rathas to observe 7th-century quarry tool marks.
-                  </p>
-                  <div className="text-[10px] text-amber-300 font-medium">🏛️ Architecture: Monolithic granite prototype</div>
+
+                  <div className="pt-2 border-t border-[#aa7b3f]/20">
+                    <button
+                      onClick={() => onNavigate('monument/brihadeeswarar-temple')}
+                      className="w-full py-2.5 rounded-xl bg-[#f5f0e6] border border-[#aa7b3f]/40 text-[#b65a3a] text-xs font-bold hover:bg-[#b65a3a] hover:text-white transition-all cursor-pointer shadow-sm text-center"
+                    >
+                      View Monument
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

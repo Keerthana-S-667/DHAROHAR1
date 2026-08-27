@@ -92,8 +92,8 @@ export const MONUMENTS: Record<string, Monument> = {
     },
     has3DModel: true,
     threeDStatus: 'available',
-    sketchfabId: '1eb09052f6cd421caeaa6cb3204cb15d',
-    sketchfabUrl: 'https://sketchfab.com/3d-models/taj-mahal-3d-model-1eb09052f6cd421caeaa6cb3204cb15d'
+    sketchfabId: '7b43e635cbfb47719d5a124302b78579',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/taj-mahal-7b43e635cbfb47719d5a124302b78579'
   },
 
   'brihadeeswarar-temple': {
@@ -116,17 +116,66 @@ export const MONUMENTS: Record<string, Monument> = {
       lat: 10.7828,
       lng: 79.1318
     },
-    heroImage: 'https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?auto=format&fit=crop&w=1600&q=85',
-    galleryImages: ['https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?auto=format&fit=crop&w=1200&q=80'],
+    heroImage: '/images/gallery/brihadeeswarar-1.jpg',
+    galleryImages: [
+      '/images/gallery/brihadeeswarar-1.jpg',
+      '/images/gallery/brihadeeswarar-2.png',
+      '/images/gallery/brihadeeswarar-3.jpg',
+      '/images/gallery/brihadeeswarar-4.png',
+      '/images/gallery/brihadeeswarar-5.jpg'
+    ],
+    imageGallery: [
+      {
+        url: '/images/gallery/brihadeeswarar-1.jpg',
+        title: '216-Foot Granitic Vimana Tower',
+        caption: 'The majestic 13-tiered stepped Dravidian pyramid tower rising 216 feet, crowned by an 80-ton single-block granite Kumbam capstone.',
+        source: 'Chola Imperial Architectural Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/brihadeeswarar-2.png',
+        title: 'Keralantakan Gopuram Royal Entrance Gate',
+        caption: 'The grand multi-tiered gateway gopuram built by Emperor Raja Raja Chola I to commemorate victory over the Chera kingdom.',
+        source: 'ASI Tamil Nadu Circle',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/brihadeeswarar-3.jpg',
+        title: 'Outer Mandapa with Yali Lion Pillars',
+        caption: 'Ornate granitic plinth, steps with elephant balustrades, and structural Yali lion-sculpted pillars of the outer assembly hall.',
+        source: 'Dharohar Cultural Heritage Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/brihadeeswarar-4.png',
+        title: 'Rajarajan Thiruvasal & Prakara Wall',
+        caption: 'The second inner entrance gateway leading into the vast open court of the Peruvudaiyar temple complex.',
+        source: 'UNESCO World Heritage Dossier',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/brihadeeswarar-5.jpg',
+        title: 'Monolithic Nandi Mandapam Sentinel',
+        caption: 'Historical photograph of the giant 20-ton single-block black granite Nandi bull guardian sculpture beneath its carved pillared pavilion.',
+        source: 'Historical Heritage Documentation',
+        photographer: 'Archaeological Survey Team'
+      }
+    ],
     culturalSignificance: 'Features a 216-foot vimana tower capped by an 80-ton single-block granite Kumbam dome, built without mortar.',
     history: 'Consecrated in 1010 CE by Raja Raja Chola I to celebrate imperial naval victories and devotion to Lord Shiva (Peruvudaiyar).',
-    stories: [],
+    stories: [
+      {
+        title: 'Interlocking Granite Masonry & Mortarless Engineering',
+        narrative: 'Built entirely of interlocking granite blocks transported from 60 km away, assembled without mortar or cement, standing for over 1,000 years.',
+        type: 'architectural_feat'
+      }
+    ],
     preservationStatus: {
       healthScore: 96,
-      threats: ['Monsoon rain runoff'],
+      threats: ['Monsoon rain runoff', 'Granite salt weathering'],
       digitalScanStatus: 'Complete 3D Mesh Scanned',
       currentInitiatives: 'Structural granite joint inspection & UNESCO conservation monitor.',
-      visitorGuidelines: ['Remove footwear before entering outer prakara']
+      visitorGuidelines: ['Remove footwear before entering outer prakara', 'No flash photography in sanctum']
     },
     audioGuide: { duration: '4 min 10 sec', narrator: 'Dr. Radhika Srinivasan', transcript: 'Look up at the majestic 216-foot vimana...' },
     has3DModel: true,
@@ -219,6 +268,202 @@ export const MONUMENTS: Record<string, Monument> = {
     hotspots: SHORE_TEMPLE_HOTSPOTS
   },
 
+  'arjunas-penance': {
+    id: 'arjunas-penance',
+    name: "Arjuna's Penance (Descent of the Ganga)",
+    nativeName: 'அர்ஜுனன் தபசு',
+    tagline: 'The World’s Largest Open-Air Bas-Relief Carved in Pink Granite',
+    stateId: 'tamil-nadu',
+    destinationId: 'mahabalipuram',
+    period: 'mid-7th century CE (c. 630–668 CE)',
+    dynasty: 'Pallava Dynasty',
+    ruler: 'King Mahendravarman I & Narasimhavarman I (Mamalla)',
+    architectureStyle: 'Rock-Cut Relief & Open-Air Monolithic Sculptural Panel',
+    material: 'Monolithic Pink Granite Boulders',
+    unescoYear: 1984,
+    location: {
+      city: 'Mahabalipuram',
+      state: 'Tamil Nadu',
+      coordinates: '12.6173° N, 80.1923° E',
+      lat: 12.6173,
+      lng: 80.1923
+    },
+    heroImage: '/images/gallery/arjunas-penance-4.jpg',
+    galleryImages: [
+      '/images/gallery/arjunas-penance-1.jpg',
+      '/images/gallery/arjunas-penance-2.jpg',
+      '/images/gallery/arjunas-penance-3.jpg',
+      '/images/gallery/arjunas-penance-4.jpg',
+      '/images/gallery/arjunas-penance-5.jpg'
+    ],
+    imageGallery: [
+      {
+        url: '/images/gallery/arjunas-penance-1.jpg',
+        title: 'Full Panoramic Bas-Relief Wall',
+        caption: 'The vast 96-foot long by 43-foot high twin granite monolith sculpted with over 100 figures of gods, celestials, animals, and Nagas.',
+        source: 'Dharohar Heritage Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/arjunas-penance-2.jpg',
+        title: 'Monolithic Court & Natural Fissure Landscape',
+        caption: 'Wide-angle perspective of the rock face framed by natural boulders and open courtyard leading to the carved shrine.',
+        source: 'ASI Tamil Nadu Circle',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/arjunas-penance-3.jpg',
+        title: 'Central Celestial River Fissure & Nagas',
+        caption: 'Close-up of the natural cleft depicting the celestial descent of the river Ganga, populated by serpent gods (Nagas and Naginis).',
+        source: 'UNESCO World Heritage Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/arjunas-penance-4.jpg',
+        title: 'Illuminated Open-Air Monolithic Vista',
+        caption: 'High-contrast perspective of the 7th-century Pallava masterwork under a brilliant sky, showcasing side mandapas and rock terraces.',
+        source: 'Dharohar Cultural Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/arjunas-penance-5.jpg',
+        title: 'Life-Sized Elephant Family & Ascetic Reliefs',
+        caption: 'Exquisite carving of a life-sized elephant herd with playful baby calves, standing beside meditating ascetics and lions.',
+        source: 'Historical Heritage Documentation',
+        photographer: 'Archaeological Survey Team'
+      }
+    ],
+    culturalSignificance: 'A 96-foot-wide by 43-foot-high twin-boulder relief depicting Bhagiratha bringing the river Ganga down from heaven, or Arjuna performing penance for Pasupata weapon.',
+    history: 'Sculpted during the 7th century under Pallava King Narasimhavarman I (Mamalla) as a grand open-air narrative masterpiece celebrating divine water descent.',
+    stories: [
+      {
+        title: 'The Dual Epic Narrative: Ganga & Pasupatastra',
+        narrative: 'The panel depicts two classic Hindu traditions: Sage Bhagiratha’s tapasya to bring River Ganga to earth to cleanse his ancestors, and Arjuna’s penance to obtain Lord Shiva’s destructive Pasupata weapon.',
+        type: 'mythology'
+      },
+      {
+        title: 'Natural Rainwater Fissure Engineering',
+        narrative: 'Pallava sculptors used the natural vertical cleft between two giant boulders as the river bed of Ganga, filling top cisterns with water during rainstorms so real water flowed down over the carved Nagas.',
+        type: 'architectural_feat'
+      }
+    ],
+    preservationStatus: {
+      healthScore: 94,
+      threats: ['Monsoon rain erosion', 'Granite surface weathering'],
+      digitalScanStatus: 'Complete 3D Mesh Scanned',
+      currentInitiatives: 'Laser surface cleaning and protective drainage management by ASI.',
+      visitorGuidelines: ['Do not climb on carved rock face', 'Maintain safe distance from relief barrier']
+    },
+    audioGuide: {
+      duration: '4 min 15 sec',
+      narrator: 'Dr. Radhika Srinivasan',
+      transcript: 'Stand before Arjuna’s Penance, one of the greatest artistic feats in human history...'
+    },
+    has3DModel: true,
+    threeDStatus: 'available',
+    sketchfabId: '510ad47a389c4c8780a1468719e4b339',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/rock-carvings-mahabalipuram-tamil-nadu-india-510ad47a389c4c8780a1468719e4b339'
+  },
+
+  'meenakshi-temple': {
+    id: 'meenakshi-temple',
+    name: 'Meenakshi Amman Temple',
+    nativeName: 'மீனாட்சி அம்மன் கோவில்',
+    tagline: 'The Legendary Polychrome Dravidian Temple Complex of Madurai',
+    stateId: 'tamil-nadu',
+    destinationId: 'madurai',
+    period: '1623–1659 CE (Rebuilt during Nayak Period; core origins 6th century BCE)',
+    dynasty: 'Madurai Nayak Dynasty & Pandya Dynasty',
+    ruler: 'King Thirumalai Nayak & King Viswanatha Nayak',
+    architectureStyle: 'High Dravidian Temple Complex Architecture',
+    material: 'Carved Granite Monoliths & Polychrome Lime Stucco Statues',
+    unescoYear: 1984,
+    location: {
+      city: 'Madurai',
+      state: 'Tamil Nadu',
+      coordinates: '9.9195° N, 78.1193° E',
+      lat: 9.9195,
+      lng: 78.1193
+    },
+    heroImage: '/images/gallery/meenakshi-temple-1.jpg',
+    galleryImages: [
+      '/images/gallery/meenakshi-temple-1.jpg',
+      '/images/gallery/meenakshi-temple-2.jpg',
+      '/images/gallery/meenakshi-temple-3.jpg',
+      '/images/gallery/meenakshi-temple-4.jpg',
+      '/images/gallery/meenakshi-temple-5.png'
+    ],
+    imageGallery: [
+      {
+        url: '/images/gallery/meenakshi-temple-1.jpg',
+        title: 'Polychrome Gopuram Towers & Madurai Skyline',
+        caption: 'The majestic 170-foot West Gopuram adorned with thousands of brightly painted stucco statues of celestial beings and puranic deities.',
+        source: 'Dharohar Heritage Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/meenakshi-temple-2.jpg',
+        title: 'Prakara Corridors & Carved Pillared Cloisters',
+        caption: 'Monolithic granite pillared verandahs featuring intricate relief carvings of guardian Yali lions and sacred motifs.',
+        source: 'ASI Tamil Nadu Circle',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/meenakshi-temple-3.jpg',
+        title: 'Golden Sunset Vista over Potramarai Kulam',
+        caption: 'Breathtaking twilight reflection over the sacred Golden Lotus Tank surrounded by towering gopuram gateway pyramids.',
+        source: 'Dharohar Cultural Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/meenakshi-temple-4.jpg',
+        title: 'Potramarai Kulam Reservoir & Flagstaff',
+        caption: 'The ancient water tank and gilded temple brass pillar (Dhvaja Stambha) set within the inner temple prakara.',
+        source: 'Madurai Heritage Society',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/meenakshi-temple-5.png',
+        title: 'Illuminated Evening Gopuram Architecture',
+        caption: 'Nighttime perspective showing the vibrant multi-colored tiers of the main gopuram glowing under evening sky.',
+        source: 'Historical Heritage Documentation',
+        photographer: 'Archaeological Survey Team'
+      }
+    ],
+    culturalSignificance: 'A 14-gopuram sacred temple city housing over 33,000 sculptures, serving as the cultural heart of Madurai and Tamil literary tradition.',
+    history: 'Mentioned in ancient Sangam literature from the 6th century BCE, rebuilt and expanded into a colossal 45-acre temple city under the Nayak Dynasty (16th–17th centuries).',
+    stories: [
+      {
+        title: 'The Divine Wedding: Thirukalyanam Festival',
+        narrative: 'Every year during Chithirai, over one million pilgrims gather to celebrate the celestial wedding of Goddess Meenakshi to Lord Sundareswarar.',
+        type: 'mythology'
+      },
+      {
+        title: 'The Sangam Board of Literary Evaluation',
+        narrative: 'According to legend, ancient Tamil poets tested their poetic works on a miraculous golden plank floating in the Golden Lotus Tank (Potramarai Kulam).',
+        type: 'historical_event'
+      }
+    ],
+    preservationStatus: {
+      healthScore: 97,
+      threats: ['Footfall density', 'Stucco pigment weathering'],
+      digitalScanStatus: 'Complete 3D Mesh Scanned',
+      currentInitiatives: 'Herbal dye restoration of gopuram sculptures and digital visitor flow management.',
+      visitorGuidelines: ['Dress conservatively', 'Electronic items prohibited inside main sanctum']
+    },
+    audioGuide: {
+      duration: '4 min 45 sec',
+      narrator: 'Dr. Radhika Srinivasan',
+      transcript: 'Welcome to the magnificent Meenakshi Sundareswarar Temple in the historic city of Madurai...'
+    },
+    has3DModel: true,
+    threeDStatus: 'available',
+    sketchfabId: 'd5a5733adc884eecaa16d47295e4ab66',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/madurai-meenakshi-amman-temple-model-d5a5733adc884eecaa16d47295e4ab66'
+  },
+
+
+
   'konark-sun-temple': {
     id: 'konark-sun-temple',
     name: 'Konark Sun Temple',
@@ -290,22 +535,60 @@ export const MONUMENTS: Record<string, Monument> = {
       lat: 17.3616,
       lng: 78.4747
     },
-    heroImage: '/images/charminar-hero.jpg',
+    heroImage: '/images/gallery/charminar-1.png',
     galleryImages: [
+      '/images/gallery/charminar-1.png',
       '/images/gallery/charminar-2.png',
       '/images/gallery/charminar-3.png',
       '/images/gallery/charminar-6.png',
       '/images/gallery/charminar-7.png'
     ],
     imageGallery: [
-      { url: '/images/gallery/charminar-2.png', source: 'DHAROHAR Cultural Archive' },
-      { url: '/images/gallery/charminar-3.png', source: 'DHAROHAR Cultural Archive' },
-      { url: '/images/gallery/charminar-6.png', source: 'DHAROHAR Cultural Archive' },
-      { url: '/images/gallery/charminar-7.png', source: 'DHAROHAR Cultural Archive' }
+      {
+        url: '/images/gallery/charminar-1.png',
+        title: 'Four Minarets Monumental Vista',
+        caption: 'The majestic 48-meter high four-minaret Indo-Islamic monument under a brilliant blue sky, showing the four grand arches facing cardinal directions.',
+        source: 'Dharohar Heritage Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/charminar-2.png',
+        title: 'Grand Arched Gateway & Balconies',
+        caption: 'Detailed view of the 11-meter wide four monumental arches supporting the double-storied structure and upper mosque.',
+        source: 'Dharohar Cultural Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/charminar-3.png',
+        title: 'Qutb Shahi Stucco & Plaster Carvings',
+        caption: 'Intricate lime mortar and pulverized marble stucco motifs adorning the upper parapets and minaret balconies.',
+        source: 'Deccan Heritage Council',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/charminar-6.png',
+        title: 'Laad Bazaar Heritage Perspective',
+        caption: 'The iconic view of Charminar towering over the historic vibrant Laad Bazaar and traditional bangle artisan quarters.',
+        source: 'Telangana Tourism Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/charminar-7.png',
+        title: 'Illuminated Evening Vista',
+        caption: 'Nighttime perspective of Charminar glowing under golden architectural floodlights at the center of Old Hyderabad.',
+        source: 'Dharohar Cultural Archive',
+        photographer: 'Archaeological Documentation Team'
+      }
     ],
     culturalSignificance: 'The signature emblem of Hyderabad, featuring 4 grand 48-meter minarets over a square arched center.',
-    history: 'Built in 1591 to commemorate the end of a deadly plague epidemic and mark the founding of Hyderabad city.',
-    stories: [],
+    history: 'Built in 1591 by Sultan Muhammad Quli Qutb Shah to commemorate the end of a deadly plague epidemic and mark the founding of Hyderabad city.',
+    stories: [
+      {
+        title: 'Plague Elimination Vow & Axis of Hyderabad',
+        narrative: 'Sultan Quli Qutb Shah prayed for the end of a devastating plague and built Charminar at the exact intersection of major trade routes connecting Golconda to coastal ports.',
+        type: 'historical_event'
+      }
+    ],
     preservationStatus: {
       healthScore: 91,
       threats: ['Traffic vibration', 'Plaster flaking'],
@@ -789,8 +1072,23 @@ export const MONUMENTS: Record<string, Monument> = {
       lat: 26.8689,
       lng: 80.9129
     },
-    heroImage: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1600&q=85',
-    galleryImages: ['https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80'],
+    heroImage: '/images/bara-imambara-hero.jpg',
+    galleryImages: [
+      '/images/bara-imambara-hero.jpg',
+      '/images/gallery/bara-imambara-1.png',
+      '/images/gallery/bara-imambara-2.png',
+      '/images/gallery/bara-imambara-3.png',
+      '/images/gallery/bara-imambara-4.png',
+      '/images/gallery/bara-imambara-5.png'
+    ],
+    imageGallery: [
+      { url: '/images/bara-imambara-hero.jpg', source: 'DHAROHAR Cultural Archive', photographer: 'User Collection', license: 'Heritage Archive' },
+      { url: '/images/gallery/bara-imambara-1.png', source: 'DHAROHAR Cultural Archive' },
+      { url: '/images/gallery/bara-imambara-2.png', source: 'DHAROHAR Cultural Archive' },
+      { url: '/images/gallery/bara-imambara-3.png', source: 'DHAROHAR Cultural Archive' },
+      { url: '/images/gallery/bara-imambara-4.png', source: 'DHAROHAR Cultural Archive' },
+      { url: '/images/gallery/bara-imambara-5.png', source: 'DHAROHAR Cultural Archive' }
+    ],
     culturalSignificance: "Contains the Bhulbhulaiya labyrinth and the world's largest arched hall unsupported by beams.",
     history: 'Built as a famine relief project in 1784 to provide employment to over 20,000 citizens.',
     stories: [],
@@ -1045,65 +1343,274 @@ export const MONUMENTS: Record<string, Monument> = {
     sketchfabUrl: 'https://sketchfab.com/3d-models/gol-gumbaz-karnataka-e0e6572b9a4b434588d47817663f6a73'
   },
 
-  'meenakshi-temple': {
-    id: 'meenakshi-temple',
-    name: 'Meenakshi Amman Temple',
-    nativeName: 'மீனாட்சி அம்மன் கோவில்',
-    tagline: 'The Rainbow Gopuram Sanctuary of Madurai',
-    stateId: 'tamil-nadu',
-    destinationId: 'madurai',
-    period: '1190–1650 CE',
-    dynasty: 'Pandyan & Nayak Dynasties',
-    ruler: 'King Thirumalai Nayak',
-    architectureStyle: 'Late Dravidian Temple Architecture',
-    material: 'Granite & Sculpted Stucco Gopurams',
-    location: { city: 'Madurai', state: 'Tamil Nadu', coordinates: '9.9195° N, 78.1193° E', lat: 9.9195, lng: 78.1193 },
-    heroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1600&q=85',
-    galleryImages: [],
-    culturalSignificance: 'Encloses 14 towering gopurams decorated with thousands of colorful mythological stucco figures.',
-    history: 'Historic epicenter of Madurai, rebuilt and expanded by Thirumalai Nayak in the 17th century.',
-    stories: [],
-    preservationStatus: { healthScore: 96, threats: ['High daily visitor density'], digitalScanStatus: 'Complete 3D Mesh Scanned', currentInitiatives: 'Stucco sculpture repainting & herbal conservation.', visitorGuidelines: ['Strict traditional dress code enforced'] },
-    audioGuide: { duration: '4.5 min', narrator: 'Dr. Radhika Srinivasan', transcript: 'Welcome to the Hall of 1000 Pillars...' },
-    has3DModel: true,
-    threeDStatus: 'available',
-    sketchfabUrl: 'https://sketchfab.com/search?type=models&q=Meenakshi+Temple+India'
-  },
 
   'virupaksha-temple': {
     id: 'virupaksha-temple',
-    name: 'Hampi / Vijayanagara Ruins',
-    nativeName: 'ಹಂಪಿ ವಿರೂಪಾಕ್ಷ',
-    tagline: 'The Boulder Capital of Musical Pillars & Stone Chariots',
+    name: 'Virupaksha Temple Complex',
+    nativeName: 'ಶ್ರೀ ವಿರೂಪಾಕ್ಷ ದೇವಾಲಯ (ಹಂಪಿ)',
+    tagline: 'The Living 7th-Century Sacred Sanctuary & Optical Camera Obscura Marvel of Hampi',
     stateId: 'karnataka',
     destinationId: 'hampi',
-    period: '1336–1565 CE',
-    dynasty: 'Vijayanagara Empire',
-    ruler: 'Emperor Krishnadevaraya',
-    architectureStyle: 'Vijayanagara Dravidian Architecture',
-    material: 'Granite Boulders',
+    period: '7th Century CE to 1513 CE (Expanded under King Krishnadevaraya)',
+    dynasty: 'Chalukya, Hoysala & Vijayanagara Dynasties',
+    ruler: 'Emperor Krishnadevaraya & Queen Lokamahadevi',
+    architectureStyle: 'Dravidian Temple Complex & Stepped Gopuram Architecture',
+    material: 'Carved Granite Monoliths & Mortarless Masonry',
     unescoYear: 1986,
     location: { city: 'Hampi', state: 'Karnataka', coordinates: '15.3350° N, 76.4600° E', lat: 15.3350, lng: 76.4600 },
-    heroImage: '/images/hampi-hero.jpg',
+    heroImage: '/images/virupaksha-hero.jpg',
     galleryImages: [
-      '/images/gallery/hampi-1.jpg',
-      '/images/gallery/hampi-2.jpg',
-      '/images/gallery/hampi-3.jpg',
-      '/images/gallery/hampi-4.jpg',
-      '/images/gallery/hampi-5.jpg'
+      '/images/gallery/virupaksha-1.jpg',
+      '/images/gallery/virupaksha-2.png',
+      '/images/gallery/virupaksha-3.png',
+      '/images/gallery/virupaksha-4.jpg',
+      '/images/gallery/virupaksha-5.png'
     ],
     imageGallery: [
-      { url: '/images/gallery/hampi-1.jpg', source: 'DHAROHAR Cultural Archive' },
-      { url: '/images/gallery/hampi-2.jpg', source: 'DHAROHAR Cultural Archive' },
-      { url: '/images/gallery/hampi-3.jpg', source: 'DHAROHAR Cultural Archive' },
-      { url: '/images/gallery/hampi-4.jpg', source: 'DHAROHAR Cultural Archive' },
-      { url: '/images/gallery/hampi-5.jpg', source: 'DHAROHAR Cultural Archive' }
+      {
+        url: '/images/gallery/virupaksha-1.jpg',
+        title: 'Panoramic Vista of Virupaksha Temple & Hampi Boulders',
+        caption: 'The majestic 165-foot East Gopuram rising above the ancient palm cloisters and granite boulder hills of Hampi.',
+        source: 'Dharohar Heritage Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/virupaksha-2.png',
+        title: 'Inner Prakara Mandapam & Courtyard',
+        caption: 'Intricately carved Dravidian granite shrine surrounded by sacred flagstone courtyards under clear sky.',
+        source: 'ASI Karnataka Circle',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/virupaksha-3.png',
+        title: '165-Foot East Raya Gopuram Entrance',
+        caption: 'The soaring multi-tiered entrance tower renovated by Emperor Krishnadevaraya in 1510 CE.',
+        source: 'Dharohar Cultural Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/virupaksha-4.jpg',
+        title: 'Golden Sunset Vista Framed by Monolithic Boulders',
+        caption: 'Breathtaking sunset view of the central temple spire nestled within the ancient Hampi boulder wilderness.',
+        source: 'Hampi Heritage Society',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/virupaksha-5.png',
+        title: 'Tiered Shikhara & Gilded Pinnacle',
+        caption: 'Detailed perspective of the multi-tiered pyramid shikhara crowned with a gold-plated kalasa.',
+        source: 'Historical Heritage Documentation',
+        photographer: 'Archaeological Survey Team'
+      }
     ],
-    culturalSignificance: 'Sprawling 4,100-hectare UNESCO sanctuary featuring musical pillars, stone chariots, and grand bazaars.',
-    history: 'Capital of the Vijayanagara Empire, described by Portuguese traveler Paes as larger and wealthier than Rome.',
-    stories: [],
-    preservationStatus: { healthScore: 92, threats: ['Structural weathering', 'Encroachment'], digitalScanStatus: 'Complete Sub-millimeter LiDAR Scan', currentInitiatives: 'Hampi World Heritage Area Management Authority oversight.', visitorGuidelines: ['Do not tap the musical pillars'] },
-    audioGuide: { duration: '4 min 30 sec', narrator: 'Dr. Radhika Srinivasan', transcript: 'Explore the vast boulder landscape of Vijayanagara...' },
+    culturalSignificance: 'The only continuously functioning sacred shrine in Hampi for over 1,300 years, renowned for its camera obscura pinhole effect and grand annual marriage festival.',
+    history: 'Dedicated to Lord Virupaksha (Shiva) and Goddess Pampa, this sacred site evolved from a small 7th-century shrine into a sprawling royal temple complex under Emperor Krishnadevaraya.',
+    stories: [
+      {
+        title: 'The Pinhole Camera Obscura Effect',
+        narrative: 'In the dark rear room of the inner sanctum, a tiny aperture in the stone wall projects an inverted pinhole shadow of the 165-foot East Gopuram tower—a 16th-century optical physics marvel.',
+        type: 'architectural_feat'
+      },
+      {
+        title: 'Laxmi the Sacred Temple Elephant',
+        narrative: 'Every morning, the temple elephant Laxmi walks through the grand bazaar to take a sacred bath in the Tungabhadra River before giving traditional trunk blessings to pilgrims.',
+        type: 'historical_event'
+      }
+    ],
+    preservationStatus: {
+      healthScore: 96,
+      threats: ['Granite surface weathering', 'River flooding during monsoons'],
+      digitalScanStatus: 'Complete 3D Mesh Scanned',
+      currentInitiatives: 'ASI & Hampi World Heritage Management Authority structural reinforcement.',
+      visitorGuidelines: ['Remove shoes before entry', 'Do not touch ancient mural paintings']
+    },
+    audioGuide: {
+      duration: '4 min 30 sec',
+      narrator: 'Dr. Radhika Srinivasan',
+      transcript: 'Welcome to the ancient Virupaksha Temple Complex, the spiritual heart of Vijayanagara...'
+    },
+    has3DModel: true,
+    threeDStatus: 'available',
+    sketchfabId: '563b5a9961f547439c8df3a794019fdf',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/virupaksha-temple-landscape-563b5a9961f547439c8df3a794019fdf'
+  },
+
+  'vittala-temple': {
+    id: 'vittala-temple',
+    name: 'Vittala & Achyutaraya Temple Complex',
+    nativeName: 'ವಿಜಯ ವಿಠಲ & ಅಚ್ಯುತರಾಯ ದೇವಾಲಯ',
+    tagline: 'The Pinnacle of Vijayanagara Architecture, Stone Chariots & Musical Pillars',
+    stateId: 'karnataka',
+    destinationId: 'hampi',
+    period: '1513–1542 CE',
+    dynasty: 'Vijayanagara Empire (Tuluva Dynasty)',
+    ruler: 'Emperor Krishnadevaraya & King Achyuta Deva Raya',
+    architectureStyle: 'High Vijayanagara Dravidian Temple Architecture',
+    material: 'Carved Granite Monoliths & Polychrome Stucco Brick Superstructures',
+    unescoYear: 1986,
+    location: { city: 'Hampi', state: 'Karnataka', coordinates: '15.3350° N, 76.4600° E', lat: 15.3350, lng: 76.4600 },
+    heroImage: '/images/vittala-hero.jpg',
+    galleryImages: [
+      '/images/gallery/vittala-1.png',
+      '/images/gallery/vittala-2.jpg',
+      '/images/gallery/vittala-3.png',
+      '/images/gallery/vittala-4.png',
+      '/images/gallery/vittala-5.jpg'
+    ],
+    imageGallery: [
+      {
+        url: '/images/gallery/vittala-1.png',
+        title: 'Achyutaraya Courtyard & Granite Monolithic Cloisters',
+        caption: 'Pillared court of Achyutaraya Temple situated at the base of Matanga Hill in Hampi.',
+        source: 'Dharohar Heritage Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/vittala-2.jpg',
+        title: 'Aerial Vista of Achyutaraya Complex & Boulder Valleys',
+        caption: 'Panoramic view looking down over the valley enclosure surrounded by ancient Hampi granite boulders and coconut groves.',
+        source: 'ASI Karnataka Circle',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/vittala-3.png',
+        title: 'Terracotta & Stone Gopuram Superstructure',
+        caption: 'Richly sculpted multi-tiered brick and stucco upper tower facing the central court.',
+        source: 'Dharohar Cultural Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/vittala-4.png',
+        title: 'Stone Gateway & Entrance Portal',
+        caption: 'Intricate granite relief carvings of guardian Yali figures and royal crests flanking the inner entrance.',
+        source: 'Hampi Heritage Society',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/vittala-5.jpg',
+        title: 'Prasanna Virupaksha (Underground Shiva Temple)',
+        caption: 'Sunken stone gateway leading down into the subterranean spring-fed sanctuary.',
+        source: 'Historical Heritage Documentation',
+        photographer: 'Archaeological Survey Team'
+      }
+    ],
+    culturalSignificance: 'Houses the iconic Garuda Stone Chariot (featured on India’s ₹50 currency note) and 56 musical acoustic columns.',
+    history: 'Built in the 16th century under Emperor Krishnadevaraya and King Achyuta Deva Raya, representing the absolute artistic peak of the Vijayanagara Empire.',
+    stories: [
+      {
+        title: 'The Stone Chariot of Garuda',
+        narrative: 'Inspired by the Konark Sun Temple chariot, Krishnadevaraya’s sculptors carved this free-standing stone vehicle so precisely that its giant granite wheels could originally be turned.',
+        type: 'architectural_feat'
+      },
+      {
+        title: 'The SaReGaMa Musical Columns',
+        narrative: '56 monolithic granite pillars in the main mandapa were engineered with metallic mineral densities, emitting musical notes when tapped by royal musicians.',
+        type: 'discovery'
+      }
+    ],
+    preservationStatus: {
+      healthScore: 95,
+      threats: ['Footfall erosion', 'Vibration damage to musical pillars'],
+      digitalScanStatus: 'Complete 3D Mesh Scanned',
+      currentInitiatives: 'Protective glass barricades around Stone Chariot & ASI acoustic monitoring.',
+      visitorGuidelines: ['Refrain from touching or tapping granite pillars', 'Strict footwear removal areas']
+    },
+    audioGuide: {
+      duration: '4 min 15 sec',
+      narrator: 'Dr. Radhika Srinivasan',
+      transcript: 'Welcome to the world-renowned Vittala and Achyutaraya Temple Complex in Hampi...'
+    },
+    has3DModel: true,
+    threeDStatus: 'available',
+    sketchfabId: 'dfaf413f0ce845a3b798b0bb4079962a',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/stone-chariot-in-hampi-india-dfaf413f0ce845a3b798b0bb4079962a'
+  },
+
+  'achyutaraya-path': {
+    id: 'achyutaraya-path',
+    name: 'Kampa Bhupa’s Riverside Path & Achyutaraya Temple',
+    nativeName: 'ಕಂಪ ಭೂಪ ನದಿ ತೀರ ಮಾರ್ಗ & ಅಚ್ಯುತರಾಯ ದೇವಾಲಯ',
+    tagline: 'The Secluded Valley Sanctuary & Ancient Diamond Bazaar Trail of Hampi',
+    stateId: 'karnataka',
+    destinationId: 'hampi',
+    period: '1378 CE & 1534 CE (Vijayanagara Empire)',
+    dynasty: 'Sangama & Tuluva Dynasties',
+    ruler: 'King Kampa I & King Achyuta Deva Raya',
+    architectureStyle: 'High Vijayanagara Valley Temple & Stone Paved River Pathway',
+    material: 'Carved Granite Monoliths & Mortarless River Masonry',
+    unescoYear: 1986,
+    location: { city: 'Hampi', state: 'Karnataka', coordinates: '15.3375° N, 76.4650° E', lat: 15.3375, lng: 76.4650 },
+    heroImage: '/images/achyutaraya-path-hero.jpg',
+    galleryImages: [
+      '/images/gallery/achyutaraya-path-1.jpg',
+      '/images/gallery/achyutaraya-path-2.jpg',
+      '/images/gallery/achyutaraya-path-3.jpg',
+      '/images/gallery/achyutaraya-path-4.jpg',
+      '/images/gallery/achyutaraya-path-5.jpg'
+    ],
+    imageGallery: [
+      {
+        url: '/images/gallery/achyutaraya-path-1.jpg',
+        title: 'Achyutaraya Temple Main Gopuram Gateway',
+        caption: 'The majestic multi-tiered terracotta and granite entrance tower of the Tiruvengalanatha Temple complex.',
+        source: 'Dharohar Heritage Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/achyutaraya-path-2.jpg',
+        title: 'Kampa Bhupa’s Stone Paved Riverside Cloister',
+        caption: 'Ancient granite stone pillared hall and riverbank embankment constructed along the Tungabhadra by Kampa I in 1378 CE.',
+        source: 'ASI Karnataka Circle',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/achyutaraya-path-3.jpg',
+        title: 'Achyutaraya Courtyard & Matanga Hill Amphitheater',
+        caption: 'Wide-angle perspective showing the expansive stone courtyard enclosed by boulder hills and pillared colonnades.',
+        source: 'Dharohar Cultural Archive',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/achyutaraya-path-4.jpg',
+        title: 'Gopuram Tower & Side Mandapa Architecture',
+        caption: 'Detailed perspective of the stone base relief moldings and brick superstructure crowning the main sanctuary gate.',
+        source: 'Hampi Heritage Society',
+        photographer: 'Archaeological Documentation Team'
+      },
+      {
+        url: '/images/gallery/achyutaraya-path-5.jpg',
+        title: 'Riverside Pillared Promenade Hall',
+        caption: 'Open granite colonnade along Kampa Bhupa’s river trail where pilgrims rested while trekking across Hampi.',
+        source: 'Historical Heritage Documentation',
+        photographer: 'Archaeological Survey Team'
+      }
+    ],
+    culturalSignificance: 'Links continuous 14th-century riverside pilgrimage along the Tungabhadra River to the grand 16th-century Achyutaraya Valley Temple and Sule Bazaar.',
+    history: 'Paved in 1378 CE by Kampa Bhupa (brother of Harihara I), this scenic 2km river trail leads pilgrims from Virupaksha to the valley temple of Tiruvengalanatha (Achyutaraya), consecrated in 1534 CE.',
+    stories: [
+      {
+        title: 'The Royal River Highway of Kampa Bhupa',
+        narrative: 'Built along the natural contours of the Tungabhadra River, Kampa Bhupa carved granite footpaths and bathing ghats out of solid river bedrock so pilgrims could walk safely between sacred shrines.',
+        type: 'architectural_feat'
+      },
+      {
+        title: 'The Global Gem Bazaars of Sule Bazaar',
+        narrative: 'Portuguese explorer Domingos Paes recorded seeing international merchants from Persia, Italy, and Portugal buying rubies, diamonds, and woven silks laid out on granite stalls in front of Achyutaraya Temple.',
+        type: 'historical_event'
+      }
+    ],
+    preservationStatus: {
+      healthScore: 94,
+      threats: ['Monsoon river flooding', 'Granite surface lichen growth'],
+      digitalScanStatus: 'Complete 3D Mesh Scanned',
+      currentInitiatives: 'Pillared colonnade stone restoration and riverbank erosion barriers by ASI.',
+      visitorGuidelines: ['Wear sturdy walking footwear', 'Stay on marked stone trails']
+    },
+    audioGuide: {
+      duration: '4 min 20 sec',
+      narrator: 'Dr. Radhika Srinivasan',
+      transcript: 'Walk along Kampa Bhupa’s ancient river path into the secluded boulder valley of Achyutaraya Temple...'
+    },
     has3DModel: true,
     threeDStatus: 'available',
     sketchfabId: 'dfaf413f0ce845a3b798b0bb4079962a',
@@ -1124,8 +1631,53 @@ export const MONUMENTS: Record<string, Monument> = {
     material: 'Red Sandstone',
     unescoYear: 1986,
     location: { city: 'Fatehpur Sikri', state: 'Uttar Pradesh', coordinates: '27.0945° N, 77.6679° E', lat: 27.0945, lng: 77.6679 },
-    heroImage: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1600&q=85',
-    galleryImages: [],
+    heroImage: '/images/fatehpur-sikri-hero.jpg',
+    galleryImages: [
+      '/images/fatehpur-sikri-hero.jpg',
+      '/images/gallery/fatehpur-sikri-1.jpg',
+      '/images/gallery/fatehpur-sikri-2.jpg',
+      '/images/gallery/fatehpur-sikri-3.jpg',
+      '/images/gallery/fatehpur-sikri-4.png',
+      '/images/gallery/fatehpur-sikri-5.jpg'
+    ],
+    imageGallery: [
+      {
+        url: '/images/fatehpur-sikri-hero.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-1.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-2.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-3.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-4.png',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      },
+      {
+        url: '/images/gallery/fatehpur-sikri-5.jpg',
+        source: 'DHAROHAR Cultural Archive',
+        photographer: 'User Collection',
+        license: 'Heritage Archive'
+      }
+    ],
     culturalSignificance: 'Home to Buland Darwaza (54m high gateway of victory), Panch Mahal, and Salim Chishti Dargah.',
     history: 'Built by Akbar as his short-lived royal capital to honor Sufi saint Salim Chishti.',
     stories: [],
@@ -1210,7 +1762,7 @@ export const STATES_DATA: StateData[] = [
         nativeName: 'लखनऊ',
         stateId: 'uttar-pradesh',
         tagline: 'The City of Nawabs & Vaulted Labyrinths',
-        heroImage: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80',
+        heroImage: '/images/bara-imambara-hero.jpg',
         description: 'Famous for Awadhi culture, refined poetry, and the gravity-defying vaulted arches of Bara Imambara.',
         historicalContext: 'Capital of the Nawabs of Awadh during the 18th and 19th centuries.',
         bestTimeToVisit: 'October to March',
@@ -1736,7 +2288,7 @@ export const HERITAGE_TRAILS: HeritageTrail[] = [
     duration: '2 Hours',
     difficulty: 'Easy',
     distance: '3.5 km',
-    heroImage: 'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80',
+    heroImage: '/images/pallava-trail-hero.jpg',
     theme: 'Early Structural Masonry & Rock Bas-Reliefs',
     description: 'Walk through Mamallapuram’s golden Pallava-period monuments. Observe how master sculptors moved from carving rock outcrops to building freestanding granite towers facing the sea.',
     stops: [
@@ -1750,7 +2302,7 @@ export const HERITAGE_TRAILS: HeritageTrail[] = [
         tipForVisitor: 'Best visited at 6:30 AM to catch the sunrise directly illuminating the eastern Shiva lingam'
       },
       {
-        monumentId: 'pancha-rathas',
+        monumentId: 'arjunas-penance',
         name: "Arjuna's Penance (Descent of the Ganga)",
         order: 2,
         durationMinutes: 30,
@@ -1760,14 +2312,14 @@ export const HERITAGE_TRAILS: HeritageTrail[] = [
         tipForVisitor: 'Look closely at the central cleft where natural rainwater simulates the descending Ganga'
       },
       {
-        monumentId: 'pancha-rathas',
-        name: 'Pancha Rathas (Five Chariots)',
+        monumentId: 'brihadeeswarar-temple',
+        name: 'Brihadeeswarar Temple (Thanjavur)',
         order: 3,
-        durationMinutes: 40,
-        distanceFromPrevious: '1.2 km walk southward',
-        keyHighlight: 'Compare the 5 distinct experimental Dravidian roof styles carved from pink granite mounds',
-        audioTrackTitle: 'Track 3: The King’s Monolithic Laboratory',
-        tipForVisitor: 'Walk clockwise around Dharmaraja Ratha to observe King Narasimhavarman’s royal portrait inscriptions'
+        durationMinutes: 45,
+        distanceFromPrevious: 'Scenic coastal highway drive to Thanjavur',
+        keyHighlight: 'Examine the 81-ton monolithic granite Kumbam apex capstone atop the 216-foot Vimana',
+        audioTrackTitle: 'Track 3: The Imperial Chola Zenith in Granite',
+        tipForVisitor: 'Observe the hollow interlocking granite stone joinery engineered by Raja Raja Chola I'
       }
     ],
     historicalNarrative: 'In the 7th century, King Mahendravarman I proudly inscribed: "This temple was made without bricks, timber, metals, or mortar." Under his son Mamalla and great-grandson Rajasimha, this trail captures humanity’s boldest leap into lasting stone architecture.'
@@ -1780,7 +2332,7 @@ export const HERITAGE_TRAILS: HeritageTrail[] = [
     duration: '2 Hours 30 Min',
     difficulty: 'Moderate',
     distance: '3.8 km',
-    heroImage: 'https://images.unsplash.com/photo-1600100397608-f010e4210d63?auto=format&fit=crop&w=1200&q=80',
+    heroImage: '/images/vijayanagara-trail-hero.png',
     theme: 'Sacred Geography & High Medieval Metallurgy & Acoustics',
     description: 'Explore the sacred axis linking continuous 1300-year devotion at Virupaksha with the acoustic wonder of Vittala Temple along the ancient riverside bazaar colonnades.',
     stops: [
@@ -1794,7 +2346,7 @@ export const HERITAGE_TRAILS: HeritageTrail[] = [
         tipForVisitor: 'Visit the rear corridor at 11:00 AM when the inverted shadow is crispest'
       },
       {
-        monumentId: 'vittala-temple',
+        monumentId: 'achyutaraya-path',
         name: 'Kampa Bhupa’s Riverside Path & Achyutaraya Temple',
         order: 2,
         durationMinutes: 40,
@@ -1824,7 +2376,7 @@ export const HERITAGE_TRAILS: HeritageTrail[] = [
     duration: '2 Hours',
     difficulty: 'Easy',
     distance: '11 km (Drive + Walking)',
-    heroImage: 'https://images.unsplash.com/photo-1599661046289-e31897846e41?auto=format&fit=crop&w=1200&q=80',
+    heroImage: '/images/rajput-trail-hero.png',
     theme: 'Thermodynamic Architecture & Hilltop Military Strategy',
     description: 'Discover how Rajput rulers mastered desert thermodynamics at Hawa Mahal, mapped the cosmos, and established impregnable fortified palaces in the Aravalli hills.',
     stops: [
