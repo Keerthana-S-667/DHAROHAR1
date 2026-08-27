@@ -87,8 +87,13 @@ export default function App() {
     return <ResearchMonumentPage onNavigate={handleNavigate} language={language} />;
   };
 
+  const ThreeDExplorerPageWrapper = () => {
+    const { monumentId } = useParams<{ monumentId: string }>();
+    return <ThreeDExplorerPage monumentId={monumentId} onNavigate={handleNavigate} language={language} />;
+  };
+
   return (
-    <div className="min-h-screen bg-[#17130F] text-[#F3EBDD] flex flex-col font-body selection:bg-[#D4A85A] selection:text-[#17130F]">
+    <div className="min-h-screen bg-[#f5f0e6] text-[#4b2f23] flex flex-col font-body selection:bg-[#b65a3a] selection:text-[#f5f0e6]">
       {/* Top Architectural Navigation Bar */}
       <Navbar
         currentRoute={currentRoute}
@@ -108,6 +113,7 @@ export default function App() {
           <Route path="/monument/:monumentId" element={<MonumentDetailPageWrapper />} />
           <Route path="/monument/:monumentId/3d" element={<ThreeDHeritageExperiencePageWrapper />} />
           <Route path="/3d-explorer" element={<ThreeDExplorerPage onNavigate={handleNavigate} language={language} />} />
+          <Route path="/3d-explorer/:monumentId" element={<ThreeDExplorerPageWrapper />} />
           <Route path="/ai-guide" element={<AIGuidePage onNavigate={handleNavigate} language={language} />} />
           <Route path="/trails" element={<HeritageTrailsPage onNavigate={handleNavigate} language={language} />} />
           <Route path="/personalized-trail" element={<PersonalizedTrailPage onNavigate={handleNavigate} language={language} />} />

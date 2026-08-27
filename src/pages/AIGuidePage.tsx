@@ -4,7 +4,7 @@ import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { heritageService } from '../services/heritageService';
 import { aiService } from '../services/aiService';
-import { SutradharChat } from '../components/SutradharChat';
+import { DharoharAIChat } from '../components/DharoharAIChat';
 import { ArrowLeft, ArrowRight, Bot } from 'lucide-react';
 
 interface AIGuidePageProps {
@@ -51,14 +51,14 @@ export const AIGuidePage: React.FC<AIGuidePageProps> = ({ onNavigate, language }
   }, [feature, topic, aiContext.monument]);
 
   return (
-    <div className="min-h-screen bg-[#17130F] text-[#F3EBDD] pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#f5f0e6] text-[#4b2f23] pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto space-y-8">
 
         {/* Navigation Breadcrumb */}
         {monumentId && (
           <button
             onClick={() => onNavigate(`monument/${monumentId}`)}
-            className="flex items-center gap-1.5 text-xs text-[#D4A85A] font-medium hover:underline cursor-pointer"
+            className="flex items-center gap-1.5 text-xs text-[#b65a3a] font-medium hover:underline cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             Back to Monument
@@ -67,22 +67,22 @@ export const AIGuidePage: React.FC<AIGuidePageProps> = ({ onNavigate, language }
 
         {/* Cultural Guide Header */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2B2118] border border-[#D4A85A]/50 text-xs text-[#D4A85A] font-semibold uppercase tracking-widest shadow-lg">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ede3d1] border border-[#aa7b3f]/50 text-xs text-[#b65a3a] font-semibold uppercase tracking-widest shadow-lg">
             <Bot className="w-4 h-4" />
-            <span>Sutradhar • AI Heritage Guide</span>
+            <span>Dharohar AI • AI Heritage Guide</span>
           </div>
 
-          <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#F3EBDD]">
+          <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#4b2f23]">
             {t.title}
           </h1>
 
-          <p className="font-subheading text-lg sm:text-xl text-[#D4A85A] italic">
+          <p className="font-subheading text-lg sm:text-xl text-[#b65a3a] italic">
             "Ask not merely when stone was carved, but what cosmic truths it preserves."
           </p>
         </div>
 
-        {/* Main Sutradhar Chat Interface */}
-        <SutradharChat
+        {/* Main Dharohar AI Chat Interface */}
+        <DharoharAIChat
           context={aiContext}
           initialQuestion={initialQuestion}
           embedded={true}
@@ -90,18 +90,18 @@ export const AIGuidePage: React.FC<AIGuidePageProps> = ({ onNavigate, language }
         />
 
         {/* Demo Bridge to Heritage Trails */}
-        <div className="p-6 rounded-2xl bg-[#2B2118]/60 border border-[#D4A85A]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="p-6 rounded-2xl bg-[#ede3d1]/60 border border-[#aa7b3f]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="space-y-1">
-            <h4 className="font-display text-base font-bold text-[#F3EBDD]">
+            <h4 className="font-display text-base font-bold text-[#4b2f23]">
               Ready to explore step-by-step thematic itineraries?
             </h4>
-            <p className="text-xs text-[#F3EBDD]/70">
+            <p className="text-xs text-[#4b2f23]/70">
               Experience the Pallava Architecture Trail linking Shore Temple to Arjuna's Penance & Pancha Rathas.
             </p>
           </div>
           <button
             onClick={() => onNavigate('personalized-trail')}
-            className="px-6 py-2.5 rounded-full bg-[#D4A85A] text-[#17130F] font-bold text-xs uppercase tracking-wider hover:bg-[#F3EBDD] transition-colors shrink-0 flex items-center gap-1.5 shadow cursor-pointer"
+            className="px-6 py-2.5 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors shrink-0 flex items-center gap-1.5 shadow cursor-pointer"
           >
             <span>Personalized Trail Generator</span>
             <ArrowRight className="w-4 h-4" />

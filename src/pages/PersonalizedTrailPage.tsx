@@ -73,29 +73,29 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
   };
 
   return (
-    <div className="min-h-screen bg-[#17130F] text-[#F3EBDD] pt-24 pb-20 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#f5f0e6] text-[#4b2f23] pt-24 pb-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto space-y-12">
         {/* Header Title */}
         <div className="text-center space-y-3 max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#2B2118] border border-[#D4A85A]/50 text-xs text-[#D4A85A] font-semibold uppercase tracking-widest shadow-lg">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#ede3d1] border border-[#aa7b3f]/50 text-xs text-[#b65a3a] font-semibold uppercase tracking-widest shadow-lg">
             <Sliders className="w-4 h-4" />
             <span>Algorithmic Itinerary Engine</span>
           </div>
 
-          <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#F3EBDD]">
+          <h1 className="font-display text-3xl sm:text-5xl font-bold text-[#4b2f23]">
             {t.builderTitle}
           </h1>
 
-          <p className="font-subheading text-lg sm:text-xl text-[#D4A85A] italic">
+          <p className="font-subheading text-lg sm:text-xl text-[#b65a3a] italic">
             “Calibrated to your available time, stride pace, and architectural passions.”
           </p>
         </div>
 
         {/* Trail Customizer Form Card */}
-        <div className="p-8 sm:p-10 rounded-3xl bg-[#2B2118] border border-[#D4A85A]/40 shadow-2xl space-y-8">
+        <div className="p-8 sm:p-10 rounded-3xl bg-[#ede3d1] border border-[#aa7b3f]/40 shadow-2xl space-y-8">
           {/* Step 1: Duration Selection */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-sm font-bold text-[#D4A85A] uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-sm font-bold text-[#b65a3a] uppercase tracking-wider">
               <Clock className="w-4 h-4" />
               <span>Step 1: Available Exploration Window</span>
             </div>
@@ -107,12 +107,12 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
                   onClick={() => setDuration(opt.id)}
                   className={`p-4 rounded-2xl border text-left transition-all ${
                     duration === opt.id
-                      ? 'bg-[#D4A85A] text-[#17130F] border-[#D4A85A] font-bold shadow-lg shadow-[#D4A85A]/20 scale-[1.02]'
-                      : 'bg-[#17130F] text-[#F3EBDD] border-[#D4A85A]/30 hover:border-[#D4A85A]/60'
+                      ? 'bg-[#b65a3a] text-white border-[#aa7b3f] font-bold shadow-lg shadow-[#D4A85A]/20 scale-[1.02]'
+                      : 'bg-[#f5f0e6] text-[#4b2f23] border-[#aa7b3f]/30 hover:border-[#aa7b3f]/60'
                   }`}
                 >
                   <div className="text-sm font-display font-bold">{opt.label}</div>
-                  <div className={`text-[11px] mt-0.5 ${duration === opt.id ? 'text-[#17130F]/80' : 'text-[#D4A85A]'}`}>
+                  <div className={`text-[11px] mt-0.5 ${duration === opt.id ? 'text-white/80' : 'text-[#b65a3a]'}`}>
                     {opt.desc}
                   </div>
                 </button>
@@ -122,7 +122,7 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
 
           {/* Step 2: Primary Interests */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-sm font-bold text-[#D4A85A] uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-sm font-bold text-[#b65a3a] uppercase tracking-wider">
               <Sparkles className="w-4 h-4" />
               <span>Step 2: Curated Thematic Interests</span>
             </div>
@@ -137,22 +137,22 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
                     onClick={() => toggleInterest(opt.id)}
                     className={`p-4 rounded-2xl border text-left transition-all flex items-center gap-3.5 ${
                       isSelected
-                        ? 'bg-[#17130F] border-[#D4A85A] shadow-md shadow-[#D4A85A]/10'
-                        : 'bg-[#17130F]/50 border-[#D4A85A]/20 text-[#F3EBDD]/60 hover:text-[#F3EBDD]'
+                        ? 'bg-[#f5f0e6] border-[#aa7b3f] shadow-md shadow-[#D4A85A]/10'
+                        : 'bg-[#f5f0e6]/50 border-[#aa7b3f]/20 text-[#4b2f23]/60 hover:text-[#4b2f23]'
                     }`}
                   >
-                    <div className={`p-2.5 rounded-xl ${isSelected ? 'bg-[#D4A85A] text-[#17130F]' : 'bg-[#2B2118] text-[#D4A85A]'}`}>
+                    <div className={`p-2.5 rounded-xl ${isSelected ? 'bg-[#b65a3a] text-white' : 'bg-[#ede3d1] text-[#b65a3a]'}`}>
                       <Icon className="w-4 h-4" />
                     </div>
                     <div className="flex-1">
-                      <div className={`text-xs font-bold ${isSelected ? 'text-[#F3EBDD]' : 'text-[#F3EBDD]/70'}`}>
+                      <div className={`text-xs font-bold ${isSelected ? 'text-[#4b2f23]' : 'text-[#4b2f23]/70'}`}>
                         {opt.id}
                       </div>
-                      <div className="text-[11px] text-[#D4A85A] font-subheading italic">
+                      <div className="text-[11px] text-[#b65a3a] font-subheading italic">
                         {opt.label}
                       </div>
                     </div>
-                    {isSelected && <CheckCircle2 className="w-4 h-4 text-[#D4A85A] shrink-0" />}
+                    {isSelected && <CheckCircle2 className="w-4 h-4 text-[#b65a3a] shrink-0" />}
                   </button>
                 );
               })}
@@ -161,7 +161,7 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
 
           {/* Step 3: Walking Pace */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-sm font-bold text-[#D4A85A] uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-sm font-bold text-[#b65a3a] uppercase tracking-wider">
               <Navigation className="w-4 h-4" />
               <span>Step 3: Stride Pace</span>
             </div>
@@ -177,8 +177,8 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
                   onClick={() => setPace(p.id as typeof pace)}
                   className={`px-4 py-2 rounded-xl text-xs font-medium border transition-all ${
                     pace === p.id
-                      ? 'bg-[#D4A85A] text-[#17130F] border-[#D4A85A] font-bold'
-                      : 'bg-[#17130F] text-[#F3EBDD]/80 border-[#D4A85A]/30 hover:border-[#D4A85A]'
+                      ? 'bg-[#b65a3a] text-white border-[#aa7b3f] font-bold'
+                      : 'bg-[#f5f0e6] text-[#4b2f23]/80 border-[#aa7b3f]/30 hover:border-[#aa7b3f]'
                   }`}
                 >
                   {p.label}
@@ -188,11 +188,11 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
           </div>
 
           {/* Generate Button */}
-          <div className="pt-4 border-t border-[#D4A85A]/30 flex justify-center">
+          <div className="pt-4 border-t border-[#aa7b3f]/30 flex justify-center">
             <button
               id="generate-personalized-trail-btn"
               onClick={handleGenerate}
-              className="px-8 py-4 rounded-full bg-[#D4A85A] text-[#17130F] font-bold text-sm uppercase tracking-wider hover:bg-[#F3EBDD] transition-all flex items-center gap-2.5 shadow-xl shadow-[#D4A85A]/30 cursor-pointer"
+              className="px-8 py-4 rounded-full bg-[#b65a3a] text-white font-bold text-sm uppercase tracking-wider hover:bg-[#f5f0e6] transition-all flex items-center gap-2.5 shadow-xl shadow-[#D4A85A]/30 cursor-pointer"
             >
               <Sparkles className="w-4 h-4" />
               <span>Synthesize Custom Itinerary</span>
@@ -202,20 +202,20 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
 
         {/* Generated Custom Trail Results */}
         {generated && (
-          <div className="p-8 sm:p-10 rounded-3xl bg-[#17130F] border border-[#D4A85A] shadow-2xl space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-300">
+          <div className="p-8 sm:p-10 rounded-3xl bg-[#f5f0e6] border border-[#aa7b3f] shadow-2xl space-y-8 animate-in fade-in slide-in-from-bottom-6 duration-300">
             {/* Trail Pass Header */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#D4A85A]/30">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#aa7b3f]/30">
               <div>
                 <div className="flex items-center gap-2">
                   <span className="px-3 py-0.5 rounded-full bg-emerald-900/40 text-emerald-300 border border-emerald-500/40 text-[10px] uppercase font-bold tracking-wider">
                     Itinerary Optimized
                   </span>
-                  <span className="text-xs text-[#D4A85A] font-mono">Mahabalipuram Coast</span>
+                  <span className="text-xs text-[#b65a3a] font-mono">Mahabalipuram Coast</span>
                 </div>
-                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#F3EBDD] mt-1">
+                <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#4b2f23] mt-1">
                   Custom {duration === '15min' ? '15-Min Express' : duration === '30min' ? '30-Min Pallava Panorama' : duration === '1hour' ? '1-Hour Deep Architectural Walk' : '2-Hour Complete Pilgrim Odyssey'}
                 </h3>
-                <p className="text-xs text-[#D4A85A] font-subheading italic text-base mt-0.5">
+                <p className="text-xs text-[#b65a3a] font-subheading italic text-base mt-0.5">
                   Focus: {selectedInterests.join(', ')} • {pace.toUpperCase()} Pace
                 </p>
               </div>
@@ -223,7 +223,7 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleDownloadPass}
-                  className="px-4 py-2 rounded-xl bg-[#2B2118] border border-[#D4A85A]/40 text-xs text-[#D4A85A] hover:bg-[#D4A85A] hover:text-[#17130F] transition-all flex items-center gap-1.5"
+                  className="px-4 py-2 rounded-xl bg-[#ede3d1] border border-[#aa7b3f]/40 text-xs text-[#b65a3a] hover:bg-[#b65a3a] hover:text-white transition-all flex items-center gap-1.5"
                 >
                   {downloadedPass ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Download className="w-3.5 h-3.5" />}
                   <span>{downloadedPass ? 'Pass Saved' : 'Export Trail Pass'}</span>
@@ -231,7 +231,7 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
 
                 <button
                   onClick={() => onNavigate('heritage-map')}
-                  className="px-4 py-2 rounded-xl bg-[#D4A85A] text-[#17130F] text-xs font-bold uppercase tracking-wider hover:bg-[#F3EBDD] transition-colors flex items-center gap-1.5 shadow"
+                  className="px-4 py-2 rounded-xl bg-[#b65a3a] text-white text-xs font-bold uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors flex items-center gap-1.5 shadow"
                 >
                   <MapPin className="w-3.5 h-3.5" />
                   <span>View on Map</span>
@@ -241,48 +241,48 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
 
             {/* Generated Waypoint Breakdown */}
             <div className="space-y-4">
-              <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-[#D4A85A]">
+              <h4 className="font-display text-sm font-semibold uppercase tracking-wider text-[#b65a3a]">
                 Calibrated Waypoint Timeline
               </h4>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="p-5 rounded-2xl bg-[#2B2118] border border-[#D4A85A]/30 space-y-2">
-                  <div className="text-[11px] font-bold text-[#D4A85A] uppercase flex items-center justify-between">
+                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 space-y-2">
+                  <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
                     <span>Stop 1 • 00:00</span>
                     <span>12 Mins</span>
                   </div>
-                  <h5 className="font-display text-base font-bold text-[#F3EBDD]">
+                  <h5 className="font-display text-base font-bold text-[#4b2f23]">
                     Shore Temple: Eastern Vimana
                   </h5>
-                  <p className="text-xs text-[#F3EBDD]/70 leading-relaxed">
+                  <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
                     Capture the early morning sun striking the basalt Shiva Lingam through the ocean breakwater portal.
                   </p>
                   <div className="text-[10px] text-amber-300 font-medium">📸 Photo Spot: Groyne rock vantage</div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#2B2118] border border-[#D4A85A]/30 space-y-2">
-                  <div className="text-[11px] font-bold text-[#D4A85A] uppercase flex items-center justify-between">
+                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 space-y-2">
+                  <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
                     <span>Stop 2 • +15:00</span>
                     <span>10 Mins</span>
                   </div>
-                  <h5 className="font-display text-base font-bold text-[#F3EBDD]">
+                  <h5 className="font-display text-base font-bold text-[#4b2f23]">
                     Arjuna's Penance Bas-Relief
                   </h5>
-                  <p className="text-xs text-[#F3EBDD]/70 leading-relaxed">
+                  <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
                     Examine the central natural rainwater fissure depicting the descent of the sacred Ganga river from the heavens.
                   </p>
                   <div className="text-[10px] text-amber-300 font-medium">📜 Inscription Fact: Over 100 celestial figures</div>
                 </div>
 
-                <div className="p-5 rounded-2xl bg-[#2B2118] border border-[#D4A85A]/30 space-y-2">
-                  <div className="text-[11px] font-bold text-[#D4A85A] uppercase flex items-center justify-between">
+                <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 space-y-2">
+                  <div className="text-[11px] font-bold text-[#b65a3a] uppercase flex items-center justify-between">
                     <span>Stop 3 • +25:00</span>
                     <span>15 Mins</span>
                   </div>
-                  <h5 className="font-display text-base font-bold text-[#F3EBDD]">
+                  <h5 className="font-display text-base font-bold text-[#4b2f23]">
                     Pancha Rathas (Five Chariots)
                   </h5>
-                  <p className="text-xs text-[#F3EBDD]/70 leading-relaxed">
+                  <p className="text-xs text-[#4b2f23]/70 leading-relaxed">
                     Walk clockwise around the monolithic Dharmaraja and Bhima Rathas to observe 7th-century quarry tool marks.
                   </p>
                   <div className="text-[10px] text-amber-300 font-medium">🏛️ Architecture: Monolithic granite prototype</div>
@@ -291,15 +291,15 @@ export const PersonalizedTrailPage: React.FC<PersonalizedTrailPageProps> = ({
             </div>
 
             {/* Next Demo Navigation */}
-            <div className="pt-4 border-t border-[#D4A85A]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-xs text-[#F3EBDD]/70">
-                Next in the main demo journey: Inspect the spatial route on the <span className="text-[#D4A85A] font-semibold">Interactive Heritage Map</span>.
+            <div className="pt-4 border-t border-[#aa7b3f]/20 flex flex-col sm:flex-row items-center justify-between gap-4">
+              <div className="text-xs text-[#4b2f23]/70">
+                Next in the main demo journey: Inspect the spatial route on the <span className="text-[#b65a3a] font-semibold">Interactive Heritage Map</span>.
               </div>
 
               <button
                 id="btn-trail-to-map"
                 onClick={() => onNavigate('heritage-map')}
-                className="px-6 py-2.5 rounded-full bg-[#D4A85A] text-[#17130F] font-bold text-xs uppercase tracking-wider hover:bg-[#F3EBDD] transition-colors flex items-center gap-1.5 shadow"
+                className="px-6 py-2.5 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#f5f0e6] transition-colors flex items-center gap-1.5 shadow"
               >
                 <span>Proceed to Heritage Map</span>
                 <ArrowRight className="w-4 h-4" />

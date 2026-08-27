@@ -419,8 +419,8 @@ export const MONUMENTS: Record<string, Monument> = {
     audioGuide: { duration: '4 min 15 sec', narrator: 'Dr. Radhika Srinivasan', transcript: 'Pass through the formidable Lahori Gate...' },
     has3DModel: true,
     threeDStatus: 'available',
-    sketchfabId: '2ad9ae0a1b524a37a2c3ab245b0e5423',
-    sketchfabUrl: 'https://sketchfab.com/3d-models/red-fort-model-2ad9ae0a1b524a37a2c3ab245b0e5423'
+    sketchfabId: '1ade538cb8b147f5ac908fbef8605c60',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/red-fort-1ade538cb8b147f5ac908fbef8605c60'
   },
 
   'qutb-minar': {
@@ -857,7 +857,8 @@ export const MONUMENTS: Record<string, Monument> = {
     audioGuide: { duration: '4 min', narrator: 'Dr. Radhika Srinivasan', transcript: 'Gaze upon the Bodhisattva Padmapani fresco...' },
     has3DModel: true,
     threeDStatus: 'available',
-    sketchfabUrl: 'https://sketchfab.com/search?type=models&q=Ajanta+Caves+India'
+    sketchfabId: '0e0aa7dd247d4d818c9ecb1e7be3bcc6',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/ajanta-cave-01-0e0aa7dd247d4d818c9ecb1e7be3bcc6'
   },
 
   'sanchi-stupa': {
@@ -935,7 +936,8 @@ export const MONUMENTS: Record<string, Monument> = {
     audioGuide: { duration: '3.5 min', narrator: 'Dr. Radhika Srinivasan', transcript: 'Feel the cool breeze passing through 953 jharokhas...' },
     has3DModel: true,
     threeDStatus: 'available',
-    sketchfabUrl: 'https://sketchfab.com/search?type=models&q=Hawa+Mahal+India'
+    sketchfabId: '95e4bc9ac2094ed988ac7467aa2de8de',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/hawa-mahal-surrendranagar-95e4bc9ac2094ed988ac7467aa2de8de'
   },
 
   'amber-fort': {
@@ -1052,7 +1054,8 @@ export const MONUMENTS: Record<string, Monument> = {
     audioGuide: { duration: '3.5 min', narrator: 'Dr. Radhika Srinivasan', transcript: 'Listen to the remarkable 11-fold acoustic echo...' },
     has3DModel: true,
     threeDStatus: 'available',
-    sketchfabUrl: 'https://sketchfab.com/search?type=models&q=Gol+Gumbaz+India'
+    sketchfabId: 'e0e6572b9a4b434588d47817663f6a73',
+    sketchfabUrl: 'https://sketchfab.com/3d-models/gol-gumbaz-karnataka-e0e6572b9a4b434588d47817663f6a73'
   },
 
   'meenakshi-temple': {

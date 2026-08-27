@@ -90,7 +90,7 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
     <div
       ref={containerRef}
       onWheel={sketchfabId ? undefined : handleWheel}
-      className={`relative w-full rounded-3xl overflow-hidden border border-[#D4A85A]/40 bg-[#17130F] shadow-2xl flex flex-col justify-between select-none ${
+      className={`relative w-full rounded-3xl overflow-hidden border border-[#aa7b3f]/40 bg-[#f5f0e6] shadow-2xl flex flex-col justify-between select-none ${
         isFullscreen ? 'h-screen w-screen rounded-none' : 'h-[500px] sm:h-[550px]'
       }`}
       style={{ cursor: sketchfabId ? 'default' : (isDragging ? 'grabbing' : 'grab') }}
@@ -132,10 +132,10 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
             }}
           >
             {/* Abstract geometric mesh skeleton representing a structural heritage monument */}
-            <div className="w-56 h-56 border-2 border-dashed border-[#D4A85A]/20 rounded-xl flex items-center justify-center animate-pulse">
-              <div className="w-40 h-40 border-2 border-[#D4A85A]/40 rotate-45 flex items-center justify-center">
-                <div className="w-24 h-24 border border-double border-[#D4A85A]/60 flex items-center justify-center">
-                  <Box className="w-10 h-10 text-[#D4A85A] opacity-80" />
+            <div className="w-56 h-56 border-2 border-dashed border-[#aa7b3f]/20 rounded-xl flex items-center justify-center animate-pulse">
+              <div className="w-40 h-40 border-2 border-[#aa7b3f]/40 rotate-45 flex items-center justify-center">
+                <div className="w-24 h-24 border border-double border-[#aa7b3f]/60 flex items-center justify-center">
+                  <Box className="w-10 h-10 text-[#b65a3a] opacity-80" />
                 </div>
               </div>
             </div>
@@ -162,8 +162,8 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
                   }}
                   className={`absolute z-20 px-3 py-1.5 rounded-full border text-[10px] font-bold tracking-wider transition-all flex items-center gap-1 cursor-pointer transform -translate-x-1/2 -translate-y-1/2 ${
                     isSelected
-                      ? 'bg-[#D4A85A] text-[#17130F] border-[#D4A85A] scale-110 shadow-lg shadow-[#D4A85A]/35'
-                      : 'bg-[#2B2118]/90 text-[#F3EBDD]/90 border-[#D4A85A]/40 hover:border-[#D4A85A]'
+                      ? 'bg-[#b65a3a] text-white border-[#aa7b3f] scale-110 shadow-lg shadow-[#D4A85A]/35'
+                      : 'bg-[#ede3d1]/90 text-[#4b2f23]/90 border-[#aa7b3f]/40 hover:border-[#aa7b3f]'
                   }`}
                   style={{
                     left: `calc(50% + ${x}px)`,
@@ -172,7 +172,7 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
                     transformStyle: 'flat'
                   }}
                 >
-                  <div className={`w-2 h-2 rounded-full ${isSelected ? 'bg-amber-950 animate-ping' : 'bg-[#D4A85A]'}`} />
+                  <div className={`w-2 h-2 rounded-full ${isSelected ? 'bg-amber-950 animate-ping' : 'bg-[#b65a3a]'}`} />
                   <span>{hotspot.name}</span>
                 </button>
               );
@@ -184,11 +184,11 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
       {/* Model Overlay Header */}
       <div className="relative z-10 p-5 flex items-center justify-between w-full bg-gradient-to-b from-[#17130F] to-transparent pointer-events-none">
         <div className="space-y-1">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-[10px] uppercase font-bold text-[#D4A85A]">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/25 text-[10px] uppercase font-bold text-[#b65a3a]">
             <Box className="w-3 h-3" />
             3D Heritage Model
           </span>
-          <p className="text-xs text-[#F3EBDD]/60 pt-1">
+          <p className="text-xs text-[#4b2f23]/60 pt-1">
             {sketchfabId ? 'Live Sketchfab 3D Embed Active' : (modelUrl ? 'GLB Asset Registered' : 'Interactive Architectural Mesh')}
           </p>
         </div>
@@ -198,7 +198,7 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
             href={sketchfabUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="pointer-events-auto px-3.5 py-1.5 rounded-xl bg-[#2B2118]/90 border border-[#D4A85A]/40 hover:border-[#D4A85A] text-xs font-semibold text-[#D4A85A] transition-colors"
+            className="pointer-events-auto px-3.5 py-1.5 rounded-xl bg-[#ede3d1]/90 border border-[#aa7b3f]/40 hover:border-[#aa7b3f] text-xs font-semibold text-[#b65a3a] transition-colors"
           >
             View on Sketchfab ↗
           </a>
@@ -207,15 +207,15 @@ export const ThreeDViewer: React.FC<ThreeDViewerProps> = ({
 
       {/* 3D Control Panel Overlay Footer */}
       <div className="relative z-10 p-4 bg-gradient-to-t from-[#17130F] to-transparent w-full flex flex-wrap justify-between items-center gap-3">
-        <div className="text-[10px] text-[#F3EBDD]/60 flex items-center gap-4">
+        <div className="text-[10px] text-[#4b2f23]/60 flex items-center gap-4">
           <span>{sketchfabId ? '🖱 Orbit & Zoom directly in Sketchfab 3D window' : '🖱 Drag to rotate • 🌀 Scroll to zoom'}</span>
         </div>
 
-        <div className="flex items-center gap-1.5 bg-[#2B2118]/80 border border-[#D4A85A]/30 p-1.5 rounded-2xl">
+        <div className="flex items-center gap-1.5 bg-[#ede3d1]/80 border border-[#aa7b3f]/30 p-1.5 rounded-2xl">
           <button
             onClick={toggleFullscreen}
             title="Fullscreen View"
-            className="p-2 rounded-lg hover:bg-[#17130F] text-[#F3EBDD]/80 hover:text-[#D4A85A] transition-colors cursor-pointer"
+            className="p-2 rounded-lg hover:bg-[#f5f0e6] text-[#4b2f23]/80 hover:text-[#b65a3a] transition-colors cursor-pointer"
           >
             {isFullscreen ? <Minimize2 className="w-4 h-4" /> : <Maximize2 className="w-4 h-4" />}
           </button>

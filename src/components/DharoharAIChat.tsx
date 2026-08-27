@@ -7,12 +7,12 @@ import { Language } from '../types';
 
 interface Message {
   id: string;
-  sender: 'user' | 'sutradhar';
+  sender: 'user' | 'dharoharAI';
   text: string;
   timestamp: string;
 }
 
-interface SutradharChatProps {
+interface DharoharAIChatProps {
   context: HeritageAIContext;
   initialQuestion?: string;
   onClose?: () => void;
@@ -35,7 +35,7 @@ function buildSuggestions(
     ];
   }
   // Language-aware suggestions from translations
-  const langSuggestions = TRANSLATIONS[language]?.sutradharQuestions;
+  const langSuggestions = TRANSLATIONS[language]?.dharoharAIQuestions;
   if (langSuggestions?.length) return langSuggestions;
 
   // English fallback per mode
@@ -59,7 +59,7 @@ function stripBoldMarkdown(text: string): string {
   return text.replace(/\*\*(.*?)\*\*/g, '$1');
 }
 
-export const SutradharChat: React.FC<SutradharChatProps> = ({
+export const DharoharAIChat: React.FC<DharoharAIChatProps> = ({
   context,
   initialQuestion,
   onClose,
@@ -73,10 +73,10 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
   const [messages, setMessages] = useState<Message[]>([
     {
       id: 'welcome',
-      sender: 'sutradhar',
+      sender: 'dharoharAI',
       text: context.monument
-        ? `Namaste! I am Sutradhar — your heritage guide for **${context.monument}**${context.selectedFeature ? `, with focus on the **${context.selectedFeature}**` : ''}. Ask me anything about its history, architecture, legends, or cultural significance.`
-        : 'Namaste! I am Sutradhar, your AI heritage guide for Indian monuments. Ask me anything about history, architecture, dynasties, or cultural significance.',
+        ? `Namaste! I am Dharohar AI — your heritage guide for **${context.monument}**${context.selectedFeature ? `, with focus on the **${context.selectedFeature}**` : ''}. Ask me anything about its history, architecture, legends, or cultural significance.`
+        : 'Namaste! I am Dharohar AI, your AI heritage guide for Indian monuments. Ask me anything about history, architecture, dynasties, or cultural significance.',
       timestamp: 'Now'
     }
   ]);
@@ -109,10 +109,10 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
     setIsTyping(true);
 
     try {
-      const answer = await aiService.askSutradhar(question, { ...context, language });
+      const answer = await aiService.askDharoharAI(question, { ...context, language });
       const botMsg: Message = {
         id: `bot-${Date.now()}`,
-        sender: 'sutradhar',
+        sender: 'dharoharAI',
         text: answer,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -120,8 +120,8 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
     } catch {
       const errMsg: Message = {
         id: `err-${Date.now()}`,
-        sender: 'sutradhar',
-        text: 'Sutradhar is temporarily unavailable. Please try again in a moment.',
+        sender: 'dharoharAI',
+        text: 'Dharohar AI is temporarily unavailable. Please try again in a moment.',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
       setMessages((prev) => [...prev, errMsg]);
@@ -133,7 +133,7 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
   const handleClear = () => {
     setMessages([{
       id: `welcome-${Date.now()}`,
-      sender: 'sutradhar',
+      sender: 'dharoharAI',
       text: context.monument
         ? `Conversation cleared. I am ready to answer your questions about **${context.monument}**.`
         : 'Conversation cleared. Ask me anything about Indian heritage.',
@@ -142,21 +142,21 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
   };
 
   return (
-    <div className={`flex flex-col bg-[#17130F] border border-[#D4A85A]/40 rounded-3xl overflow-hidden shadow-2xl ${embedded ? 'h-[580px] max-h-[85vh]' : 'h-[600px]'}`}>
+    <div className={`flex flex-col bg-[#f5f0e6] border border-[#aa7b3f]/40 rounded-3xl overflow-hidden shadow-2xl ${embedded ? 'h-[580px] max-h-[85vh]' : 'h-[600px]'}`}>
 
       {/* Header */}
-      <div className="px-5 py-4 bg-[#2B2118] border-b border-[#D4A85A]/25 shrink-0">
+      <div className="px-5 py-4 bg-[#ede3d1] border-b border-[#aa7b3f]/25 shrink-0">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-[#D4A85A] text-[#17130F] font-bold text-base flex items-center justify-center shadow-md shrink-0">
+            <div className="w-9 h-9 rounded-full bg-[#b65a3a] text-white font-bold text-base flex items-center justify-center shadow-md shrink-0">
               सू
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-display text-sm font-bold text-[#F3EBDD]">Sutradhar</span>
+                <span className="font-display text-sm font-bold text-[#4b2f23]">Dharohar AI</span>
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" />
               </div>
-              <p className="text-[10px] text-[#D4A85A]">
+              <p className="text-[10px] text-[#b65a3a]">
                 {mode === 'researcher' ? 'Research Assistant Mode' : 'Heritage Guide Mode'}
                 {!hasApiKey && ' • Demo Mode'}
               </p>
@@ -166,7 +166,7 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
             <button
               onClick={handleClear}
               title="Clear conversation"
-              className="p-1.5 rounded-lg hover:bg-[#17130F] text-[#F3EBDD]/50 hover:text-[#F3EBDD] transition-colors cursor-pointer"
+              className="p-1.5 rounded-lg hover:bg-[#f5f0e6] text-[#4b2f23]/50 hover:text-[#4b2f23] transition-colors cursor-pointer"
             >
               <RefreshCw className="w-3.5 h-3.5" />
             </button>
@@ -174,7 +174,7 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
               <button
                 onClick={onClose}
                 title="Close"
-                className="p-1.5 rounded-lg hover:bg-[#17130F] text-[#F3EBDD]/50 hover:text-[#F3EBDD] transition-colors cursor-pointer"
+                className="p-1.5 rounded-lg hover:bg-[#f5f0e6] text-[#4b2f23]/50 hover:text-[#4b2f23] transition-colors cursor-pointer"
               >
                 <X className="w-3.5 h-3.5" />
               </button>
@@ -185,18 +185,18 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
         {/* Context header strip */}
         {context.monument && (
           <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-[10px]">
-            <span className="flex items-center gap-1 text-[#D4A85A]/80">
+            <span className="flex items-center gap-1 text-[#b65a3a]/80">
               <Layers className="w-3 h-3" />
-              <span className="font-bold text-[#F3EBDD]">{context.monument}</span>
+              <span className="font-bold text-[#4b2f23]">{context.monument}</span>
             </span>
             {context.location && (
-              <span className="flex items-center gap-1 text-[#F3EBDD]/55">
+              <span className="flex items-center gap-1 text-[#4b2f23]/55">
                 <MapPin className="w-3 h-3" />
                 {context.location}{context.state ? `, ${context.state}` : ''}
               </span>
             )}
             {context.dynasty && (
-              <span className="flex items-center gap-1 text-[#F3EBDD]/55">
+              <span className="flex items-center gap-1 text-[#4b2f23]/55">
                 <Crown className="w-3 h-3" />
                 {context.dynasty}
               </span>
@@ -218,37 +218,37 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
             key={msg.id}
             className={`flex gap-2.5 max-w-full ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
           >
-            {msg.sender === 'sutradhar' && (
-              <div className="w-7 h-7 rounded-full bg-[#D4A85A] text-[#17130F] font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
+            {msg.sender === 'dharoharAI' && (
+              <div className="w-7 h-7 rounded-full bg-[#b65a3a] text-white font-bold text-[11px] flex items-center justify-center shrink-0 mt-0.5">
                 सू
               </div>
             )}
             <div
               className={`px-4 py-3 rounded-2xl text-xs leading-relaxed max-w-[85%] ${
                 msg.sender === 'user'
-                  ? 'bg-[#D4A85A] text-[#17130F] font-medium rounded-tr-none'
-                  : 'bg-[#2B2118] text-[#F3EBDD]/90 border border-[#D4A85A]/20 rounded-tl-none'
+                  ? 'bg-[#b65a3a] text-white font-medium rounded-tr-none'
+                  : 'bg-[#ede3d1] text-[#4b2f23]/90 border border-[#aa7b3f]/20 rounded-tl-none'
               }`}
             >
               {/* Render bold markdown-lite */}
               <div className="whitespace-pre-line">
                 {msg.text.split('**').map((part, i) =>
                   i % 2 === 1
-                    ? <strong key={i} className={msg.sender === 'user' ? 'text-[#17130F]' : 'text-[#D4A85A]'}>{part}</strong>
+                    ? <strong key={i} className={msg.sender === 'user' ? 'text-white' : 'text-[#b65a3a]'}>{part}</strong>
                     : <span key={i}>{part}</span>
                 )}
               </div>
 
-              {/* Listen button on Sutradhar responses */}
-              {msg.sender === 'sutradhar' && (
-                <div className="mt-2 pt-2 border-t border-[#D4A85A]/10 flex items-center justify-between gap-2">
+              {/* Listen button on Dharohar AI responses */}
+              {msg.sender === 'dharoharAI' && (
+                <div className="mt-2 pt-2 border-t border-[#aa7b3f]/10 flex items-center justify-between gap-2">
                   <VoiceNarrationButton
                     text={stripBoldMarkdown(msg.text)}
                     language={language}
                     ariaLabel={tVoice.listenResponse}
                     variant="compact"
                   />
-                  <div className={`text-[9px] text-[#F3EBDD]/35`}>
+                  <div className={`text-[9px] text-[#4b2f23]/35`}>
                     {msg.timestamp}
                   </div>
                 </div>
@@ -256,7 +256,7 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
 
               {/* Timestamp for user messages */}
               {msg.sender === 'user' && (
-                <div className="text-[9px] mt-1.5 text-right text-[#17130F]/60">
+                <div className="text-[9px] mt-1.5 text-right text-white/60">
                   {msg.timestamp}
                 </div>
               )}
@@ -266,13 +266,13 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
 
         {isTyping && (
           <div className="flex items-center gap-2.5">
-            <div className="w-7 h-7 rounded-full bg-[#D4A85A] text-[#17130F] font-bold text-[11px] flex items-center justify-center shrink-0">
+            <div className="w-7 h-7 rounded-full bg-[#b65a3a] text-white font-bold text-[11px] flex items-center justify-center shrink-0">
               सू
             </div>
-            <div className="px-4 py-3 rounded-2xl bg-[#2B2118] border border-[#D4A85A]/20 rounded-tl-none flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D4A85A] animate-bounce" style={{ animationDelay: '0ms' }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D4A85A] animate-bounce" style={{ animationDelay: '150ms' }} />
-              <span className="w-1.5 h-1.5 rounded-full bg-[#D4A85A] animate-bounce" style={{ animationDelay: '300ms' }} />
+            <div className="px-4 py-3 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/20 rounded-tl-none flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#b65a3a] animate-bounce" style={{ animationDelay: '0ms' }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#b65a3a] animate-bounce" style={{ animationDelay: '150ms' }} />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#b65a3a] animate-bounce" style={{ animationDelay: '300ms' }} />
             </div>
           </div>
         )}
@@ -280,13 +280,13 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
       </div>
 
       {/* Language-aware suggested question chips */}
-      <div className="px-4 py-2 border-t border-[#D4A85A]/15 flex gap-2 overflow-x-auto shrink-0 bg-[#17130F]/60">
+      <div className="px-4 py-2 border-t border-[#aa7b3f]/15 flex gap-2 overflow-x-auto shrink-0 bg-[#f5f0e6]/60">
         {suggestions.slice(0, 4).map((q, i) => (
           <button
             key={i}
             onClick={() => handleSend(q)}
             disabled={isTyping}
-            className="px-2.5 py-1 rounded-full border border-[#D4A85A]/30 text-[10px] text-[#F3EBDD]/70 hover:text-[#D4A85A] hover:border-[#D4A85A] shrink-0 transition-colors cursor-pointer disabled:opacity-40 whitespace-nowrap"
+            className="px-2.5 py-1 rounded-full border border-[#aa7b3f]/30 text-[10px] text-[#4b2f23]/70 hover:text-[#b65a3a] hover:border-[#aa7b3f] shrink-0 transition-colors cursor-pointer disabled:opacity-40 whitespace-nowrap"
           >
             {q.length > 45 ? q.substring(0, 42) + '...' : q}
           </button>
@@ -294,7 +294,7 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
       </div>
 
       {/* Input bar */}
-      <div className="p-3 border-t border-[#D4A85A]/25 flex gap-2 shrink-0 bg-[#2B2118]">
+      <div className="p-3 border-t border-[#aa7b3f]/25 flex gap-2 shrink-0 bg-[#ede3d1]">
         <input
           type="text"
           value={input}
@@ -308,12 +308,12 @@ export const SutradharChat: React.FC<SutradharChatProps> = ({
               : 'Ask about this monument...'
           }
           disabled={isTyping}
-          className="flex-1 bg-[#17130F] border border-[#D4A85A]/30 rounded-xl px-3 py-2.5 text-xs text-[#F3EBDD] placeholder-[#F3EBDD]/35 focus:outline-none focus:border-[#D4A85A] disabled:opacity-50"
+          className="flex-1 bg-[#f5f0e6] border border-[#aa7b3f]/30 rounded-xl px-3 py-2.5 text-xs text-[#4b2f23] placeholder-[#F3EBDD]/35 focus:outline-none focus:border-[#aa7b3f] disabled:opacity-50"
         />
         <button
           onClick={() => handleSend()}
           disabled={!input.trim() || isTyping}
-          className="px-4 py-2.5 rounded-xl bg-[#D4A85A] text-[#17130F] font-bold text-xs disabled:opacity-40 hover:bg-[#F3EBDD] transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
+          className="px-4 py-2.5 rounded-xl bg-[#b65a3a] text-white font-bold text-xs disabled:opacity-40 hover:bg-[#f5f0e6] transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
         >
           <Send className="w-3.5 h-3.5" />
         </button>
