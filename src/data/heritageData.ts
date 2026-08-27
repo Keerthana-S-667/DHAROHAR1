@@ -789,8 +789,21 @@ export const MONUMENTS: Record<string, Monument> = {
       lat: 26.8689,
       lng: 80.9129
     },
-    heroImage: 'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1600&q=85',
-    galleryImages: ['https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80'],
+    heroImage: '/images/bara-imambara-hero.jpg',
+    galleryImages: [
+      '/images/gallery/bara-imambara-1.png',
+      '/images/gallery/bara-imambara-2.png',
+      '/images/gallery/bara-imambara-3.png',
+      '/images/gallery/bara-imambara-4.png',
+      '/images/gallery/bara-imambara-5.png'
+    ],
+    imageGallery: [
+      { url: '/images/gallery/bara-imambara-1.png', source: 'DHAROHAR Cultural Archive' },
+      { url: '/images/gallery/bara-imambara-2.png', source: 'DHAROHAR Cultural Archive' },
+      { url: '/images/gallery/bara-imambara-3.png', source: 'DHAROHAR Cultural Archive' },
+      { url: '/images/gallery/bara-imambara-4.png', source: 'DHAROHAR Cultural Archive' },
+      { url: '/images/gallery/bara-imambara-5.png', source: 'DHAROHAR Cultural Archive' }
+    ],
     culturalSignificance: "Contains the Bhulbhulaiya labyrinth and the world's largest arched hall unsupported by beams.",
     history: 'Built as a famine relief project in 1784 to provide employment to over 20,000 citizens.',
     stories: [],
