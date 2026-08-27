@@ -1,0 +1,6 @@
+{
+  "name": "DHAROHAR - Digital Indian Heritage",
+  "description": "Futuristic digital heritage platform for discovering Indian monuments in 3D, heritage trails, AI cultural guidance, and preservation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
