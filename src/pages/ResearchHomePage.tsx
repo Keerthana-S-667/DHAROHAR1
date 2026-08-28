@@ -1,8 +1,11 @@
 import React, { useState, useMemo } from 'react';
-import { Search, Compass, ArrowLeft, BookOpen, Layers, Filter, Check, ShieldAlert, Award, Grid, Trash2, Calendar, FileText, Sparkles, Navigation } from 'lucide-react';
-import { Language, Monument } from '../types';
+import { Search, ArrowLeft, BookOpen, Layers, Award, Grid, Trash2, FileText, Sparkles, Trophy, Target, BookMarked } from 'lucide-react';
+import { Language } from '../types';
+import { TRANSLATIONS } from '../data/translations';
 import { useStore } from '../store/store';
 import { heritageService } from '../services/heritageService';
+import { studentProgressService } from '../services/studentProgressService';
+import { hasQuizData } from '../data/quizData';
 
 interface ResearchHomePageProps {
   onNavigate: (route: string) => void;
@@ -14,6 +17,8 @@ export const ResearchHomePage: React.FC<ResearchHomePageProps> = ({
   language
 }) => {
   const store = useStore();
+  const t = TRANSLATIONS[language]?.research || TRANSLATIONS.en.research;
+  const tLanding = TRANSLATIONS[language]?.landing || TRANSLATIONS.en.landing;
 
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedState, setSelectedState] = useState<string>('all');
@@ -22,7 +27,7 @@ export const ResearchHomePage: React.FC<ResearchHomePageProps> = ({
   const [selectedPeriod, setSelectedPeriod] = useState<string>('all');
   const [selectedUnescoOnly, setSelectedUnescoOnly] = useState<boolean>(false);
 
-  const monuments = Object.values(heritageService.getMonuments());
+  const monuments = Object.values(heritageService.getMonuments(language));
 
   // Extracted unique filter lists from active dataset
   const states = useMemo(() => Array.from(new Set(monuments.map(m => m.location.state))), [monuments]);
@@ -92,19 +97,129 @@ export const ResearchHomePage: React.FC<ResearchHomePageProps> = ({
           <span className="text-[#4b2f23] font-bold">Research Portal</span>
         </div>
 
-        {/* Header Block */}
-        <div className="space-y-4 text-center max-w-3xl mx-auto">
+        {/* Header */}
+        <div className="space-y-3">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#ede3d1] border border-[#aa7b3f]/30 text-[10px] text-[#b65a3a] font-bold uppercase tracking-wider">
             <BookOpen className="w-3.5 h-3.5 animate-pulse" />
-            <span>Virtual Research & Study Environment</span>
+            <span>{t.workspaceTitle}</span>
           </div>
-          <h1 className="font-display text-4xl sm:text-6xl font-bold text-[#4b2f23] tracking-tight">
-            Explore India's Heritage
+          <h1 className="font-display text-4xl sm:text-5xl font-bold text-[#4b2f23] tracking-tight">
+            {tLanding.roleResearcherTitle}
           </h1>
-          <p className="text-xs sm:text-base text-[#4b2f23]/70 leading-relaxed">
-            Discover monuments, architecture, history and cultural stories through a virtual research experience. Explore structural timelines, save items of interest to your research notebook, and compare monument profiles side-by-side.
+          <p className="text-sm text-[#4b2f23]/70 max-w-xl leading-relaxed">
+            {t.workspaceSubtitle}
           </p>
         </div>
+
+        {/* ── STUDENT DASHBOARD ────────────────────────────────────────────── */}
+        {(() => {
+          const progress = studentProgressService.getProgress();
+          const studentLevel = studentProgressService.getStudentLevel();
+          const avgScore = studentProgressService.getAverageScore();
+          const totalQuests = studentProgressService.getTotalQuestsCompleted();
+          const recentIds = store.recentlyViewedMonuments;
+          const hasAnyProgress = progress.monumentsExplored.length > 0 || store.savedResearchItems.length > 0 || totalQuests > 0;
+
+          return (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Quick Access */}
+              <div className="lg:col-span-2 p-6 rounded-3xl bg-[#ede3d1] border border-[#aa7b3f]/30 shadow-xl space-y-4">
+                <h3 className="text-xs font-bold text-[#b65a3a] uppercase tracking-wider flex items-center gap-1.5">
+                  <Grid className="w-4 h-4" /> Quick Access
+                </h3>
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {[
+                    { icon: '📜', label: 'Research Dossier', desc: 'Deep-dive monument archive', action: () => {} },
+                    { icon: '📚', label: 'Research Library', desc: 'Verified UNESCO & ASI sources', action: () => {} },
+                    { icon: '📝', label: 'My Notebook', desc: `${store.savedResearchItems.length} saved items`, action: () => onNavigate('research/progress') },
+                    { icon: '🎯', label: 'Heritage Quest', desc: '4-level knowledge test', action: () => {} },
+                    { icon: '🤖', label: 'Ask Dharohar AI', desc: 'Research-mode AI guide', action: () => onNavigate('ai-guide') },
+                    { icon: '🏆', label: 'My Progress', desc: `Level: ${studentLevel.title}`, action: () => onNavigate('research/progress') },
+                  ].map(item => (
+                    <button
+                      key={item.label}
+                      onClick={item.action}
+                      className="p-3 rounded-2xl bg-[#f5f0e6] border border-[#aa7b3f]/15 hover:border-[#aa7b3f]/50 text-left cursor-pointer transition-all hover:shadow-md space-y-1"
+                    >
+                      <div className="text-xl">{item.icon}</div>
+                      <p className="text-xs font-bold text-[#4b2f23]">{item.label}</p>
+                      <p className="text-[10px] text-[#4b2f23]/50">{item.desc}</p>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Progress snapshot */}
+              <div className="p-6 rounded-3xl bg-[#ede3d1] border-2 border-[#aa7b3f]/30 shadow-xl space-y-4">
+                <div className="flex items-center justify-between">
+                  <h3 className="text-xs font-bold text-[#b65a3a] uppercase tracking-wider flex items-center gap-1.5">
+                    <Trophy className="w-4 h-4" /> My Progress
+                  </h3>
+                  <button
+                    onClick={() => onNavigate('research/progress')}
+                    className="text-[10px] text-[#b65a3a] font-bold hover:underline cursor-pointer"
+                  >
+                    View All
+                  </button>
+                </div>
+                <div className="space-y-3">
+                  {[
+                    { label: 'Monuments Explored', value: progress.monumentsExplored.length, icon: '🏛️' },
+                    { label: 'Research Notes', value: store.savedResearchItems.length, icon: '📝' },
+                    { label: 'Sources Viewed', value: progress.sourcesViewed.length, icon: '📜' },
+                    { label: 'Quests Completed', value: totalQuests, icon: '🎯' },
+                  ].map(({ label, value, icon }) => (
+                    <div key={label} className="flex items-center justify-between p-2 rounded-xl bg-[#f5f0e6] border border-[#aa7b3f]/15">
+                      <span className="text-[11px] font-semibold text-[#4b2f23]/80">{icon} {label}</span>
+                      <span className="font-black text-[#4b2f23] text-sm">{value}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="pt-2 border-t border-[#aa7b3f]/20">
+                  <p className="text-[10px] text-[#b65a3a] uppercase font-bold tracking-wider">Current Level</p>
+                  <p className="text-sm font-bold text-[#4b2f23]">{studentLevel.title}</p>
+                </div>
+                <button
+                  onClick={() => onNavigate('research/progress')}
+                  className="w-full py-2.5 rounded-xl bg-[#b65a3a] text-white text-[10px] font-bold uppercase tracking-wider cursor-pointer hover:bg-[#9e4a2e] transition-colors shadow"
+                >
+                  View Full Progress
+                </button>
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* Continue Researching */}
+        {store.recentlyViewedMonuments.length > 0 && (
+          <div className="space-y-4">
+            <h3 className="text-xs font-bold text-[#b65a3a] uppercase tracking-wider flex items-center gap-1.5">
+              <BookOpen className="w-4 h-4" /> Continue Researching
+            </h3>
+            <div className="flex gap-4 overflow-x-auto pb-2">
+              {store.recentlyViewedMonuments.map(id => {
+                const mon = heritageService.getMonumentById(id);
+                if (!mon) return null;
+                return (
+                  <div
+                    key={id}
+                    onClick={() => onNavigate(`research/monument/${id}`)}
+                    className="flex-shrink-0 w-48 rounded-2xl overflow-hidden border border-[#aa7b3f]/25 bg-[#ede3d1] cursor-pointer hover:border-[#aa7b3f]/60 transition-all shadow-md hover:shadow-lg"
+                  >
+                    <img src={mon.heroImage} alt={mon.name} className="w-full h-28 object-cover" />
+                    <div className="p-3 space-y-1">
+                      <p className="text-xs font-bold text-[#4b2f23] line-clamp-1">{mon.name}</p>
+                      <p className="text-[10px] text-[#4b2f23]/50">{mon.dynasty}</p>
+                      {hasQuizData(id) && (
+                        <span className="text-[9px] text-green-700 font-bold">Quest Available</span>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        )}
 
         {/* Quick Browse Categories */}
         <div className="p-6 rounded-3xl bg-[#ede3d1]/80 border border-[#aa7b3f]/30 shadow-xl space-y-4">

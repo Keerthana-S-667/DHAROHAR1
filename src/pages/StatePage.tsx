@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { heritageService } from '../services/heritageService';
 import { Language, Monument } from '../types';
+import { TRANSLATIONS } from '../data/translations';
 import { 
   MapPin, 
   ArrowLeft, 
@@ -24,10 +25,28 @@ interface StatePageProps {
   language: Language;
 }
 
-export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => {
+export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate, language }) => {
   const [activeTab, setActiveTab] = useState<'monuments' | 'destinations'>('monuments');
-  const state = heritageService.getStateById(stateId) || heritageService.getStates()[0];
-  const monuments = heritageService.getMonumentsByState(state.id);
+  const state = heritageService.getStateById(stateId, language) || heritageService.getStates(language)[0];
+  const monuments = heritageService.getMonumentsByState(state.id, language);
+  const t = TRANSLATIONS[language]?.state || TRANSLATIONS.en.state;
+  const tNav = TRANSLATIONS[language]?.nav || TRANSLATIONS.en.nav;
+
+  // Native state names for Tamil and Hindi
+  const stateNativeNames: Record<string, Record<Language, string>> = {
+    'tamil-nadu': { en: 'Tamil Nadu', ta: 'தமிழ்நாடு', hi: 'तमिलनाडु' },
+    'karnataka': { en: 'Karnataka', ta: 'கர்நாடகா', hi: 'कर्नाटक' },
+    'rajasthan': { en: 'Rajasthan', ta: 'ராஜஸ்தான்', hi: 'राजस्थान' },
+    'delhi': { en: 'Delhi', ta: 'டெல்லி', hi: 'दिल्ली' },
+    'odisha': { en: 'Odisha', ta: 'ஒடிசா', hi: 'ओडिशा' },
+    'maharashtra': { en: 'Maharashtra', ta: 'மகாராஷ்டிரா', hi: 'महाराष्ट्र' },
+    'uttar-pradesh': { en: 'Uttar Pradesh', ta: 'உத்தரப் பிரதேசம்', hi: 'उत्तर प्रदेश' },
+    'gujarat': { en: 'Gujarat', ta: 'குஜராத்', hi: 'गुजरात' },
+    'bihar': { en: 'Bihar', ta: 'பீகார்', hi: 'बिहार' },
+    'west-bengal': { en: 'West Bengal', ta: 'மேற்கு வங்கம்', hi: 'पश्चिम बंगाल' }
+  };
+
+  const displayName = stateNativeNames[state.id]?.[language] || state.name;
 
   return (
     <div className="min-h-screen bg-[#f5f0e6] text-[#4b2f23] pt-24 pb-20 px-4 sm:px-6 lg:px-8">
@@ -39,10 +58,10 @@ export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => 
             className="hover:underline flex items-center gap-1 font-medium cursor-pointer"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            Back to Explore India
+            {t.backToExplore}
           </button>
           <span className="text-[#4b2f23]/40">/</span>
-          <span className="text-[#4b2f23] font-bold">{state.name}</span>
+          <span className="text-[#4b2f23] font-bold">{displayName}</span>
         </div>
 
         {/* State Hero Banner */}
@@ -50,8 +69,8 @@ export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => 
           <div className="relative h-72 sm:h-96 w-full">
             <HeritageImage
               src={state.heroImage}
-              alt={state.name}
-              fallbackName={state.name}
+              alt={displayName}
+              fallbackName={displayName}
               className="w-full h-full object-cover filter brightness-105 contrast-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#17130F]/90 via-[#17130F]/45 to-transparent" />
@@ -59,10 +78,10 @@ export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => 
             <div className="absolute bottom-6 left-6 right-6 space-y-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#f5f0e6]/95 border border-[#aa7b3f]/40 text-xs text-[#b65a3a] font-bold shadow-md">
                 <Compass className="w-3.5 h-3.5" />
-                Capital: {state.capital}
+                {t.capital} {state.capital}
               </div>
               <h1 className="font-display text-4xl sm:text-6xl font-extrabold text-white drop-shadow-lg">
-                {state.name}
+                {displayName}
               </h1>
               <p className="font-subheading text-xl sm:text-2xl text-[#F3EBDD] italic font-semibold drop-shadow-md">
                 {state.tagline}
@@ -75,7 +94,7 @@ export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="md:col-span-2 space-y-4">
                 <h3 className="font-display text-xl font-bold text-[#4b2f23]">
-                  Historical & Architectural Overview
+                  {t.overviewTitle}
                 </h3>
                 <p className="text-xs sm:text-sm text-[#4b2f23]/80 leading-relaxed">
                   {state.overview}
@@ -85,7 +104,7 @@ export const StatePage: React.FC<StatePageProps> = ({ stateId, onNavigate }) => 
               <div className="p-5 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/30 space-y-3">
                 <div className="text-xs font-bold text-[#b65a3a] uppercase tracking-wider flex items-center gap-1.5">
                   <History className="w-4 h-4" />
-                  Key Dynasties
+                  {t.keyDynasties}
                 </div>
                 <ul className="space-y-2 text-xs text-[#4b2f23]/90">
                   {state.dynasties.map((dynasty, idx) => (

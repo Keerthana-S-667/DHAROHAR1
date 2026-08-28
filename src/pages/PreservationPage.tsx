@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import confetti from 'canvas-confetti';
 import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { 
@@ -32,6 +33,14 @@ export const PreservationPage: React.FC<PreservationPageProps> = ({ onNavigate, 
     e.preventDefault();
     if (!pledgeName.trim()) return;
     setPledged(true);
+    try {
+      confetti({
+        particleCount: 80,
+        spread: 70,
+        origin: { y: 0.6 },
+        colors: ['#b65a3a', '#aa7b3f', '#d5b990', '#22c55e']
+      });
+    } catch {}
   };
 
   const handleSharePledge = () => {
@@ -147,102 +156,146 @@ export const PreservationPage: React.FC<PreservationPageProps> = ({ onNavigate, 
         </div>
 
         {/* Interactive Heritage Guardian Pledge Generator */}
-        <div className="p-8 sm:p-12 rounded-3xl bg-gradient-to-br from-[#2B2118] via-[#17130F] to-[#2B2118] border border-[#aa7b3f] shadow-2xl space-y-8">
-          <div className="text-center space-y-2 max-w-2xl mx-auto">
-            <Award className="w-12 h-12 text-[#b65a3a] mx-auto animate-pulse" />
-            <h2 className="font-display text-3xl font-bold text-[#4b2f23]">
-              Become a Verified Heritage Guardian
-            </h2>
-            <p className="text-xs sm:text-sm text-[#4b2f23]/80">
-              Sign the digital pledge to safeguard ancient Indian monuments and receive your personalized DHAROHAR Guardian Pass.
-            </p>
-          </div>
+        <div className="relative p-8 sm:p-12 rounded-3xl overflow-hidden border-2 border-[#aa7b3f]/40 shadow-2xl"
+          style={{ background: 'linear-gradient(135deg, #ede3d1 0%, #f8f3eb 50%, #e8dbc7 100%)' }}
+        >
+          {/* Decorative background pattern */}
+          <div className="absolute inset-0 opacity-[0.05]"
+            style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234b2f23' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }}
+          />
 
-          {!pledged ? (
-            <form onSubmit={handlePledgeSubmit} className="max-w-md mx-auto space-y-4">
+          {/* Top golden border accent line */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-72 h-1 bg-gradient-to-r from-transparent via-[#b65a3a] to-transparent rounded-full" />
+
+          <div className="relative space-y-8">
+            {/* Header */}
+            <div className="text-center space-y-3 max-w-2xl mx-auto">
+              <div className="relative inline-flex">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#b65a3a] to-[#aa7b3f] flex items-center justify-center mx-auto shadow-lg shadow-[#b65a3a]/25">
+                  <Award className="w-8 h-8 text-[#f5f0e6]" />
+                </div>
+              </div>
+
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-[#b65a3a] mb-1.5">
-                  Your Full Name
-                </label>
-                <input
-                  id="guardian-name-input"
-                  type="text"
-                  required
-                  value={pledgeName}
-                  onChange={(e) => setPledgeName(e.target.value)}
-                  placeholder="e.g. Aditi Sharma / Vikramaditya"
-                  className="w-full bg-[#f5f0e6] border border-[#aa7b3f]/40 rounded-xl px-4 py-3 text-sm text-[#4b2f23] placeholder-[#F3EBDD]/40 outline-none focus:border-[#aa7b3f]"
-                />
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#f5f0e6]/80 border border-[#aa7b3f]/20 text-xs text-[#4b2f23]/80 space-y-2">
-                <div className="font-bold text-[#b65a3a]">The 4 Guardian Tenets:</div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span>I will never deface or touch fragile ancient carvings.</span>
+                <div className="text-[10px] uppercase font-bold tracking-[0.3em] text-[#b65a3a] mb-1">
+                  DHAROHAR Preservation Initiative
                 </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span>I will advocate for digital archiving and scientific restoration.</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Check className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                  <span>I will educate others on cultural respect and non-intrusive visiting.</span>
-                </div>
+                <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#4b2f23] leading-tight">
+                  Become a Verified<br />
+                  <span className="text-[#b65a3a]">Heritage Guardian</span>
+                </h2>
               </div>
 
-              <button
-                id="sign-pledge-btn"
-                type="submit"
-                className="w-full py-4 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#f5f0e6] transition-all shadow-xl shadow-[#D4A85A]/20 cursor-pointer flex items-center justify-center gap-2"
-              >
-                <ShieldCheck className="w-4 h-4" />
-                <span>Sign Digital Guardian Pledge</span>
-              </button>
-            </form>
-          ) : (
-            /* Digital Certificate Pass */
-            <div className="max-w-lg mx-auto p-8 rounded-3xl bg-[#f5f0e6] border-2 border-[#aa7b3f] shadow-2xl space-y-6 text-center animate-in zoom-in duration-300">
-              <div className="w-16 h-16 rounded-full bg-[#b65a3a] text-white flex items-center justify-center mx-auto shadow-lg">
-                <Award className="w-8 h-8" />
-              </div>
-
-              <div className="space-y-1">
-                <div className="text-[10px] uppercase font-bold tracking-widest text-[#b65a3a]">
-                  Official Preservation Charter
-                </div>
-                <h3 className="font-display text-2xl font-bold text-[#4b2f23]">
-                  Certified Heritage Guardian
-                </h3>
-                <p className="font-subheading text-xl text-[#b65a3a] italic font-bold">
-                  {pledgeName}
-                </p>
-                <p className="text-[11px] text-[#4b2f23]/60 font-mono">
-                  Credential ID: DH-2026-{(Math.random() * 90000 + 10000).toFixed(0)} • WGS-84 India
-                </p>
-              </div>
-
-              <div className="p-4 rounded-xl bg-[#ede3d1] border border-[#aa7b3f]/30 text-xs text-[#4b2f23]/90 italic font-subheading">
-                “This certifies that {pledgeName} has pledged sacred stewardship to preserve India's architectural monuments for the next thousand generations.”
-              </div>
-
-              <div className="flex items-center justify-center gap-3 pt-2">
-                <button
-                  onClick={handleSharePledge}
-                  className="px-5 py-2.5 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#f5f0e6] transition-all flex items-center gap-1.5 shadow"
-                >
-                  {copiedPledge ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
-                  <span>{copiedPledge ? 'Pledge Copied!' : 'Share Certificate'}</span>
-                </button>
-                <button
-                  onClick={() => setPledged(false)}
-                  className="px-4 py-2.5 rounded-full bg-[#ede3d1] border border-[#aa7b3f]/40 text-xs text-[#b65a3a] hover:bg-[#f5f0e6]"
-                >
-                  Sign Another
-                </button>
-              </div>
+              <p className="text-sm text-[#4b2f23]/80 leading-relaxed max-w-lg mx-auto font-medium">
+                Sign the digital pledge to safeguard ancient Indian monuments and receive your
+                personalized <span className="text-[#b65a3a] font-bold">DHAROHAR Guardian Pass</span>.
+              </p>
             </div>
-          )}
+
+            {!pledged ? (
+              <form onSubmit={handlePledgeSubmit} className="max-w-md mx-auto space-y-5">
+                {/* Name Input */}
+                <div className="space-y-1.5">
+                  <label className="block text-[10px] font-bold uppercase tracking-[0.2em] text-[#b65a3a]">
+                    Your Full Name
+                  </label>
+                  <input
+                    id="guardian-name-input"
+                    type="text"
+                    required
+                    value={pledgeName}
+                    onChange={(e) => setPledgeName(e.target.value)}
+                    placeholder="e.g. Aditi Sharma / Vikramaditya"
+                    className="w-full bg-[#f5f0e6] border-2 border-[#aa7b3f]/40 rounded-xl px-4 py-3.5 text-sm font-semibold text-[#4b2f23] placeholder-[#4b2f23]/40 outline-none focus:border-[#b65a3a] focus:ring-2 focus:ring-[#b65a3a]/20 shadow-inner transition-all"
+                  />
+                </div>
+
+                {/* The 4 Guardian Tenets */}
+                <div className="rounded-2xl border-2 border-[#aa7b3f]/30 bg-[#f5f0e6]/90 overflow-hidden shadow-md">
+                  <div className="px-4 py-3 border-b border-[#aa7b3f]/25 bg-[#ede3d1]">
+                    <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#b65a3a]">
+                      The 4 Guardian Tenets
+                    </span>
+                  </div>
+                  <div className="divide-y divide-[#aa7b3f]/15">
+                    {[
+                      { icon: '🏛️', tenet: 'I will never deface or touch fragile ancient carvings.', color: 'text-emerald-700' },
+                      { icon: '💾', tenet: 'I will advocate for digital archiving and scientific restoration.', color: 'text-blue-700' },
+                      { icon: '📢', tenet: 'I will educate others on cultural respect and non-intrusive visiting.', color: 'text-amber-700' },
+                      { icon: '🌿', tenet: 'I will support sustainable heritage tourism and zero-waste visiting.', color: 'text-teal-700' },
+                    ].map(({ icon, tenet, color }, i) => (
+                      <div key={i} className="flex items-start gap-3 px-4 py-3 hover:bg-[#ede3d1]/40 transition-colors">
+                        <span className="text-base shrink-0 mt-0.5">{icon}</span>
+                        <Check className={`w-4 h-4 ${color} shrink-0 mt-0.5 font-bold`} />
+                        <span className="text-xs font-semibold text-[#4b2f23] leading-relaxed">{tenet}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* CTA Button */}
+                <button
+                  id="sign-pledge-btn"
+                  type="submit"
+                  className="w-full py-4 rounded-2xl font-bold text-sm uppercase tracking-[0.15em] cursor-pointer flex items-center justify-center gap-2.5 shadow-xl transition-all duration-300 hover:scale-[1.02] active:scale-[0.98]"
+                  style={{
+                    background: 'linear-gradient(135deg, #b65a3a 0%, #aa7b3f 100%)',
+                    boxShadow: '0 6px 20px rgba(182, 90, 58, 0.35)',
+                    color: '#ffffff'
+                  }}
+                >
+                  <ShieldCheck className="w-5 h-5" />
+                  <span>Sign Digital Guardian Pledge</span>
+                </button>
+
+                <p className="text-center text-[11px] text-[#4b2f23]/60 font-medium leading-relaxed">
+                  By signing, you join thousands of heritage guardians protecting India's monuments for future generations.
+                </p>
+              </form>
+            ) : (
+              /* Digital Certificate Pass */
+              <div className="max-w-lg mx-auto p-8 rounded-3xl border-2 border-[#aa7b3f] shadow-2xl space-y-6 text-center animate-in zoom-in duration-300 bg-[#f5f0e6]">
+                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#aa7b3f] to-[#b65a3a] flex items-center justify-center mx-auto shadow-lg shadow-[#b65a3a]/30">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+
+                <div className="space-y-1">
+                  <div className="text-[10px] uppercase font-bold tracking-widest text-[#b65a3a]">
+                    Official Preservation Charter
+                  </div>
+                  <h3 className="font-display text-2xl font-bold text-[#4b2f23]">
+                    Certified Heritage Guardian
+                  </h3>
+                  <p className="font-subheading text-xl text-[#b65a3a] italic font-bold">
+                    {pledgeName}
+                  </p>
+                  <p className="text-[11px] text-[#4b2f23]/70 font-mono font-bold">
+                    Credential ID: DH-2026-{(Math.random() * 90000 + 10000).toFixed(0)} • WGS-84 India
+                  </p>
+                </div>
+
+                <div className="p-4 rounded-xl bg-[#ede3d1] border border-[#aa7b3f]/30 text-xs text-[#4b2f23] font-semibold italic font-subheading">
+                  "This certifies that {pledgeName} has pledged sacred stewardship to preserve India's architectural monuments for the next thousand generations."
+                </div>
+
+                <div className="flex items-center justify-center gap-3 pt-2">
+                  <button
+                    onClick={handleSharePledge}
+                    className="px-5 py-2.5 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#9e4a2e] transition-all flex items-center gap-1.5 shadow cursor-pointer"
+                  >
+                    {copiedPledge ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-300" /> : <Share2 className="w-3.5 h-3.5" />}
+                    <span>{copiedPledge ? 'Pledge Copied!' : 'Share Certificate'}</span>
+                  </button>
+                  <button
+                    onClick={() => setPledged(false)}
+                    className="px-4 py-2.5 rounded-full bg-[#ede3d1] border border-[#aa7b3f]/40 text-xs font-bold text-[#b65a3a] hover:bg-[#f5f0e6] cursor-pointer"
+                  >
+                    Sign Another
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

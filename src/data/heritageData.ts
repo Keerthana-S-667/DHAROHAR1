@@ -726,8 +726,51 @@ export const MONUMENTS: Record<string, Monument> = {
       lat: 28.5245,
       lng: 77.1855
     },
-    heroImage: 'https://images.unsplash.com/photo-1545232979-fbf30fe367c5?auto=format&fit=crop&w=1600&q=85',
-    galleryImages: ['https://images.unsplash.com/photo-1545232979-fbf30fe367c5?auto=format&fit=crop&w=1200&q=80'],
+    heroImage: '/images/qutub-minar-hero.jpg',
+    galleryImages: [
+      '/images/gallery/qutub-minar-1.jpg',
+      '/images/gallery/qutub-minar-2.jpg',
+      '/images/gallery/qutub-minar-3.png',
+      '/images/gallery/qutub-minar-4.jpg',
+      '/images/gallery/qutub-minar-5.png'
+    ],
+    imageGallery: [
+      {
+        url: '/images/gallery/qutub-minar-1.jpg',
+        title: 'Qutub Minar & Alai Darwaza Gateway',
+        caption: 'The 72.5-metre red sandstone minaret framing the red sandstone Alai Darwaza dome under a clear blue sky.',
+        source: 'ASI Delhi Circle',
+        photographer: 'Dharohar Heritage Archive'
+      },
+      {
+        url: '/images/gallery/qutub-minar-2.jpg',
+        title: 'Framed Vista Through Ancient Stone Arch',
+        caption: 'Vertical perspective of the soaring fluted tower framed by ancient Sultanate period carved stone archways.',
+        source: 'Archaeological Documentation Team',
+        photographer: 'Creative Light Art'
+      },
+      {
+        url: '/images/gallery/qutub-minar-3.png',
+        title: 'Quwwat-ul-Islam Ruined Masonry Complex',
+        caption: 'Close-up view of the 5-storeyed victory tower standing beyond ancient stone masonry walls and historical ruins.',
+        source: 'ASI Archaeological Survey',
+        photographer: 'Heritage Documentation'
+      },
+      {
+        url: '/images/gallery/qutub-minar-4.jpg',
+        title: 'Intricate Carved Balconies & Quranic Epigraphy',
+        caption: 'Low angle view looking up at the elaborate stalactite brackets, fluted shaft, and carved bands of Kufic calligraphy.',
+        source: 'UNESCO Heritage Documentation',
+        photographer: 'Shaopeng Architectural Archive'
+      },
+      {
+        url: '/images/gallery/qutub-minar-5.png',
+        title: 'Illuminated Qutub Minar Under Crescent Moon',
+        caption: 'Night illumination highlighting the golden-lit red sandstone balconies and court against a deep blue evening sky.',
+        source: 'Delhi Tourism Heritage Lights',
+        photographer: 'Dharohar Night Archive'
+      }
+    ],
     culturalSignificance: 'Rises 72.5 meters with 5 distinct storeys covered in intricate Quranic epigraphy and stalactite balconies.',
     history: 'Started in 1192 by Qutb-ud-din Aibak after defeating Prithviraj Chauhan; expanded by Iltutmish and Firoz Shah Tughlaq.',
     stories: [],

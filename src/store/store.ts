@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { Language, TravellerPreferences, SavedResearchItem } from '../types';
 
 export interface GlobalState {
-  selectedUserRole: 'traveller' | 'researcher' | 'admin' | null;
+  selectedUserRole: 'traveller' | 'researcher' | null;
   language: Language;
   userLocation: { latitude: number; longitude: number } | null;
   locationPermissionState: 'granted' | 'denied' | 'prompt' | 'unknown';
@@ -17,7 +17,10 @@ export interface GlobalState {
   savedResearchItems: SavedResearchItem[];
   selectedComparisonMonuments: string[];
 
-  setSelectedUserRole: (role: 'traveller' | 'researcher' | 'admin' | null) => void;
+  // Navigation History
+  recentlyViewedMonuments: string[];   // max 5, most recent first
+
+  setSelectedUserRole: (role: 'traveller' | 'researcher' | null) => void;
   setLanguage: (lang: Language) => void;
   setUserLocation: (location: { latitude: number; longitude: number } | null) => void;
   setLocationPermissionState: (state: 'granted' | 'denied' | 'prompt' | 'unknown') => void;
@@ -34,6 +37,9 @@ export interface GlobalState {
   addComparisonMonument: (monumentId: string) => void;
   removeComparisonMonument: (monumentId: string) => void;
   clearComparisonMonuments: () => void;
+
+  // Navigation History Actions
+  addRecentlyViewed: (monumentId: string) => void;
 }
 
 const getStoredResearch = (): SavedResearchItem[] => {
@@ -45,6 +51,14 @@ const getStoredResearch = (): SavedResearchItem[] => {
     console.error('Failed to parse saved research:', err);
     return [];
   }
+};
+
+const getStoredRecentlyViewed = (): string[] => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = localStorage.getItem('dharohar_recently_viewed');
+    return raw ? JSON.parse(raw) : [];
+  } catch { return []; }
 };
 
 export const useStore = create<GlobalState>((set) => ({
@@ -62,6 +76,9 @@ export const useStore = create<GlobalState>((set) => ({
   researchFilters: {},
   savedResearchItems: getStoredResearch(),
   selectedComparisonMonuments: [],
+
+  // Navigation History
+  recentlyViewedMonuments: getStoredRecentlyViewed(),
 
   setSelectedUserRole: (role) => set({ selectedUserRole: role }),
   setLanguage: (lang) => set({ language: lang }),
@@ -102,10 +119,16 @@ export const useStore = create<GlobalState>((set) => ({
     selectedComparisonMonuments: state.selectedComparisonMonuments.filter((id) => id !== monumentId)
   })),
 
-  clearComparisonMonuments: () => set({ selectedComparisonMonuments: [] })
+  clearComparisonMonuments: () => set({ selectedComparisonMonuments: [] }),
+
+  addRecentlyViewed: (monumentId) => set((state) => {
+    const filtered = state.recentlyViewedMonuments.filter(id => id !== monumentId);
+    const updated = [monumentId, ...filtered].slice(0, 5);
+    try { localStorage.setItem('dharohar_recently_viewed', JSON.stringify(updated)); } catch {}
+    return { recentlyViewedMonuments: updated };
+  }),
 }));
 
 if (typeof window !== 'undefined') {
   (window as any).useStore = useStore;
 }
-

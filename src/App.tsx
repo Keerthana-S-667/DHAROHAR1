@@ -28,7 +28,9 @@ import { TravellerHomePage } from './pages/TravellerHomePage';
 import { ResearchHomePage } from './pages/ResearchHomePage';
 import { ResearchMonumentPage } from './pages/ResearchMonumentPage';
 import { ResearchComparePage } from './pages/ResearchComparePage';
-import { AdminLoginPage } from './pages/AdminLoginPage';
+import { HeritageQuestPage } from './pages/HeritageQuestPage';
+import { StudentProgressPage } from './pages/StudentProgressPage';
+import { InteractiveFX } from './components/InteractiveFX';
 import { TravellerSearchPage } from './pages/TravellerSearchPage';
 import { TravellerPreferencesPage } from './pages/TravellerPreferencesPage';
 import { TravellerNearbyPlaceholderPage } from './pages/TravellerNearbyPlaceholderPage';
@@ -84,7 +86,12 @@ export default function App() {
 
   const ResearchMonumentPageWrapper = () => {
     const { monumentId } = useParams<{ monumentId: string }>();
-    return <ResearchMonumentPage onNavigate={handleNavigate} language={language} />;
+    return <ResearchMonumentPage monumentId={monumentId} onNavigate={handleNavigate} language={language} />;
+  };
+
+  const HeritageQuestPageWrapper = () => {
+    const { monumentId } = useParams<{ monumentId: string }>();
+    return <HeritageQuestPage monumentId={monumentId} onNavigate={handleNavigate} language={language} />;
   };
 
   const ThreeDExplorerPageWrapper = () => {
@@ -129,12 +136,16 @@ export default function App() {
           <Route path="/research" element={<ResearchHomePage onNavigate={handleNavigate} language={language} />} />
           <Route path="/research/monument/:monumentId" element={<ResearchMonumentPageWrapper />} />
           <Route path="/research/compare" element={<ResearchComparePage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/admin/login" element={<AdminLoginPage onNavigate={handleNavigate} language={language} />} />
+          <Route path="/research/quest/:monumentId" element={<HeritageQuestPageWrapper />} />
+          <Route path="/research/progress" element={<StudentProgressPage onNavigate={handleNavigate} language={language} />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
 
-      {/* Global Architectural Footer */}
+      {/* Global Interactive FX Dock, Sound & Particle Engine */}
+      <InteractiveFX onNavigate={handleNavigate} onOpenSearch={() => setIsSearchOpen(true)} />
+
+      {/* Persistent Footer */}
       <Footer onNavigate={handleNavigate} language={language} />
 
       {/* Global Instant Search & Jump Modal */}

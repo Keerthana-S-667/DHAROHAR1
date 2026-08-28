@@ -38,14 +38,12 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
     document.getElementById('role-selection-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleRoleSelect = (role: 'traveller' | 'researcher' | 'admin') => {
+  const handleRoleSelect = (role: 'traveller' | 'researcher') => {
     setSelectedUserRole(role);
     if (role === 'traveller') {
       onNavigate('traveller');
-    } else if (role === 'researcher') {
-      onNavigate('research');
     } else {
-      onNavigate('admin/login');
+      onNavigate('research');
     }
   };
 
@@ -187,7 +185,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
             </p>
           </div>
 
-          {/* 3-Column Grid */}
+          {/* 2-Column Grid */}
           <div className="pathways-grid">
             
             {/* Card 1: Traveller / Tourist */}
@@ -226,26 +224,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
                   className="button button-primary pathway-btn"
                 >
                   {t.roleResearcherBtn} <ArrowRight size={14} strokeWidth={1.6} />
-                </button>
-              </div>
-            </div>
-
-            {/* Card 3: Administrator */}
-            <div className="pathway-card-wrap">
-              <div className="pathway-card">
-                <div className="pathway-card-top">
-                  <span className="pathway-number">03</span>
-                  <span className="pathway-icon-circle">
-                    <Shield size={17} strokeWidth={1.25} />
-                  </span>
-                </div>
-                <h3 className="pathway-title">{t.roleAdminTitle}</h3>
-                <p className="pathway-desc">{t.roleAdminDesc}</p>
-                <button 
-                  onClick={() => handleRoleSelect('admin')}
-                  className="button button-primary pathway-btn"
-                >
-                  {t.roleAdminBtn} <ArrowRight size={14} strokeWidth={1.6} />
                 </button>
               </div>
             </div>

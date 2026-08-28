@@ -189,5 +189,72 @@ export interface SavedResearchItem {
   sectionName?: string;
   featureName?: string;
   note?: string;
+  savedContent?: string;
+  sourceUrls?: string[];
   timestamp: number;
+}
+
+// ── Research Library ──────────────────────────────────────────────────────────
+
+export type ResearchSourceType =
+  | 'OFFICIAL_SOURCE'
+  | 'RESEARCH_PAPER'
+  | 'ACADEMIC_PUBLICATION'
+  | 'ARCHAEOLOGICAL_REPORT'
+  | 'HISTORICAL_DOCUMENT'
+  | 'BOOK_CATALOGUE'
+  | 'MUSEUM_RECORD'
+  | 'UNESCO_RECORD'
+  | 'GOVERNMENT_DOCUMENT';
+
+export interface ResearchSource {
+  id: string;
+  monumentId: string;
+  title: string;
+  author?: string;
+  year?: string;
+  organization: string;
+  sourceType: ResearchSourceType;
+  description: string;
+  url: string;
+}
+
+// ── Heritage Quest ────────────────────────────────────────────────────────────
+
+export type QuizLevel = 'explorer' | 'historian' | 'researcher' | 'scholar';
+
+export type QuizQuestionType = 'mcq' | 'true_false' | 'timeline';
+
+export interface QuizQuestion {
+  id: string;
+  monumentId: string;
+  level: QuizLevel;
+  type: QuizQuestionType;
+  question: string;
+  options: string[];
+  correctIndex: number;
+  explanation: string;
+  sourceNote?: string;
+}
+
+// ── Student Progress ──────────────────────────────────────────────────────────
+
+export interface BadgeDefinition {
+  id: string;
+  icon: string;
+  title: string;
+  description: string;
+  requirement: string;
+}
+
+export interface StudentProgress {
+  monumentsExplored: string[];
+  sectionsCompleted: string[];   // e.g. "taj-mahal:architecture"
+  sourcesViewed: string[];       // source ids
+  sourcesSaved: string[];
+  notesCreated: number;
+  questsCompleted: Record<string, { level: QuizLevel; score: number; completedAt: number }[]>;
+  badgesEarned: string[];
+  totalScore: number;
+  lastUpdated: number;
 }
