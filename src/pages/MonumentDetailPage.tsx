@@ -45,7 +45,7 @@ export const MonumentDetailPage: React.FC<MonumentDetailPageProps> = ({
   onNavigate,
   language
 }) => {
-  const monument = heritageService.getMonumentById(monumentId) || heritageService.getMonumentById('shore-temple')!;
+  const monument = heritageService.getMonumentById(monumentId, language) || heritageService.getMonumentById('shore-temple', language)!;
   const [copiedLink, setCopiedLink] = useState(false);
   const [showDharoharAI, setShowDharoharAI] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'timeline' | 'architecture' | 'gallery'>('overview');
@@ -138,7 +138,9 @@ export const MonumentDetailPage: React.FC<MonumentDetailPageProps> = ({
               Back to {monument.location.city}
             </button>
             <span className="text-[#4b2f23]/40">/</span>
-            <span className="text-[#4b2f23] font-bold">{monument.name}</span>
+            <span className="text-[#4b2f23] font-bold">
+              {(language === 'ta' || language === 'hi') && monument.nativeName ? monument.nativeName : monument.name}
+            </span>
           </div>
 
           <button
@@ -146,7 +148,7 @@ export const MonumentDetailPage: React.FC<MonumentDetailPageProps> = ({
             className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#ede3d1] border border-[#aa7b3f]/30 text-[#b65a3a] hover:bg-[#b65a3a] hover:text-white transition-all text-xs cursor-pointer"
           >
             {copiedLink ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
-            <span>{copiedLink ? 'Link Copied' : 'Share Monument'}</span>
+            <span>{copiedLink ? (language === 'ta' ? 'இணைப்பு நகலெடுக்கப்பட்டது' : language === 'hi' ? 'लिंक कॉपी हो गया' : 'Link Copied') : (language === 'ta' ? 'பகிருங்கள்' : language === 'hi' ? 'साझा करें' : 'Share Monument')}</span>
           </button>
         </div>
 
@@ -180,7 +182,13 @@ export const MonumentDetailPage: React.FC<MonumentDetailPageProps> = ({
                   {monument.location.city}, {monument.location.state} • {monument.period}
                 </div>
                 <h1 className="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white mt-1 drop-shadow-lg tracking-tight">
-                  {monument.name}
+                  {(language === 'ta' || language === 'hi') && monument.nativeName ? (
+                    <>
+                      {monument.nativeName} <span className="text-[#D4A85A] font-normal text-3xl sm:text-4xl">({monument.name})</span>
+                    </>
+                  ) : (
+                    monument.name
+                  )}
                 </h1>
                 <p className="font-subheading text-2xl sm:text-3xl text-[#F3EBDD] italic mt-1 font-semibold drop-shadow-md">
                   “{monument.tagline}”

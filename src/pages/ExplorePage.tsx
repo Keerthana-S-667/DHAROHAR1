@@ -12,7 +12,7 @@ interface ExplorePageProps {
 
 export const ExplorePage: React.FC<ExplorePageProps> = ({ onNavigate, language }) => {
   const t = TRANSLATIONS[language].explore;
-  const statesData = heritageService.getStates();
+  const statesData = heritageService.getStates(language);
 
 
   return (

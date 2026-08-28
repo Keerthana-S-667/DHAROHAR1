@@ -44,10 +44,6 @@ export const TRANSLATIONS = {
       roleResearcherTitle: 'Student / Researcher',
       roleResearcherDesc: 'Explore monuments virtually, investigate their architecture and history, compare heritage sites and build your own research collection.',
       roleResearcherBtn: 'Begin Research',
-      
-      roleAdminTitle: 'Administrator',
-      roleAdminDesc: 'Manage, verify and publish the digital heritage information that powers DHAROHAR.',
-      roleAdminBtn: 'Manage Portal',
 
       featuredBadge: 'Featured 3D Architectural Monument',
       featuredTitle: 'Shore Temple, Mahabalipuram',
@@ -82,10 +78,47 @@ export const TRANSLATIONS = {
     },
     explore: {
       title: 'Explore India’s Architectural Dynasties',
-      subtitle: 'Discover five iconic cultural landscapes where stone masonry, astronomy, and cosmic devotion shaped global heritage.',
+      subtitle: 'Discover iconic cultural landscapes where stone masonry, astronomy, and cosmic devotion shaped global heritage.',
       viewState: 'Explore State Heritage',
       monumentsCount: 'Monuments Recorded',
       dynastiesTitle: 'Dynasties'
+    },
+    state: {
+      backToExplore: 'Back to Explore India',
+      capital: 'Capital:',
+      overviewTitle: 'Historical & Architectural Overview',
+      keyDynasties: 'Key Dynasties',
+      exploreMonuments: 'Explore Monuments',
+      destinations: 'Destinations',
+      virtual3DActive: 'Virtual 3D Twin Active',
+      viewMonument: 'View Monument Details',
+      explore3D: 'Explore 3D Model'
+    },
+    destination: {
+      backToState: 'Back to State',
+      monumentsIn: 'Monuments in',
+      highlights: 'Architectural Highlights'
+    },
+    research: {
+      workspaceTitle: 'HERITAGE RESEARCH & LEARNING WORKSPACE',
+      workspaceSubtitle: 'Investigate primary source documents, architectural blueprints, compare monuments, and track your research progress.',
+      searchPlaceholder: 'Search research library, primary sources, architectural features...',
+      dossiersTitle: 'Explore Research Dossiers',
+      notebookTitle: 'My Research Notebook',
+      progressTitle: 'My Learning & Research Progress',
+      questTitle: 'Heritage Quest Challenge',
+      compareTitle: 'Monument Comparative Analysis Matrix'
+    },
+    common: {
+      all: 'All',
+      search: 'Search',
+      viewAll: 'View All',
+      back: 'Back',
+      explore: 'Explore',
+      details: 'Details',
+      riskHigh: 'High Risk',
+      riskMod: 'Moderate Risk',
+      riskLow: 'Low Risk'
     },
     monument: {
       explore3DBtn: 'Explore in High-Fidelity 3D',
@@ -138,12 +171,12 @@ export const TRANSLATIONS = {
       tagline: '“Explore the past. Experience it in 3D. Preserve it for the future.”',
       desc: 'A high-fidelity digital heritage sanctuary dedicated to the epigraphy, astronomy, and architectural marvels of Indian temple civilizations and dynastic monuments.',
       charterBtn: 'Digital Preservation Charter',
-      spatialBtn: 'Spatial 3D Archive',
+      spatialBtn: '3D Archive',
       regionalTitle: 'Regional Heritage',
       experiencesTitle: 'Experiences',
-      stewardshipTitle: 'Stewardship',
-      copyright: '© 2026 DHAROHAR • Dedicated to the living memory of India\'s master stonemasons and architects.',
-      reverence: 'Crafted with reverence for Indian Heritage'
+      stewardshipTitle: 'Preservation',
+      copyright: '© 2026 Dharohar • Dedicated to the master architects of India.',
+      reverence: 'Crafted with reverence for Indian heritage'
     },
     voice: {
       listen: 'Listen',
@@ -209,10 +242,6 @@ export const TRANSLATIONS = {
       roleResearcherTitle: 'மாணவர் / संशोधகர்',
       roleResearcherDesc: 'நினைவுச் சின்னங்களை மெய்நிகராக ஆராயுங்கள், கட்டிடக்கலை மற்றும் வரலாற்றை ஆய்வு செய்து ஒப்பீடு செய்யுங்கள்.',
       roleResearcherBtn: 'ஆராய்ச்சியைத் தொடங்கு',
-      
-      roleAdminTitle: 'நிர்வாகி',
-      roleAdminDesc: 'தரோஹரை இயக்கும் டிஜிட்டல் மரபுத் தகவல்களை நிர்வகிக்கவும், சரிபார்க்கவும் மற்றும் வெளியிடவும்.',
-      roleAdminBtn: 'தளத்தை நிர்வகிக்க',
 
       featuredBadge: 'சிறப்பு 3D கட்டிடக்கலை நினைவுச்சின்னம்',
       featuredTitle: 'கடற்கரைக் கோவில், மகாபலிபுரம்',
@@ -231,7 +260,7 @@ export const TRANSLATIONS = {
 
       atlasBadge: 'கட்டிடக்கலை வரைபடம்',
       atlasTitle: 'பிராந்திய மரபு வழியாக இந்தியாவை ஆராயுங்கள்',
-      atlasViewAll: '5 மாநிலங்களையும் காண்க',
+      atlasViewAll: 'அனைத்து மாநிலங்களையும் காண்க',
       exploreStateBtn: 'ஆராய்க',
 
       trailsBadge: 'கருப்பொருள் பயணங்கள்',
@@ -247,10 +276,47 @@ export const TRANSLATIONS = {
     },
     explore: {
       title: 'இந்தியாவின் வரலாற்றுப் பொக்கிஷங்கள்',
-      subtitle: 'கல்வெட்டுகள், வானியல் மற்றும் கலை நுணுக்கங்கள் நிறைந்த ஐந்து முக்கிய மாநிலங்களின் மரபுச் சின்னங்கள்.',
+      subtitle: 'கல்வெட்டுகள், வானியல் மற்றும் கலை நுணுக்கங்கள் நிறைந்த முக்கிய மாநிலங்களின் மரபுச் சின்னங்கள்.',
       viewState: 'மாநில மரபைக் காண்க',
       monumentsCount: 'பதிவு செய்யப்பட்ட சின்னங்கள்',
       dynastiesTitle: 'அரச மரபுகள்'
+    },
+    state: {
+      backToExplore: 'இந்தியாவை ஆராயத் திரும்பு',
+      capital: 'தலைநகரம்:',
+      overviewTitle: 'வரலாற்று & கட்டிடக்கலை கண்ணோட்டம்',
+      keyDynasties: 'முக்கிய அரச வம்சங்கள்',
+      exploreMonuments: 'நினைவுச் சின்னங்களை ஆராய்க',
+      destinations: 'முக்கிய இடங்கள்',
+      virtual3DActive: '3D மெய்நிகர் வடிவம் தயார்',
+      viewMonument: 'விவரங்களைக் காண்க',
+      explore3D: '3D முப்பரிமாணத்தில் காண்க'
+    },
+    destination: {
+      backToState: 'மாநிலத்திற்குத் திரும்பு',
+      monumentsIn: 'நினைவுச் சின்னங்கள்:',
+      highlights: 'கட்டிடக்கலை சிறப்பம்சங்கள்'
+    },
+    research: {
+      workspaceTitle: 'மரபு ஆராய்ச்சி & கற்றல் கூடம்',
+      workspaceSubtitle: 'வரலாற்று ஆவணங்கள், கட்டிடக்கலை மாதிரிகளை ஆராய்ந்து உங்கள் ஆய்வுக் குறிப்புகளைச் சேமியுங்கள்.',
+      searchPlaceholder: 'ஆராய்ச்சி நூலகம், வரலாற்று மூலங்களைத் தேடுக...',
+      dossiersTitle: 'ஆராய்ச்சி விவரக் குறிப்புகளை ஆராய்க',
+      notebookTitle: 'என் ஆராய்ச்சி குறிப்பேடு',
+      progressTitle: 'என் கற்றல் & ஆராய்ச்சி முன்னேற்றம்',
+      questTitle: 'மரபுச் சவால் வினாடி வினா',
+      compareTitle: 'நினைவுச் சின்ன ஒப்பீட்டுப் பலகை'
+    },
+    common: {
+      all: 'அனைத்தும்',
+      search: 'தேடுக',
+      viewAll: 'அனைத்தையும் காண்க',
+      back: 'பின்செல்க',
+      explore: 'ஆராய்க',
+      details: 'விவரங்கள்',
+      riskHigh: 'அதிக ஆபத்து',
+      riskMod: 'மிதமான ஆபத்து',
+      riskLow: 'குறைந்த ஆபத்து'
     },
     monument: {
       explore3DBtn: '3D முப்பரிமாணத்தில் காண்க',
@@ -374,10 +440,6 @@ export const TRANSLATIONS = {
       roleResearcherTitle: 'छात्र / शोधकर्ता',
       roleResearcherDesc: 'स्मारकों का वर्चुअल अन्वेषण करें, उनकी वास्तुकला और इतिहास का अध्ययन करें तथा शोध संग्रह बनाएं।',
       roleResearcherBtn: 'शोध प्रारंभ करें',
-      
-      roleAdminTitle: 'प्रशासक',
-      roleAdminDesc: 'धरोहर को संचालित करने वाली डिजिटल जानकारी का प्रबंधन, सत्यापन और प्रकाशन करें।',
-      roleAdminBtn: 'पोर्टल प्रबंधित करें',
 
       featuredBadge: 'विशेष 3D स्थापत्य स्मारक',
       featuredTitle: 'शोर मंदिर, महाबलीपुरम',
@@ -396,7 +458,7 @@ export const TRANSLATIONS = {
 
       atlasBadge: 'स्थापत्य मानचित्र',
       atlasTitle: 'सांस्कृतिक क्षेत्रों द्वारा भारत का अन्वेषण करें',
-      atlasViewAll: 'सभी 5 राज्य देखें',
+      atlasViewAll: 'सभी राज्य देखें',
       exploreStateBtn: 'अन्वेषण करें',
 
       trailsBadge: 'विषयगत यात्राएं',
@@ -416,6 +478,43 @@ export const TRANSLATIONS = {
       viewState: 'राज्य धरोहर देखें',
       monumentsCount: 'दर्ज स्मारक',
       dynastiesTitle: 'प्रमुख राजवंश'
+    },
+    state: {
+      backToExplore: 'भारत अन्वेषण पर वापस जाएँ',
+      capital: 'राजधानी:',
+      overviewTitle: 'ऐतिहासिक एवं स्थापत्य विवरण',
+      keyDynasties: 'प्रमुख राजवंश',
+      exploreMonuments: 'स्मारक अन्वेषण करें',
+      destinations: 'प्रमुख स्थल',
+      virtual3DActive: '3D वर्चुअल मॉडल सक्रिय',
+      viewMonument: 'विवरण देखें',
+      explore3D: '3D में देखें'
+    },
+    destination: {
+      backToState: 'राज्य पर वापस जाएं',
+      monumentsIn: 'स्मारक स्थान:',
+      highlights: 'स्थापत्य मुख्य आकर्षण'
+    },
+    research: {
+      workspaceTitle: 'धरोहर शोध एवं अध्ययन केंद्र',
+      workspaceSubtitle: 'प्राथमिक ऐतिहासिक दस्तावेजों का अध्ययन करें, स्मारकों की तुलना करें और अपना शोध संग्रह बनाएं।',
+      searchPlaceholder: 'शोध पुस्तकालय, ऐतिहासिक स्रोत खोजें...',
+      dossiersTitle: 'शोध फाइलों का अन्वेषण करें',
+      notebookTitle: 'मेरी शोध नोटबुक',
+      progressTitle: 'मेरी अध्ययन प्रगति',
+      questTitle: 'धरोहर प्रश्नोत्तरी चुनौती',
+      compareTitle: 'स्मारक तुलनात्मक विश्लेषण'
+    },
+    common: {
+      all: 'सभी',
+      search: 'खोजें',
+      viewAll: 'सभी देखें',
+      back: 'वापस',
+      explore: 'अन्वेषण करें',
+      details: 'विवरण',
+      riskHigh: 'उच्च जोखिम',
+      riskMod: 'मध्यम जोखिम',
+      riskLow: 'कम जोखिम'
     },
     monument: {
       explore3DBtn: '3D में सजीव अनुभव करें',
@@ -495,4 +594,3 @@ export const TRANSLATIONS = {
     ]
   }
 };
-

@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { HeritageImage } from '../components/HeritageImage';
 
+import { TRANSLATIONS } from '../data/translations';
+
 interface DestinationPageProps {
   destinationId: string;
   onNavigate: (route: string) => void;
@@ -22,8 +24,11 @@ interface DestinationPageProps {
 
 export const DestinationPage: React.FC<DestinationPageProps> = ({
   destinationId,
-  onNavigate
+  onNavigate,
+  language
 }) => {
+  const t = TRANSLATIONS[language]?.destination || TRANSLATIONS.en.destination;
+  const tNav = TRANSLATIONS[language]?.nav || TRANSLATIONS.en.nav;
   const statesData = heritageService.getStates();
   const monuments = heritageService.getMonuments();
 

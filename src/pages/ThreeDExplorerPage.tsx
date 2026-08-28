@@ -33,7 +33,7 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
   language,
   monumentId
 }) => {
-  const monumentsMap = heritageService.getMonuments();
+  const monumentsMap = heritageService.getMonuments(language);
   const monumentsList = Object.values(monumentsMap);
 
   // Default to monumentId prop if provided, else 'taj-mahal'
@@ -262,13 +262,15 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
         </div>
 
         {/* Demo Next Steps Journey Carousel */}
-        <div className="p-8 rounded-3xl bg-gradient-to-r from-[#2B2118] via-[#17130F] to-[#2B2118] border border-[#aa7b3f]/40 space-y-4">
+        <div className="p-8 rounded-3xl border-2 border-[#aa7b3f]/40 space-y-4 shadow-xl"
+          style={{ background: 'linear-gradient(135deg, #ede3d1 0%, #f8f3eb 50%, #e8dbc7 100%)' }}
+        >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
               <div className="text-xs font-bold uppercase tracking-wider text-[#b65a3a]">
                 Digital Heritage Exploration
               </div>
-              <h3 className="font-display text-2xl font-bold text-[#4b2f23] mt-1">
+              <h3 className="font-display text-2xl sm:text-3xl font-bold text-[#4b2f23] mt-1">
                 Continue the Heritage Experience
               </h3>
             </div>
@@ -277,7 +279,7 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
               <button
                 id="btn-next-to-ai-guide"
                 onClick={() => onNavigate('ai-guide')}
-                className="px-5 py-2.5 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#9a472a] transition-colors flex items-center gap-1.5 shadow-md cursor-pointer"
+                className="px-5 py-2.5 rounded-full bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-wider hover:bg-[#9a472a] transition-all flex items-center gap-1.5 shadow-md cursor-pointer"
               >
                 <Bot className="w-4 h-4" />
                 <span>Ask AI Guide</span>
@@ -286,7 +288,7 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
               <button
                 id="btn-next-to-trails"
                 onClick={() => onNavigate('trails')}
-                className="px-5 py-2.5 rounded-full bg-[#ede3d1] border border-[#aa7b3f]/40 text-[#4b2f23] text-xs font-semibold uppercase tracking-wider hover:border-[#aa7b3f] transition-colors flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-full bg-[#f5f0e6] border-2 border-[#aa7b3f]/40 text-[#4b2f23] font-bold text-xs uppercase tracking-wider hover:border-[#b65a3a] hover:bg-[#ede3d1] transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <Navigation className="w-4 h-4 text-[#b65a3a]" />
                 <span>Heritage Trails</span>
@@ -295,7 +297,7 @@ export const ThreeDExplorerPage: React.FC<ThreeDExplorerPageProps> = ({
               <button
                 id="btn-next-to-map"
                 onClick={() => onNavigate('heritage-map')}
-                className="px-5 py-2.5 rounded-full bg-[#f5f0e6] border border-[#aa7b3f]/40 text-[#b65a3a] text-xs font-semibold uppercase tracking-wider hover:bg-[#ede3d1] transition-colors flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-full bg-[#f5f0e6] border-2 border-[#aa7b3f]/40 text-[#b65a3a] font-bold text-xs uppercase tracking-wider hover:bg-[#ede3d1] transition-all flex items-center gap-1.5 cursor-pointer"
               >
                 <MapPin className="w-4 h-4" />
                 <span>Interactive Map</span>

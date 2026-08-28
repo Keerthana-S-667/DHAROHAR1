@@ -5,7 +5,43 @@ import {
   SHORE_TEMPLE_HOTSPOTS, 
   AI_CULTURAL_KNOWLEDGE_BASE 
 } from '../data/heritageData';
-import { StateData, Monument, HeritageTrail, Hotspot, Destination, NearbyHeritageResult, TravellerPreferences, HistoricalTimelineEvent, GalleryImage } from '../types';
+import { LOCALIZED_STATES, LOCALIZED_MONUMENTS } from '../data/localizedHeritageData';
+import { StateData, Monument, HeritageTrail, Hotspot, Destination, NearbyHeritageResult, TravellerPreferences, HistoricalTimelineEvent, GalleryImage, Language } from '../types';
+
+export function localizeState(state: StateData, lang?: Language): StateData {
+  if (!state || !lang || lang === 'en') return state;
+  const loc = LOCALIZED_STATES[state.id]?.[lang];
+  if (!loc) return state;
+
+  return {
+    ...state,
+    name: loc.name || state.name,
+    tagline: loc.tagline || state.tagline,
+    overview: loc.overview || state.overview,
+    architecturalHeritage: loc.architecturalHeritage || state.architecturalHeritage,
+    capital: loc.capital || state.capital,
+    dynasties: loc.dynasties || state.dynasties
+  };
+}
+
+export function localizeMonument(m: Monument, lang?: Language): Monument {
+  if (!m || !lang || lang === 'en') return m;
+  const loc = LOCALIZED_MONUMENTS[m.id]?.[lang];
+  if (!loc) return m;
+
+  return {
+    ...m,
+    name: loc.name || m.name,
+    tagline: loc.tagline || m.tagline,
+    culturalSignificance: loc.culturalSignificance || m.culturalSignificance,
+    history: loc.history || m.history,
+    architectureStyle: loc.architectureStyle || m.architectureStyle,
+    material: loc.material || m.material,
+    period: loc.period || m.period,
+    dynasty: loc.dynasty || m.dynasty,
+    ruler: loc.ruler || m.ruler
+  };
+}
 
 export function enrichMonument(m: Monument): Monument {
   if (!m) return m;
@@ -58,62 +94,14 @@ export function enrichMonument(m: Monument): Monument {
     ])
   };
 
-  // 4. Image Gallery (Guaranteed At Least 5 Photos for Every Monument)
-  const HERITAGE_STOCK_GALLERY = [
-    'https://images.unsplash.com/photo-1564507592333-c60657eea523?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1621847468516-1ed5d0df56fe?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1600100397608-f010e4210d63?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1590050752117-238cb0fb12b1?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1599661046827-dacff0c0f09a?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1609946782701-d82f71887e5b?auto=format&fit=crop&w=1200&q=80'
-  ];
-
-  let initialGallery: GalleryImage[] = [];
-
-  if (m.imageGallery && m.imageGallery.length > 0) {
-    initialGallery = m.imageGallery.map((img, idx) => ({
-      ...img,
-      title: img.title || `${m.name} - View ${idx + 1}`,
-      caption: img.caption || `High-resolution view of ${m.name} in ${m.location.city}, displaying ${m.architectureStyle}.`,
-      source: img.source || 'Dharohar Cultural Heritage Archive',
-      photographer: img.photographer || 'Archaeological Survey Team'
-    }));
-  } else {
-    const urls = (m.galleryImages && m.galleryImages.length > 0)
-      ? m.galleryImages
-      : [m.heroImage];
-    initialGallery = urls.map((url, idx) => ({
-      url,
-      title: `${m.name} - Perspective ${idx + 1}`,
-      caption: `Architectural vista of ${m.name} in ${m.location.city}, highlighting ${m.architectureStyle}.`,
-      source: 'Dharohar Cultural Heritage Archive',
-      photographer: 'Archaeological Documentation Team'
-    }));
-  }
-
-  const photoCaptions = [
-    `Panoramic wide vista of ${m.name} under morning sunlight in ${m.location.city}.`,
-    `Detailed stone masonry and ornamental relief work showcasing ${m.architectureStyle}.`,
-    `Sunset twilight view of ${m.name}, highlighting structural proportion and symmetry.`,
-    `Interior sanctum and pillared corridor geometry crafted from ${m.material}.`,
-    `Aerial perspective demonstrating the surrounding garden / courtyard layout of ${m.name}.`,
-    `Close-up view of carved threshold sentinels and epigraph inscriptions.`
-  ];
-
-  while (initialGallery.length < 5) {
-    const padIdx = initialGallery.length;
-    const stockUrl = HERITAGE_STOCK_GALLERY[padIdx % HERITAGE_STOCK_GALLERY.length];
-    initialGallery.push({
-      url: stockUrl,
-      title: `${m.name} - Architectural Detail #${padIdx + 1}`,
-      caption: photoCaptions[padIdx % photoCaptions.length],
-      source: 'Dharohar High-Resolution Archive',
-      photographer: 'Archaeological Survey Team'
-    });
-  }
+  const initialGallery: GalleryImage[] = (m.imageGallery && m.imageGallery.length > 0)
+    ? m.imageGallery
+    : (m.galleryImages || [m.heroImage]).map((url, idx) => ({
+        url,
+        source: 'DHAROHAR Archives',
+        title: `${m.name} View ${idx + 1}`,
+        caption: `Architectural perspective showing structural detailing of ${m.name}.`
+      }));
 
   return {
     ...m,
@@ -167,21 +155,22 @@ export const heritageService = {
   /**
    * Retrieves all states list.
    */
-  getStates(): StateData[] {
-    return STATES_DATA;
+  getStates(language?: Language): StateData[] {
+    return STATES_DATA.map((s) => localizeState(s, language));
   },
 
   /**
    * Retrieves a single state by its ID.
    */
-  getStateById(stateId: string): StateData | undefined {
-    return STATES_DATA.find((s) => s.id === stateId);
+  getStateById(stateId: string, language?: Language): StateData | undefined {
+    const s = STATES_DATA.find((s) => s.id === stateId);
+    return s ? localizeState(s, language) : undefined;
   },
 
   /**
    * Retrieves all monuments located in a specific state by stateId.
    */
-  getMonumentsByState(stateId: string): Monument[] {
+  getMonumentsByState(stateId: string, language?: Language): Monument[] {
     const all = Object.values(MONUMENTS);
     const state = STATES_DATA.find((s) => s.id === stateId);
     const destinationMonIds = state
@@ -197,16 +186,16 @@ export const heritageService = {
             m.location.state &&
             m.location.state.toLowerCase().replace(/\s+/g, '-') === stateId)
       )
-      .map(enrichMonument);
+      .map((m) => localizeMonument(enrichMonument(m), language));
   },
 
   /**
    * Retrieves all monuments map.
    */
-  getMonuments(): Record<string, Monument> {
+  getMonuments(language?: Language): Record<string, Monument> {
     const enriched: Record<string, Monument> = {};
     for (const key in MONUMENTS) {
-      enriched[key] = enrichMonument(MONUMENTS[key]);
+      enriched[key] = localizeMonument(enrichMonument(MONUMENTS[key]), language);
     }
     return enriched;
   },
@@ -214,9 +203,9 @@ export const heritageService = {
   /**
    * Retrieves a single monument by its ID.
    */
-  getMonumentById(monumentId: string): Monument | undefined {
+  getMonumentById(monumentId: string, language?: Language): Monument | undefined {
     const m = MONUMENTS[monumentId];
-    return m ? enrichMonument(m) : undefined;
+    return m ? localizeMonument(enrichMonument(m), language) : undefined;
   },
 
   /**
