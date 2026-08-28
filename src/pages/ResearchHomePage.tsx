@@ -115,76 +115,50 @@ export const ResearchHomePage: React.FC<ResearchHomePageProps> = ({
         {(() => {
           const progress = studentProgressService.getProgress();
           const studentLevel = studentProgressService.getStudentLevel();
-          const avgScore = studentProgressService.getAverageScore();
           const totalQuests = studentProgressService.getTotalQuestsCompleted();
-          const recentIds = store.recentlyViewedMonuments;
-          const hasAnyProgress = progress.monumentsExplored.length > 0 || store.savedResearchItems.length > 0 || totalQuests > 0;
 
           return (
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              {/* Quick Access */}
-              <div className="lg:col-span-2 p-6 rounded-3xl bg-[#ede3d1] border border-[#aa7b3f]/30 shadow-xl space-y-4">
-                <h3 className="text-xs font-bold text-[#b65a3a] uppercase tracking-wider flex items-center gap-1.5">
-                  <Grid className="w-4 h-4" /> Quick Access
-                </h3>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  {[
-                    { icon: '📜', label: 'Research Dossier', desc: 'Deep-dive monument archive', action: () => {} },
-                    { icon: '📚', label: 'Research Library', desc: 'Verified UNESCO & ASI sources', action: () => {} },
-                    { icon: '📝', label: 'My Notebook', desc: `${store.savedResearchItems.length} saved items`, action: () => onNavigate('research/progress') },
-                    { icon: '🎯', label: 'Heritage Quest', desc: '4-level knowledge test', action: () => {} },
-                    { icon: '🤖', label: 'Ask Dharohar AI', desc: 'Research-mode AI guide', action: () => onNavigate('ai-guide') },
-                    { icon: '🏆', label: 'My Progress', desc: `Level: ${studentLevel.title}`, action: () => onNavigate('research/progress') },
-                  ].map(item => (
+            <div className="p-6 rounded-3xl bg-[#ede3d1] border border-[#aa7b3f]/30 shadow-xl w-full">
+              <div className="flex flex-col md:flex-row gap-6 items-stretch justify-between">
+                <div className="flex-1 space-y-4">
+                  <div className="flex items-center justify-between">
+                    <h3 className="text-xs font-bold text-[#b65a3a] uppercase tracking-wider flex items-center gap-1.5">
+                      <Trophy className="w-4 h-4" /> My Progress Snapshot
+                    </h3>
                     <button
-                      key={item.label}
-                      onClick={item.action}
-                      className="p-3 rounded-2xl bg-[#f5f0e6] border border-[#aa7b3f]/15 hover:border-[#aa7b3f]/50 text-left cursor-pointer transition-all hover:shadow-md space-y-1"
+                      onClick={() => onNavigate('research/progress')}
+                      className="text-[10px] text-[#b65a3a] font-bold hover:underline cursor-pointer"
                     >
-                      <div className="text-xl">{item.icon}</div>
-                      <p className="text-xs font-bold text-[#4b2f23]">{item.label}</p>
-                      <p className="text-[10px] text-[#4b2f23]/50">{item.desc}</p>
+                      View All
                     </button>
-                  ))}
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {[
+                      { label: 'Monuments Explored', value: progress.monumentsExplored.length, icon: '🏛️' },
+                      { label: 'Research Notes', value: store.savedResearchItems.length, icon: '📝' },
+                      { label: 'Sources Viewed', value: progress.sourcesViewed.length, icon: '📜' },
+                      { label: 'Quests Completed', value: totalQuests, icon: '🎯' },
+                    ].map(({ label, value, icon }) => (
+                      <div key={label} className="flex flex-col justify-between p-3.5 rounded-2xl bg-[#f5f0e6] border border-[#aa7b3f]/15 space-y-1">
+                        <span className="text-[10px] font-semibold text-[#4b2f23]/60 leading-tight">{icon} {label}</span>
+                        <span className="font-black text-[#4b2f23] text-xl pt-1">{value}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-              </div>
-
-              {/* Progress snapshot */}
-              <div className="p-6 rounded-3xl bg-[#ede3d1] border-2 border-[#aa7b3f]/30 shadow-xl space-y-4">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-xs font-bold text-[#b65a3a] uppercase tracking-wider flex items-center gap-1.5">
-                    <Trophy className="w-4 h-4" /> My Progress
-                  </h3>
+                
+                <div className="w-full md:w-64 p-5 rounded-2xl bg-[#f5f0e6]/50 border border-[#aa7b3f]/25 flex flex-col justify-between space-y-4">
+                  <div>
+                    <p className="text-[9px] text-[#b65a3a] uppercase font-bold tracking-wider">Current Level</p>
+                    <p className="text-base font-bold text-[#4b2f23]">{studentLevel.title}</p>
+                  </div>
                   <button
                     onClick={() => onNavigate('research/progress')}
-                    className="text-[10px] text-[#b65a3a] font-bold hover:underline cursor-pointer"
+                    className="w-full py-2.5 rounded-xl bg-[#b65a3a] text-white text-[10px] font-bold uppercase tracking-wider cursor-pointer hover:bg-[#9e4a2e] transition-colors shadow"
                   >
-                    View All
+                    View Full Progress
                   </button>
                 </div>
-                <div className="space-y-3">
-                  {[
-                    { label: 'Monuments Explored', value: progress.monumentsExplored.length, icon: '🏛️' },
-                    { label: 'Research Notes', value: store.savedResearchItems.length, icon: '📝' },
-                    { label: 'Sources Viewed', value: progress.sourcesViewed.length, icon: '📜' },
-                    { label: 'Quests Completed', value: totalQuests, icon: '🎯' },
-                  ].map(({ label, value, icon }) => (
-                    <div key={label} className="flex items-center justify-between p-2 rounded-xl bg-[#f5f0e6] border border-[#aa7b3f]/15">
-                      <span className="text-[11px] font-semibold text-[#4b2f23]/80">{icon} {label}</span>
-                      <span className="font-black text-[#4b2f23] text-sm">{value}</span>
-                    </div>
-                  ))}
-                </div>
-                <div className="pt-2 border-t border-[#aa7b3f]/20">
-                  <p className="text-[10px] text-[#b65a3a] uppercase font-bold tracking-wider">Current Level</p>
-                  <p className="text-sm font-bold text-[#4b2f23]">{studentLevel.title}</p>
-                </div>
-                <button
-                  onClick={() => onNavigate('research/progress')}
-                  className="w-full py-2.5 rounded-xl bg-[#b65a3a] text-white text-[10px] font-bold uppercase tracking-wider cursor-pointer hover:bg-[#9e4a2e] transition-colors shadow"
-                >
-                  View Full Progress
-                </button>
               </div>
             </div>
           );

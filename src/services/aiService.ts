@@ -1,7 +1,7 @@
-/**
- * DHAROHAR AI Service — Dharohar AI Heritage Guide
- * Connects to Google Gemini via VITE_GEMINI_API_KEY env variable.
- * All AI communication is isolated inside this service.
+﻿/**
+ * DHAROHAR AI Service -- Dharohar AI Heritage Guide
+ * Routes all AI chat through the Express /api/ai/chat server endpoint.
+ * Gemini API key lives server-side only -- never exposed to the browser.
  */
 
 import { Language } from '../types';
@@ -29,134 +29,73 @@ export interface HeritageAIContext {
   language?: Language;
 }
 
-// Deterministic fallback responses for when Gemini is unavailable
-const FALLBACK_RESPONSES: Record<string, string> = {
-  story: `This monument stands as a testament to the artistic and spiritual vision of its patrons. Built during the height of a great dynasty, it served as both a place of worship and a symbol of royal power. Legends speak of divine inspiration guiding the craftsmen who shaped every stone. Walking through its corridors, you are experiencing centuries of devotion preserved in granite.`,
-  architecture: `This monument exemplifies the architectural mastery of its era. The skilled craftsmen employed sophisticated techniques — precisely fitted stone joints, carefully calibrated proportions, and ornamental programs that merged aesthetic beauty with structural integrity. Each architectural element carries symbolic meaning rooted in ancient cosmological frameworks.`,
-  history: `The monument's history spans multiple centuries, witnessing the rise and fall of dynasties, the devotion of pilgrims, and the attention of modern conservation efforts. Archaeological evidence and epigraphical records provide insights into its patronage, construction timeline, and cultural importance across different historical periods.`,
-  default: `Dharohar AI is currently operating in offline mode. This monument contains a rich wealth of historical, architectural, and cultural significance. Please explore the detailed sections on this page for comprehensive information about its dynasty, construction techniques, and preservation status. You can ask me about specific architectural features, historical context, or cultural significance when the AI connection is restored.`
-};
-
-function buildSystemPrompt(mode: 'traveller' | 'researcher'): string {
-  const modeInstruction = mode === 'traveller'
-    ? 'Prefer simple, engaging, story-driven explanations suitable for a visitor experiencing the monument in person. Keep answers to 2-4 paragraphs. Use vivid language and avoid academic jargon.'
-    : 'Prefer structured, detailed scholarly explanations. Include architectural terminology, historical context, dynastic significance, and construction techniques. Organize information clearly.';
-
-  return `You are Dharohar AI (सूत्रधार), DHAROHAR's AI heritage cultural guide for Indian monuments and architecture.
-
-Your purpose is to explain Indian heritage accurately, clearly, and respectfully. You are a knowledgeable, warm, and culturally sensitive guide.
-
-BEHAVIOR RULES:
-- Use the provided monument context as your primary source of information.
-- Do NOT invent historical facts not present in the context.
-- If the context does not contain enough information, clearly say more information is needed.
-- Distinguish historical evidence from legends or traditional stories when relevant.
-- Keep answers understandable and engaging.
-- Always respond in English unless the user writes in another language.
-
-MODE: ${mode === 'traveller' ? 'TRAVELLER GUIDE' : 'RESEARCH ASSISTANT'}
-${modeInstruction}`;
+/** Gemini-format turn stored for multi-turn conversation continuity */
+interface GeminiTurn {
+  role: 'user' | 'model';
+  parts: [{ text: string }];
 }
 
-function buildContextString(context: HeritageAIContext): string {
-  const parts: string[] = ['=== MONUMENT CONTEXT ==='];
+/**
+ * Per-session conversation history keyed by a context fingerprint.
+ * Keeps the last 12 turns (~6 exchanges) so context stays relevant.
+ */
+const conversationStore = new Map<string, GeminiTurn[]>();
 
-  if (context.monument) parts.push(`Monument: ${context.monument}${context.nativeName ? ` (${context.nativeName})` : ''}`);
-  if (context.location) parts.push(`Location: ${context.location}${context.state ? `, ${context.state}` : ''}`);
-  if (context.dynasty) parts.push(`Dynasty / Patron: ${context.dynasty}${context.ruler ? ` — ruled by ${context.ruler}` : ''}`);
-  if (context.historicalPeriod) parts.push(`Historical Period: ${context.historicalPeriod}`);
-  if (context.architecturalStyle) parts.push(`Architectural Style: ${context.architecturalStyle}`);
-  if (context.constructionMaterial) parts.push(`Construction Material: ${context.constructionMaterial}`);
-  if (context.constructionTechnique) parts.push(`Construction Technique: ${context.constructionTechnique}`);
-  if (context.unescoStatus) parts.push(`UNESCO Status: ${context.unescoStatus}`);
-  if (context.unescoDetails) parts.push(`UNESCO Details: ${context.unescoDetails}`);
-  if (context.culturalSignificance) parts.push(`\nCultural Significance:\n${context.culturalSignificance}`);
-  if (context.historicalChronicle) parts.push(`\nHistorical Chronicle:\n${context.historicalChronicle}`);
-  if (context.legends) parts.push(`\nLegends & Stories:\n${context.legends}`);
-
-  if (context.selectedFeature) {
-    parts.push(`\n=== SELECTED ARCHITECTURAL FEATURE ===`);
-    parts.push(`Feature: ${context.selectedFeature}`);
-    if (context.selectedFeatureDescription) parts.push(`Description: ${context.selectedFeatureDescription}`);
-    if (context.selectedFeatureSignificance) parts.push(`Architectural Significance: ${context.selectedFeatureSignificance}`);
-  }
-
-  return parts.join('\n');
+function getContextKey(context: HeritageAIContext): string {
+  return [context.monument || 'general', context.researchMode || 'traveller'].join(':');
 }
 
-function getFallbackResponse(question: string): string {
-  const lower = question.toLowerCase();
-  if (lower.includes('story') || lower.includes('legend') || lower.includes('tell me') || lower.includes('why was')) {
-    return FALLBACK_RESPONSES.story;
-  }
-  if (lower.includes('architect') || lower.includes('style') || lower.includes('construction') || lower.includes('built')) {
-    return FALLBACK_RESPONSES.architecture;
-  }
-  if (lower.includes('history') || lower.includes('dynasty') || lower.includes('period') || lower.includes('when')) {
-    return FALLBACK_RESPONSES.history;
-  }
-  return FALLBACK_RESPONSES.default;
+function getHistory(context: HeritageAIContext): GeminiTurn[] {
+  return conversationStore.get(getContextKey(context)) ?? [];
+}
+
+function appendHistory(context: HeritageAIContext, userText: string, modelText: string): void {
+  const key = getContextKey(context);
+  const history = conversationStore.get(key) ?? [];
+  history.push({ role: 'user', parts: [{ text: userText }] });
+  history.push({ role: 'model', parts: [{ text: modelText }] });
+  // Keep last 12 turns (6 exchanges)
+  const trimmed = history.slice(-12);
+  conversationStore.set(key, trimmed);
 }
 
 export const aiService = {
   /**
    * Primary method: Ask Dharohar AI a question with full monument context.
-   * Uses Gemini Flash if VITE_GEMINI_API_KEY is configured, falls back gracefully.
+   * Sends the request to the Express /api/ai/chat endpoint (server-side Gemini).
+   * Throws on failure so the caller (DharoharAIChat) can show a clean error.
    */
   async askDharoharAI(question: string, context: HeritageAIContext = {}): Promise<string> {
-    const apiKey = (import.meta.env.VITE_GEMINI_API_KEY as string | undefined)?.trim();
+    const conversationHistory = getHistory(context);
 
-    if (!apiKey) {
-      console.warn('[Dharohar AI] No VITE_GEMINI_API_KEY found — using fallback responses.');
-      await new Promise((r) => setTimeout(r, 600));
-      return getFallbackResponse(question);
+    const response = await fetch('/api/ai/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        message: question,
+        context,
+        conversationHistory
+      })
+    });
+
+    const data = await response.json().catch(() => ({ success: false, error: 'Invalid server response.' }));
+
+    if (!response.ok || !data.success) {
+      const errMsg = data.error || `Server error ${response.status}`;
+      console.error('[Dharohar AI] Request failed:', errMsg);
+      throw new Error(errMsg);
     }
 
-    const mode = context.researchMode || 'traveller';
-    const systemPrompt = buildSystemPrompt(mode);
-    const contextString = buildContextString(context);
+    const answer: string = data.message;
 
-    const fullPrompt = `${systemPrompt}\n\n${contextString}\n\n=== USER QUESTION ===\n${question}`;
+    // Store this exchange for conversation continuity
+    appendHistory(context, question, answer);
 
-    try {
-      const response = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: fullPrompt }] }],
-            generationConfig: {
-              temperature: 0.7,
-              maxOutputTokens: mode === 'researcher' ? 800 : 500,
-              topP: 0.9
-            }
-          })
-        }
-      );
-
-      if (!response.ok) {
-        const errBody = await response.text();
-        console.error(`[Dharohar AI] Gemini API ${response.status}:`, errBody);
-        throw new Error(`Gemini API error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
-
-      if (!text) {
-        throw new Error('Empty response from Gemini');
-      }
-
-      return text.trim();
-    } catch (err) {
-      console.warn('[aiService] Gemini call failed, using fallback:', err);
-      return getFallbackResponse(question);
-    }
+    return answer;
   },
 
   /**
-   * Legacy method kept for backward compatibility with existing AIGuidePage keyword system.
+   * Legacy method kept for backward compatibility.
    */
   async getHeritageResponse(query: string, context?: string): Promise<string> {
     return this.askDharoharAI(query, {
@@ -166,8 +105,14 @@ export const aiService = {
   },
 
   /**
+   * Clear conversation history for a given context (e.g. when user clicks Clear).
+   */
+  clearHistory(context: HeritageAIContext): void {
+    conversationStore.delete(getContextKey(context));
+  },
+
+  /**
    * Build a HeritageAIContext from a Monument object.
-   * Import from heritageService outside, pass monument here.
    */
   buildContext(monument: {
     id: string;
