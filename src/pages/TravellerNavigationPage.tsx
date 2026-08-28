@@ -13,6 +13,15 @@ interface TravellerNavigationPageProps {
   language: Language;
 }
 
+const formatEstTime = (seconds: number) => {
+  const mins = Math.ceil(seconds / 60);
+  if (mins < 60) {
+    return { value: mins.toString(), unit: 'min' };
+  }
+  const hrs = (seconds / 3600).toFixed(1);
+  return { value: hrs, unit: 'hrs' };
+};
+
 export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = ({
   onNavigate,
   language
@@ -381,9 +390,11 @@ export const TravellerNavigationPage: React.FC<TravellerNavigationPageProps> = (
                       <span className="text-[10px] text-[#b65a3a] uppercase tracking-wider block font-bold">Est. Time</span>
                       <div className="flex items-baseline gap-1">
                         <span className="text-xl font-bold font-mono">
-                          {isLoading ? '...' : route ? Math.ceil(route.durationSeconds / 60) : '0'}
+                          {isLoading ? '...' : route ? formatEstTime(route.durationSeconds).value : '0'}
                         </span>
-                        <span className="text-[10px] text-[#4b2f23]/60 font-semibold uppercase">min</span>
+                        <span className="text-[10px] text-[#4b2f23]/60 font-semibold uppercase">
+                          {isLoading ? '' : route ? formatEstTime(route.durationSeconds).unit : 'min'}
+                        </span>
                       </div>
                     </div>
                   </div>

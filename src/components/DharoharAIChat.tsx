@@ -82,11 +82,15 @@ export const DharoharAIChat: React.FC<DharoharAIChatProps> = ({
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
-  const [hasApiKey] = useState(() => !!(import.meta.env.VITE_GEMINI_API_KEY as string | undefined)?.trim());
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Scroll only the inner messages container — not the whole page
+    const container = messagesContainerRef.current;
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   }, [messages, isTyping]);
 
   useEffect(() => {
@@ -131,6 +135,7 @@ export const DharoharAIChat: React.FC<DharoharAIChatProps> = ({
   };
 
   const handleClear = () => {
+    aiService.clearHistory(context);
     setMessages([{
       id: `welcome-${Date.now()}`,
       sender: 'dharoharAI',
@@ -142,7 +147,7 @@ export const DharoharAIChat: React.FC<DharoharAIChatProps> = ({
   };
 
   return (
-    <div className={`flex flex-col bg-[#f5f0e6] border border-[#aa7b3f]/40 rounded-3xl overflow-hidden shadow-2xl ${embedded ? 'h-[580px] max-h-[85vh]' : 'h-[600px]'}`}>
+    <div className={`flex flex-col bg-[#f5f0e6] border border-[#aa7b3f]/40 rounded-3xl overflow-hidden shadow-2xl ${embedded ? 'h-[700px] max-h-[85vh]' : 'h-[700px]'}`}>
 
       {/* Header */}
       <div className="px-5 py-4 bg-[#ede3d1] border-b border-[#aa7b3f]/25 shrink-0">
@@ -158,7 +163,6 @@ export const DharoharAIChat: React.FC<DharoharAIChatProps> = ({
               </div>
               <p className="text-[10px] text-[#b65a3a]">
                 {mode === 'researcher' ? 'Research Assistant Mode' : 'Heritage Guide Mode'}
-                {!hasApiKey && ' • Demo Mode'}
               </p>
             </div>
           </div>
@@ -212,7 +216,7 @@ export const DharoharAIChat: React.FC<DharoharAIChatProps> = ({
       </div>
 
       {/* Messages area — min-h-0 is critical for flex-child scroll containment */}
-      <div className="flex-1 overflow-y-auto min-h-0 p-4 space-y-4">
+      <div ref={messagesContainerRef} className="flex-1 overflow-y-auto min-h-0 p-4 space-y-4">
         {messages.map((msg) => (
           <div
             key={msg.id}

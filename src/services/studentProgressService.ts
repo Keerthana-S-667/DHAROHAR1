@@ -5,6 +5,7 @@
  */
 
 import { StudentProgress, QuizLevel, BadgeDefinition } from '../types';
+import { heritageService } from './heritageService';
 
 const STORAGE_KEY = 'dharohar_student_progress';
 
@@ -151,6 +152,14 @@ function checkAndAwardBadges(progress: StudentProgress): string[] {
   });
   if (hasAllLevels) award('all-levels');
 
+  // Monument specific master badges
+  Object.entries(progress.questsCompleted).forEach(([monId, arr]) => {
+    const hasHigh = arr.some(q => q.score >= 80);
+    if (hasHigh) {
+      award(`${monId}-master`);
+    }
+  });
+
   return newBadges;
 }
 
@@ -204,12 +213,19 @@ export const studentProgressService = {
     return newBadges;
   },
 
-  recordQuestCompletion(monumentId: string, level: QuizLevel, score: number): string[] {
+  recordQuestCompletion(monumentId: string, level: QuizLevel | string, score: number, xpEarned?: number): string[] {
     const progress = loadProgress();
     if (!progress.questsCompleted[monumentId]) {
       progress.questsCompleted[monumentId] = [];
     }
-    progress.questsCompleted[monumentId].push({ level, score, completedAt: Date.now() });
+    const internalLevel = (level === 'easy' ? 'explorer' : level === 'medium' ? 'historian' : 'researcher') as QuizLevel;
+    progress.questsCompleted[monumentId].push({ level: internalLevel, score, completedAt: Date.now() });
+    
+    const xpVal = xpEarned !== undefined ? xpEarned : score;
+    if (typeof (progress as any).totalXp !== 'number') {
+      (progress as any).totalXp = 0;
+    }
+    (progress as any).totalXp += xpVal;
     progress.totalScore += score;
     const newBadges = checkAndAwardBadges(progress);
     saveProgress(progress);
@@ -246,7 +262,25 @@ export const studentProgressService = {
 
   getBadgesEarned(): BadgeDefinition[] {
     const progress = loadProgress();
-    return BADGE_DEFINITIONS.filter(b => progress.badgesEarned.includes(b.id));
+    const earnedIds = progress.badgesEarned;
+    const badges = BADGE_DEFINITIONS.filter(b => earnedIds.includes(b.id));
+    
+    earnedIds.forEach(id => {
+      if (id.endsWith('-master') && !badges.some(b => b.id === id)) {
+        const monId = id.replace('-master', '');
+        const monument = heritageService.getMonumentById(monId);
+        const name = monument ? monument.name : 'Monument';
+        badges.push({
+          id,
+          icon: '🏛️',
+          title: `${name} Master`,
+          description: `Achieved 80%+ score on the ${name} Heritage Quest`,
+          requirement: `Score 80%+ on ${name} Quiz`
+        });
+      }
+    });
+    
+    return badges;
   },
 
   resetProgress(): void {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Compass, 
   Sparkles, 
@@ -15,7 +15,9 @@ import {
   BookOpen,
   User,
   Shield,
-  HelpCircle
+  HelpCircle,
+  ShieldAlert,
+  Bot
 } from 'lucide-react';
 import { heritageService } from '../services/heritageService';
 import { useStore } from '../store/store';
@@ -23,6 +25,8 @@ import { Language } from '../types';
 import { TRANSLATIONS } from '../data/translations';
 import { HeritageImage } from '../components/HeritageImage';
 import { TajMahalViewer } from '../components/hero/TajMahalViewer';
+import { useAuthStore } from '../store/authStore';
+import { AboutSection } from '../components/AboutSection';
 
 interface LandingPageProps {
   onNavigate: (route: string) => void;
@@ -34,16 +38,72 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
   const setSelectedUserRole = useStore((state) => state.setSelectedUserRole);
   const statesData = heritageService.getStates();
 
+  // Bind Auth state
+  const { session, profile, logout } = useAuthStore();
+  const [roleConflict, setRoleConflict] = useState<{ currentRole: string; targetRole: string } | null>(null);
+  const [authPromptTarget, setAuthPromptTarget] = useState<string | null>(null);
+
   const handleBeginExploration = () => {
     document.getElementById('role-selection-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleRoleSelect = (role: 'traveller' | 'researcher') => {
     setSelectedUserRole(role);
-    if (role === 'traveller') {
-      onNavigate('traveller');
+    
+    if (!session) {
+      onNavigate(`auth/${role}`);
+      return;
+    }
+
+    if (profile?.role === role) {
+      onNavigate(role === 'traveller' ? 'traveller' : 'research');
+    } else if (profile?.role) {
+      setRoleConflict({ currentRole: profile.role, targetRole: role });
     } else {
-      onNavigate('research');
+      onNavigate(`auth/${role}`);
+    }
+  };
+
+  const handleProtectedAction = (targetRoute: string) => {
+    if (!session) {
+      setAuthPromptTarget(targetRoute);
+    } else {
+      onNavigate(targetRoute);
+    }
+  };
+
+  const getAuthPromptDetails = () => {
+    switch (authPromptTarget) {
+      case 'ai-guide':
+        return {
+          title: 'Consult Dharohar AI',
+          desc: 'Dharohar AI is an expert cultural companion available to authenticated users. Please choose your portal to authenticate and begin.'
+        };
+      case 'explore':
+        return {
+          title: 'Explore Living Heritage',
+          desc: 'Access our comprehensive Indian monument archives. Please choose your portal to authenticate and begin.'
+        };
+      case 'heritage-map':
+        return {
+          title: 'Explore Heritage Map',
+          desc: 'Interact with geographical paths and monument trails. Please choose your portal to authenticate and begin.'
+        };
+      case '3d-explorer':
+        return {
+          title: 'Enter 3D Explorer',
+          desc: 'Experience high-fidelity sub-millimeter 3D scans. Please choose your portal to authenticate and begin.'
+        };
+      case 'preservation':
+        return {
+          title: 'Heritage Preservation Pledge',
+          desc: 'Sign the Heritage Preservation Pledge and access conservation guidelines. Please authenticate to continue.'
+        };
+      default:
+        return {
+          title: 'Access Digital Sanctuary',
+          desc: 'This experience is reserved for authenticated users. Please choose your portal to sign in and proceed.'
+        };
     }
   };
 
@@ -102,7 +162,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
 
               <button
                 id="hero-btn-explore-heritage"
-                onClick={() => onNavigate('explore')}
+                onClick={() => handleProtectedAction('explore')}
                 className="px-6 py-3.5 rounded-full hover:bg-[#F4EFE6] border border-[#d5b990] text-[#4b2f23] font-bold text-xs uppercase tracking-widest transition-all duration-300 flex items-center gap-2 cursor-pointer"
               >
                 <div className="w-6 h-6 rounded-full border border-[#b65a3a] flex items-center justify-center text-[#b65a3a]">
@@ -115,7 +175,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
             {/* Supporting Quick Jump Cards */}
             <div className="grid grid-cols-2 gap-4 pt-6 border-t border-[#d5b990]">
               <button
-                onClick={() => onNavigate('heritage-map')}
+                onClick={() => handleProtectedAction('heritage-map')}
                 className="p-4 rounded-xl bg-[#ede3d1] border border-[#d5b990] hover:border-[#b65a3a] text-left transition-all duration-300 group cursor-pointer"
               >
                 <div className="w-8 h-8 rounded-lg bg-[#f5f0e6] border border-[#d5b990] flex items-center justify-center text-[#b65a3a] mb-3">
@@ -128,7 +188,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
               </button>
 
               <button
-                onClick={() => onNavigate('3d-explorer')}
+                onClick={() => handleProtectedAction('3d-explorer')}
                 className="p-4 rounded-xl bg-[#ede3d1] border border-[#d5b990] hover:border-[#b65a3a] text-left transition-all duration-300 group cursor-pointer"
               >
                 <div className="w-8 h-8 rounded-lg bg-[#f5f0e6] border border-[#d5b990] flex items-center justify-center text-[#b65a3a] mb-3">
@@ -234,80 +294,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
       </section>
 
       {/* ==================================================
-          3. EXPLORE INDIA BY HERITAGE REGION
-          ================================================== */}
-      <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#d5b990]">
-        
-        {/* Section Header */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 pb-4 border-b border-[#d5b990]">
-          <div>
-            <div className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#b65a3a] mb-2 flex items-center gap-2">
-              <div className="w-4 h-[1px] bg-[#b65a3a]" />
-              <span>{t.atlasBadge}</span>
-            </div>
-            <h2 className="font-display text-3xl sm:text-4xl font-bold text-[#4b2f23]">
-              {t.atlasTitle}
-            </h2>
-          </div>
-          <button
-            onClick={() => onNavigate('explore')}
-            className="text-xs font-bold uppercase tracking-widest text-[#b65a3a] hover:text-[#4b2f23] flex items-center gap-1.5 transition-colors self-start sm:self-auto cursor-pointer"
-          >
-            <span>{t.atlasViewAll}</span>
-            <ArrowRight className="w-4 h-4" />
-          </button>
-        </div>
-
-        {/* Dynamic State Cards grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {statesData.map((state) => (
-            <div
-              key={state.id}
-              onClick={() => onNavigate(`state/${state.id}`)}
-              className="group relative rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/20 overflow-hidden cursor-pointer hover:border-[#b65a3a]/60 hover:shadow-lg transition-all duration-300 flex flex-col"
-            >
-              {/* Image Frame */}
-              <div className="relative h-52 overflow-hidden bg-[#f5f0e6]">
-                <HeritageImage
-                  src={state.heroImage}
-                  alt={state.name}
-                  fallbackName={state.name}
-                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#ede3d1]/80 via-transparent to-transparent" />
-                <div className="absolute top-3 right-3 px-3 py-1 rounded bg-[#f5f0e6]/90 border border-[#d5b990] text-[9px] text-[#b65a3a] uppercase tracking-wider font-extrabold shadow-sm">
-                  {state.destinations[0]?.name}
-                </div>
-              </div>
-
-              {/* Info content */}
-              <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-display text-xl font-bold text-[#4b2f23] group-hover:text-[#b65a3a] transition-colors">
-                      {state.name}
-                    </h3>
-                    <span className="text-[13px] font-subheading italic text-[#b65a3a] font-semibold">{state.nativeName}</span>
-                  </div>
-                  <p className="text-xs text-[#4b2f23]/70 mt-2 line-clamp-2 leading-relaxed">
-                    {state.tagline}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-[#d5b990]/60 flex items-center justify-between text-[11px]">
-                  <span className="font-semibold text-[#4b2f23]/60 tracking-wider uppercase font-body">{state.dynasties[0]}</span>
-                  <span className="flex items-center gap-1 text-[#b65a3a] font-extrabold tracking-wider group-hover:translate-x-1 transition-transform">
-                    {t.exploreStateBtn} <ChevronRight className="w-3.5 h-3.5" />
-                  </span>
-                </div>
-              </div>
-
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ==================================================
           6. AI HERITAGE GUIDE INTRO (SUTRADHAR)
           ================================================== */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-[#d5b990]">
@@ -332,16 +318,16 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
             <div className="space-y-3 pt-2">
               <span className="text-[10px] uppercase font-bold tracking-wider text-[#4b2f23]/50 block">Suggested Inquiries</span>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                <div className="p-3 bg-[#ede3d1] border border-[#d5b990] rounded-xl text-[#4b2f23]/80 font-medium hover:border-[#b65a3a] cursor-pointer transition-colors" onClick={() => onNavigate('ai-guide')}>
+                <div className="p-3 bg-[#ede3d1] border border-[#d5b990] rounded-xl text-[#4b2f23]/80 font-medium hover:border-[#b65a3a] cursor-pointer transition-colors" onClick={() => handleProtectedAction('ai-guide')}>
                   "Why was this monument built?"
                 </div>
-                <div className="p-3 bg-[#ede3d1] border border-[#d5b990] rounded-xl text-[#4b2f23]/80 font-medium hover:border-[#b65a3a] cursor-pointer transition-colors" onClick={() => onNavigate('ai-guide')}>
+                <div className="p-3 bg-[#ede3d1] border border-[#d5b990] rounded-xl text-[#4b2f23]/80 font-medium hover:border-[#b65a3a] cursor-pointer transition-colors" onClick={() => handleProtectedAction('ai-guide')}>
                   "What makes its architectural style unique?"
                 </div>
-                <div className="p-3 bg-[#ede3d1] border border-[#d5b990] rounded-xl text-[#4b2f23]/80 font-medium hover:border-[#b65a3a] cursor-pointer transition-colors" onClick={() => onNavigate('ai-guide')}>
+                <div className="p-3 bg-[#ede3d1] border border-[#d5b990] rounded-xl text-[#4b2f23]/80 font-medium hover:border-[#b65a3a] cursor-pointer transition-colors" onClick={() => handleProtectedAction('ai-guide')}>
                   "Who commissioned the Shore Temple?"
                 </div>
-                <div className="p-3 bg-[#ede3d1] border border-[#d5b990] rounded-xl text-[#4b2f23]/80 font-medium hover:border-[#b65a3a] cursor-pointer transition-colors" onClick={() => onNavigate('ai-guide')}>
+                <div className="p-3 bg-[#ede3d1] border border-[#d5b990] rounded-xl text-[#4b2f23]/80 font-medium hover:border-[#b65a3a] cursor-pointer transition-colors" onClick={() => handleProtectedAction('ai-guide')}>
                   "Explain the relief works in Tamil."
                 </div>
               </div>
@@ -349,7 +335,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
 
             <div className="pt-4">
               <button
-                onClick={() => onNavigate('ai-guide')}
+                onClick={() => handleProtectedAction('ai-guide')}
                 className="px-6 py-3.5 rounded bg-[#b65a3a] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#4b2f23] transition-all flex items-center gap-2 cursor-pointer"
               >
                 <span>Consult Dharohar AI</span>
@@ -419,7 +405,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
 
           <div className="pt-6">
             <button
-              onClick={() => onNavigate('preservation')}
+              onClick={() => handleProtectedAction('preservation')}
               className="px-8 py-3.5 rounded bg-[#4b2f23] text-white font-bold text-xs uppercase tracking-widest hover:bg-[#b65a3a] transition-colors cursor-pointer"
             >
               {t.btnPreserveGuidelines}
@@ -427,6 +413,107 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onNavigate, language }
           </div>
         </div>
       </section>
+
+      {/* ── ABOUT SECTION (bottom of landing page) ── */}
+      <AboutSection />
+
+      {/* Role Conflict Dialog */}
+      {roleConflict && (
+        <div className="fixed inset-0 bg-[#331f16]/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-[#ede3d1] border border-[#d5b990] max-w-md w-full p-8 rounded-2xl space-y-6 shadow-xl text-center animate-fade-in-up">
+            <div className="w-12 h-12 rounded-full bg-[#b65a3a]/10 text-[#b65a3a] flex items-center justify-center mx-auto">
+              <ShieldAlert className="w-6 h-6 animate-pulse" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-display text-xl font-bold text-[#4b2f23]">
+                Role Ambiguity Detected
+              </h3>
+              <p className="text-xs text-[#4b2f23]/75 leading-relaxed">
+                You are currently signed in as a <span className="font-extrabold uppercase text-[#b65a3a]">{roleConflict.currentRole === 'traveller' ? 'Traveller / Tourist' : 'Student / Researcher'}</span>. 
+                To enter the <span className="font-extrabold uppercase text-[#b65a3a]">{roleConflict.targetRole === 'traveller' ? 'Traveller' : 'Researcher'}</span> area, you need to sign out first.
+              </p>
+            </div>
+            <div className="flex flex-col gap-2.5 pt-2">
+              <button
+                onClick={async () => {
+                  const target = roleConflict.targetRole;
+                  setRoleConflict(null);
+                  await logout();
+                  onNavigate(`auth/${target}`);
+                }}
+                className="w-full py-2.5 bg-[#b65a3a] hover:bg-[#4b2f23] text-white text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer rounded-lg"
+              >
+                Sign Out & Continue
+              </button>
+              <button
+                onClick={() => {
+                  const current = roleConflict.currentRole;
+                  setRoleConflict(null);
+                  onNavigate(current === 'traveller' ? 'traveller' : 'research');
+                }}
+                className="w-full py-2.5 border border-[#d5b990] hover:bg-[#ede3d1] text-[#4b2f23] text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer rounded-lg"
+              >
+                Continue as {roleConflict.currentRole === 'traveller' ? 'Traveller' : 'Researcher'}
+              </button>
+              <button
+                onClick={() => setRoleConflict(null)}
+                className="w-full py-2.5 text-[#4b2f23]/60 hover:text-[#4b2f23] text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Dynamic Auth Prompt Dialog */}
+      {authPromptTarget && (
+        <div className="fixed inset-0 bg-[#331f16]/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+          <div className="bg-[#ede3d1] border border-[#d5b990] max-w-md w-full p-8 rounded-2xl space-y-6 shadow-xl text-center animate-fade-in-up">
+            <div className="w-12 h-12 rounded-full bg-[#b65a3a]/10 text-[#b65a3a] flex items-center justify-center mx-auto">
+              <Bot className="w-6 h-6 animate-pulse" />
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-display text-xl font-bold text-[#4b2f23]">
+                {getAuthPromptDetails().title}
+              </h3>
+              <p className="text-xs text-[#4b2f23]/75 leading-relaxed">
+                {getAuthPromptDetails().desc}
+              </p>
+            </div>
+            <div className="flex flex-col gap-2.5 pt-2">
+              <button
+                onClick={() => {
+                  const target = authPromptTarget;
+                  setAuthPromptTarget(null);
+                  onNavigate(`auth/traveller?redirect=/${target}`);
+                }}
+                className="w-full py-2.5 bg-[#b65a3a] hover:bg-[#4b2f23] text-white text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer rounded-lg flex items-center justify-center gap-2"
+              >
+                <User className="w-4.5 h-4.5" />
+                <span>Traveller Portal</span>
+              </button>
+              <button
+                onClick={() => {
+                  const target = authPromptTarget;
+                  setAuthPromptTarget(null);
+                  onNavigate(`auth/researcher?redirect=/${target}`);
+                }}
+                className="w-full py-2.5 bg-[#4b2f23] hover:bg-[#b65a3a] text-white text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer rounded-lg flex items-center justify-center gap-2"
+              >
+                <BookOpen className="w-4.5 h-4.5" />
+                <span>Student / Researcher Portal</span>
+              </button>
+              <button
+                onClick={() => setAuthPromptTarget(null)}
+                className="w-full py-2.5 text-[#4b2f23]/60 hover:text-[#4b2f23] text-[10px] font-bold uppercase tracking-widest transition-colors cursor-pointer"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
     </div>
   );

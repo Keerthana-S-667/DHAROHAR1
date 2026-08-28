@@ -258,3 +258,100 @@ export interface StudentProgress {
   totalScore: number;
   lastUpdated: number;
 }
+
+// ── Heritage Preservation Reports ─────────────────────────────────────────────
+
+export type ReportSeverity = 'low' | 'medium' | 'high' | 'critical';
+
+export type ReportStatus = 
+  | 'submitted'
+  | 'under_review'
+  | 'assigned'
+  | 'field_verification'
+  | 'action_conservation'
+  | 'requires_more_info'
+  | 'resolved';
+
+export interface HeritageReport {
+  id: string;
+  monumentId: string;
+  monumentName: string;
+  state: string;
+  issueType: string;
+  severity: ReportSeverity;
+  status: ReportStatus;
+  priorityScore: number;
+  description: string;
+  visualEvidence?: string[];
+  gpsLatitude?: number;
+  gpsLongitude?: number;
+  reporterName?: string;
+  reporterEmail?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ReportStatusHistory {
+  id: string;
+  reportId: string;
+  status: ReportStatus;
+  officerName?: string;
+  notes?: string;
+  createdAt: string;
+}
+
+export interface ReportAssignment {
+  id: string;
+  reportId: string;
+  assignedRole: string;
+  assignedToName: string;
+  targetDate: string;
+  officerNote?: string;
+  createdAt: string;
+}
+
+export interface FieldVerification {
+  id: string;
+  reportId: string;
+  verificationStatus: 'confirmed' | 'not_confirmed' | 'requires_further_study';
+  observedCondition: string;
+  recommendedAction: string;
+  fieldNotes?: string;
+  additionalEvidence?: string[];
+  verifiedByName: string;
+  verifiedAt: string;
+}
+
+export interface ReportResolution {
+  id: string;
+  reportId: string;
+  summary: string;
+  notes: string;
+  evidenceUrl?: string;
+  resolvedByName: string;
+  resolvedAt: string;
+}
+
+export interface ReportActivityLog {
+  id: string;
+  actorName: string;
+  actorRole: string;
+  action: string;
+  reportId?: string;
+  details?: string;
+  createdAt: string;
+}
+
+export interface CommunityContribution {
+  id: string;
+  title: string;
+  location: string;
+  contributorName: string;
+  contributorEmail?: string;
+  content: string;
+  status: 'pending' | 'approved' | 'rejected';
+  moderationNote?: string;
+  moderatedByName?: string;
+  moderatedAt?: string;
+  createdAt: string;
+}

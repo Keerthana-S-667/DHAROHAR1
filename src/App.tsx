@@ -37,6 +37,12 @@ import { TravellerNearbyPlaceholderPage } from './pages/TravellerNearbyPlacehold
 import { TravellerMapPage } from './pages/TravellerMapPage';
 import { TravellerNavigationPage } from './pages/TravellerNavigationPage';
 
+// Auth Imports
+import { ProtectedRoute, RoleProtectedRoute } from './components/RouteGuard';
+import { AuthPage } from './pages/AuthPage';
+import { AdminPage } from './pages/AdminPage';
+import { useAuthStore } from './store/authStore';
+
 export default function App() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -46,12 +52,18 @@ export default function App() {
   const language = useStore((state) => state.language);
   const setLanguage = useStore((state) => state.setLanguage);
 
+  // Bind and initialize Zustand Auth state
+  const initializeAuth = useAuthStore((state) => state.initialize);
+  useEffect(() => {
+    initializeAuth();
+  }, [initializeAuth]);
+
   // Derived currentRoute string to preserve existing component logic (e.g. active indicators)
   const currentRoute = location.pathname === '/' ? 'landing' : location.pathname.substring(1);
 
   // Scroll to top whenever route changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
   }, [location.pathname]);
 
   // Navigate helper to map existing custom route calls to React Router paths
@@ -102,13 +114,15 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#f5f0e6] text-[#4b2f23] flex flex-col font-body selection:bg-[#b65a3a] selection:text-[#f5f0e6]">
       {/* Top Architectural Navigation Bar */}
-      <Navbar
-        currentRoute={currentRoute}
-        onNavigate={handleNavigate}
-        language={language}
-        onLanguageChange={setLanguage}
-        onOpenSearch={() => setIsSearchOpen(true)}
-      />
+      {!currentRoute.startsWith('admin') && (
+        <Navbar
+          currentRoute={currentRoute}
+          onNavigate={handleNavigate}
+          language={language}
+          onLanguageChange={setLanguage}
+          onOpenSearch={() => setIsSearchOpen(true)}
+        />
+      )}
 
       {/* Main Content Area with React Router */}
       <main className="flex-1">
@@ -121,23 +135,128 @@ export default function App() {
           <Route path="/monument/:monumentId/3d" element={<ThreeDHeritageExperiencePageWrapper />} />
           <Route path="/3d-explorer" element={<ThreeDExplorerPage onNavigate={handleNavigate} language={language} />} />
           <Route path="/3d-explorer/:monumentId" element={<ThreeDExplorerPageWrapper />} />
-          <Route path="/ai-guide" element={<AIGuidePage onNavigate={handleNavigate} language={language} />} />
+          
+          {/* Protected AI Guide Route */}
+          <Route path="/ai-guide" element={
+            <ProtectedRoute>
+              <AIGuidePage onNavigate={handleNavigate} language={language} />
+            </ProtectedRoute>
+          } />
+
           <Route path="/trails" element={<HeritageTrailsPage onNavigate={handleNavigate} language={language} />} />
           <Route path="/personalized-trail" element={<PersonalizedTrailPage onNavigate={handleNavigate} language={language} />} />
           <Route path="/heritage-map" element={<HeritageMapPage onNavigate={handleNavigate} language={language} />} />
           <Route path="/preservation" element={<PreservationPage onNavigate={handleNavigate} language={language} />} />
           <Route path="/about" element={<AboutPage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/traveller" element={<TravellerHomePage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/traveller/search" element={<TravellerSearchPage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/traveller/preferences" element={<TravellerPreferencesPage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/traveller/nearby" element={<TravellerNearbyPlaceholderPage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/traveller/map" element={<TravellerMapPage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/traveller/navigation/:monumentId" element={<TravellerNavigationPage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/research" element={<ResearchHomePage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/research/monument/:monumentId" element={<ResearchMonumentPageWrapper />} />
-          <Route path="/research/compare" element={<ResearchComparePage onNavigate={handleNavigate} language={language} />} />
-          <Route path="/research/quest/:monumentId" element={<HeritageQuestPageWrapper />} />
-          <Route path="/research/progress" element={<StudentProgressPage onNavigate={handleNavigate} language={language} />} />
+
+          {/* Protected Traveller Routes */}
+          <Route path="/traveller" element={
+            <RoleProtectedRoute allowedRoles={['traveller']}>
+              <TravellerHomePage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/traveller/search" element={
+            <RoleProtectedRoute allowedRoles={['traveller']}>
+              <TravellerSearchPage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/traveller/preferences" element={
+            <RoleProtectedRoute allowedRoles={['traveller']}>
+              <TravellerPreferencesPage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/traveller/nearby" element={
+            <RoleProtectedRoute allowedRoles={['traveller']}>
+              <TravellerNearbyPlaceholderPage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/traveller/map" element={
+            <RoleProtectedRoute allowedRoles={['traveller']}>
+              <TravellerMapPage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/traveller/navigation/:monumentId" element={
+            <RoleProtectedRoute allowedRoles={['traveller']}>
+              <TravellerNavigationPage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+
+          {/* Protected Researcher Routes */}
+          <Route path="/research" element={
+            <RoleProtectedRoute allowedRoles={['researcher']}>
+              <ResearchHomePage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/research/monument/:monumentId" element={
+            <RoleProtectedRoute allowedRoles={['researcher']}>
+              <ResearchMonumentPageWrapper />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/research/compare" element={
+            <RoleProtectedRoute allowedRoles={['researcher']}>
+              <ResearchComparePage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/research/quest" element={
+            <RoleProtectedRoute allowedRoles={['researcher']}>
+              <HeritageQuestPageWrapper />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/research/quest/:monumentId" element={
+            <RoleProtectedRoute allowedRoles={['researcher']}>
+              <HeritageQuestPageWrapper />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/research/progress" element={
+            <RoleProtectedRoute allowedRoles={['researcher']}>
+              <StudentProgressPage onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+
+          {/* Protected Admin Routes */}
+          <Route path="/admin" element={
+            <RoleProtectedRoute allowedRoles={['admin']}>
+              <AdminPage subview="dashboard" onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/admin/reports" element={
+            <RoleProtectedRoute allowedRoles={['admin']}>
+              <AdminPage subview="reports" onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/admin/reports/:reportId" element={
+            <RoleProtectedRoute allowedRoles={['admin']}>
+              <AdminPage subview="report-details" onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/admin/risk-monitor" element={
+            <RoleProtectedRoute allowedRoles={['admin']}>
+              <AdminPage subview="risk-monitor" onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/admin/contributions" element={
+            <RoleProtectedRoute allowedRoles={['admin']}>
+              <AdminPage subview="contributions" onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/admin/analytics" element={
+            <RoleProtectedRoute allowedRoles={['admin']}>
+              <AdminPage subview="analytics" onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+          <Route path="/admin/activity" element={
+            <RoleProtectedRoute allowedRoles={['admin']}>
+              <AdminPage subview="activity" onNavigate={handleNavigate} language={language} />
+            </RoleProtectedRoute>
+          } />
+
+          {/* Public Authentication Pages */}
+          <Route path="/auth/traveller" element={<AuthPage mode="traveller" />} />
+          <Route path="/auth/researcher" element={<AuthPage mode="researcher" />} />
+          <Route path="/admin/login" element={<AuthPage mode="admin" />} />
+          <Route path="/auth/forgot-password" element={<AuthPage mode="forgot-password" />} />
+          <Route path="/auth/reset-password" element={<AuthPage mode="reset-password" />} />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>

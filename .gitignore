@@ -7,3 +7,6 @@ coverage/
 .env
 .env*
 !.env.example
+.env.local
+.env.*.local
+supabase/.temp/

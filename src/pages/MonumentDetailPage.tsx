@@ -7,6 +7,7 @@ import { DharoharAIChat } from '../components/DharoharAIChat';
 import { VoiceNarrationButton } from '../components/VoiceNarrationButton';
 import { aiService } from '../services/aiService';
 import { voiceService } from '../services/voiceService';
+import { AIAudioHeritageGuide } from '../components/AIAudioHeritageGuide';
 import { 
   ArrowLeft, 
   Sparkles, 
@@ -48,6 +49,7 @@ export const MonumentDetailPage: React.FC<MonumentDetailPageProps> = ({
   const monument = heritageService.getMonumentById(monumentId, language) || heritageService.getMonumentById('shore-temple', language)!;
   const [copiedLink, setCopiedLink] = useState(false);
   const [showDharoharAI, setShowDharoharAI] = useState(false);
+  const [showAIAudioModal, setShowAIAudioModal] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'timeline' | 'architecture' | 'gallery'>('overview');
   const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
 
@@ -300,6 +302,33 @@ export const MonumentDetailPage: React.FC<MonumentDetailPageProps> = ({
               ariaLabel={`Listen to the heritage story of ${monument.name}`}
               variant="full"
             />
+          </div>
+        </div>
+
+        {/* AI Audio Heritage Guide Card */}
+        <div className="p-6 rounded-2xl bg-[#ede3d1] border border-[#aa7b3f]/40 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-xl">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 rounded-full bg-[#b65a3a]/15 border border-[#aa7b3f]/40 flex items-center justify-center shrink-0">
+              <Sparkles className="w-5 h-5 text-[#b65a3a]" />
+            </div>
+            <div>
+              <div className="text-xs font-bold text-[#b65a3a] uppercase tracking-wider">
+                AI AUDIO HERITAGE GUIDE
+              </div>
+              <p className="text-xs text-[#4b2f23]/70 mt-0.5">
+                Personalized audio storytelling for your heritage journey &bull; Listen • Learn • Experience
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center">
+            <button
+              onClick={() => setShowAIAudioModal(true)}
+              className="flex items-center gap-2 px-5 py-3 rounded-full text-xs font-bold bg-[#b65a3a] hover:bg-[#9a472a] text-white transition-all cursor-pointer shadow-md"
+            >
+              <Volume2 className="w-4 h-4" />
+              <span>Listen to this Monument</span>
+            </button>
           </div>
         </div>
 
@@ -793,6 +822,15 @@ export const MonumentDetailPage: React.FC<MonumentDetailPageProps> = ({
             />
           </div>
         </div>
+      )}
+
+      {/* AI Audio Heritage Guide Modal */}
+      {showAIAudioModal && (
+        <AIAudioHeritageGuide
+          monument={monument as any}
+          language={language}
+          onClose={() => setShowAIAudioModal(false)}
+        />
       )}
     </div>
   );
